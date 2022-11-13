@@ -28,6 +28,9 @@ export class Exercise {
   image: string;
 
   @IsInt()
+  workoutId?: number;
+
+  @IsInt()
   reps?: number;
 
   @IsInt()
