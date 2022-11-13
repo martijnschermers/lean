@@ -27,8 +27,7 @@ async function bootstrap() {
     skipMissingProperties: true,
     exceptionFactory: (errors: ValidationError[]) => {
       const messages = errors.map(error =>
-        `Property ${error.property} has invalid value ${error.value},
-        ${Object.values(error.constraints).join(', ')}`
+        `Property ${error.property} has invalid value ${error.value}, ${Object.values(error.constraints).join(', ')}`
       );
 
       return new ValidationException(messages);
