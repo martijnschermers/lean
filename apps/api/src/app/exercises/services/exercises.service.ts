@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 import { Exercise } from "@lean/api-interfaces";
 import { Model } from "mongoose";
 import { InjectModel } from "@nestjs/mongoose";
@@ -6,15 +6,15 @@ import { InjectModel } from "@nestjs/mongoose";
 @Injectable()
 export class ExercisesService {
 
-  constructor(@InjectModel('Exercise') private exerciseModel: Model<Exercise>) {
+  constructor(@InjectModel("Exercise") private exerciseModel: Model<Exercise>) {
   }
 
   async findAll(): Promise<Exercise[]> {
-    return this.exerciseModel.find({}, {__v: 0});
+    return this.exerciseModel.find({}, { __v: 0 });
   }
 
   async updateExercise(id: string, exercise: Partial<Exercise>): Promise<Exercise> {
-    return this.exerciseModel.findByIdAndUpdate(id, exercise, {new: true});
+    return this.exerciseModel.findByIdAndUpdate(id, exercise, { new: true });
   }
 
   async deleteExercise(id: string): Promise<Exercise> {
@@ -27,5 +27,9 @@ export class ExercisesService {
     await newExercise.save();
 
     return newExercise.toObject({ versionKey: false });
+  }
+
+  async findOne(id: string): Promise<Exercise> {
+    return this.exerciseModel.findOne({ _id: id }, { __v: 0 });
   }
 }
