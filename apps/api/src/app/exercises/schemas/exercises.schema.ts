@@ -1,25 +1,34 @@
-import * as mongoose from 'mongoose';
-import { ExerciseCategory, ExerciseType } from "@lean/api-interfaces";
+import * as mongoose from "mongoose";
+import { ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
 
 export const ExercisesSchema = new mongoose.Schema({
-  name: String,
-  description: String,
+  name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
   type: {
     type: String,
-    enum: [ExerciseType.STRENGTH, ExerciseType.CARDIO]
+    enum: [ExerciseType.STRENGTH, ExerciseType.CARDIO],
+    required: true
   },
   category: {
     type: String,
-    enum: [ExerciseCategory.BARBELL, ExerciseCategory.BAND, ExerciseCategory.CABLE, ExerciseCategory.BODYWEIGHT, ExerciseCategory.KETTLEBELL, ExerciseCategory.MACHINE, ExerciseCategory.DUMBBELL, ExerciseCategory.OTHER]
+    enum: [ExerciseCategory.BARBELL, ExerciseCategory.BAND, ExerciseCategory.CABLE, ExerciseCategory.BODYWEIGHT, ExerciseCategory.KETTLEBELL, ExerciseCategory.MACHINE, ExerciseCategory.DUMBBELL, ExerciseCategory.OTHER],
+    required: true
   },
-  primaryMuscle: String,
-  image: String,
-  reps: {
-    type: Number,
-    required: false
+  primaryMuscle: {
+    type: String,
+    enum: [Muscle.LATS, Muscle.BACK, Muscle.CHEST, Muscle.BICEPS, Muscle.TRICEPS, Muscle.FOREARMS, Muscle.ABS, Muscle.TRAPS, Muscle.SHOULDERS, Muscle.CALVES, Muscle.GLUTES, Muscle.HAMSTRINGS, Muscle.QUADS, Muscle.OTHER],
+    required: true
   },
-  weight: {
-    type: Number,
-    required: false
+  image: {
+    type: String,
+    required: true
   },
+  reps: Number,
+  weight: Number
 });

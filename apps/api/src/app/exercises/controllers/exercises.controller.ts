@@ -1,15 +1,14 @@
 import { Exercise } from '@lean/api-interfaces';
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, UseFilters } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ExercisesService } from "../services/exercises.service";
 
 @Controller('exercises')
 export class ExercisesController {
 
-  constructor(private exercisesService: ExercisesService) {
-  }
+  constructor(private exercisesService: ExercisesService) {}
 
   @Post()
-  async createExercise(@Body() exercise: Partial<Exercise>): Promise<Exercise> {
+  async createExercise(@Body() exercise: Exercise): Promise<Exercise> {
     return this.exercisesService.createExercise(exercise);
   }
 
@@ -19,7 +18,7 @@ export class ExercisesController {
   }
 
   @Put(':id')
-  async updateExercise(@Param("id") id: string, @Body() exercise: Partial<Exercise>): Promise<Exercise> {
+  async updateExercise(@Param("id") id: string, @Body() exercise: Exercise): Promise<Exercise> {
 
     if (exercise._id) {
       throw new BadRequestException("You cannot change the id");
