@@ -7,15 +7,23 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/lean",
         "index": "apps/lean/src/index.html",
         "main": "apps/lean/src/main.ts",
         "polyfills": "apps/lean/src/polyfills.ts",
         "tsConfig": "apps/lean/tsconfig.app.json",
-        "assets": ["apps/lean/src/favicon.ico", "apps/lean/src/assets"],
-        "styles": ["apps/lean/src/styles.css"],
+        "assets": [
+          "apps/lean/src/favicon.ico",
+          "apps/lean/src/assets",
+          "apps/lean/src/_redirects"
+        ],
+        "styles": [
+          "apps/lean/src/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -75,12 +83,17 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/lean/**/*.ts", "apps/lean/**/*.html"]
+        "lintFilePatterns": [
+          "apps/lean/**/*.ts",
+          "apps/lean/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/lean/jest.config.ts",
         "passWithNoTests": true
