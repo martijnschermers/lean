@@ -3,11 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ExercisesModule } from './exercises/exercises.module';
+import { ExerciseModule } from './exercises/exercise.module';
+import { WorkoutsModule } from './workouts/workouts.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, ExercisesModule],
+  declarations: [AppComponent, AboutComponent],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    ExerciseModule,
+    WorkoutsModule,
+    AppRoutingModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
