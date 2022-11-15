@@ -6,11 +6,15 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ExercisesService {
+export class ExerciseService {
 
   constructor(private http: HttpClient) { }
 
   getExercises(): Observable<Exercise[]> {
     return this.http.get<Exercise[]>('/api/exercises');
+  }
+
+  getExercise(id: string | null): Observable<Exercise> {
+    return this.http.get<Exercise>(`/api/exercises/${id}`);
   }
 }
