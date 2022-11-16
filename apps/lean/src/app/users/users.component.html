@@ -1,0 +1,49 @@
+<div class="overflow-x-auto">
+  <table class="table w-full">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover cursor-pointer" *ngFor="let user of users" routerLink="/user/{{user._id}}">
+        <th>{{user._id}}</th>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td><button class="link link-primary" (click)="deleteUser(user)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="divider"></div>
+
+<div class="prose m-auto mb-5">
+  <h2 class="mb-1 text-center">Add User</h2>
+
+  <div class="form-control w-full">
+    <label class="label">
+      <span class="label-text">Name</span>
+    </label>
+    <input type="text" placeholder="Name" [(ngModel)]="user.name" class="input input-bordered w-full" />
+  </div>
+
+  <div class="form-control w-full">
+    <label class="label">
+      <span class="label-text">Email</span>
+    </label>
+    <input type="email" placeholder="Email" [(ngModel)]="user.email" class="input input-bordered w-full" />
+  </div>
+
+  <div class="form-control w-full">
+    <label class="label">
+      <span class="label-text">Password</span>
+    </label>
+    <input type="password" placeholder="Password" [(ngModel)]="user.password" class="input input-bordered w-full" />
+  </div>
+
+  <button class="btn btn-primary w-full mt-5" (click)="addUser()">Add User</button>
+</div>
