@@ -19,14 +19,14 @@ export class User {
   password: string;
 
   @IsArray()
-  workouts: Workout[];
+  workouts?: Workout[];
 
   @IsArray()
-  followers: User[];
+  followers?: User[];
 
   @IsArray()
-  groupWorkouts: GroupWorkout[];
+  groupWorkouts?: GroupWorkout[];
 
   @IsArray()
-  exercises: Exercise[];
+  exercises?: Exercise[];
 }

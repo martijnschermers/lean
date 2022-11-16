@@ -22,5 +22,5 @@ export class Workout {
   date: Date;
 
   @IsArray()
-  sets: Set[];
+  sets?: Set[];
 }
