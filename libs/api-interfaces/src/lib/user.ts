@@ -1,5 +1,7 @@
 import { Workout } from "./workout";
 import { IsArray, IsEmail, IsMongoId, IsString } from "class-validator";
+import { Exercise } from "./exercise";
+import { GroupWorkout } from "./group-workout";
 
 export class User {
   @IsString()
@@ -20,6 +22,11 @@ export class User {
   workouts: Workout[];
 
   @IsArray()
-  friends: User[];
-  // tracking: Tracking[];
+  followers: User[];
+
+  @IsArray()
+  groupWorkouts: GroupWorkout[];
+
+  @IsArray()
+  exercises: Exercise[];
 }

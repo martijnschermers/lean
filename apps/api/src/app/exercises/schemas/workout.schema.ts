@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { SetSchema } from './set.schema';
 
 export const WorkoutSchema = new mongoose.Schema({
   name: {
@@ -22,12 +23,7 @@ export const WorkoutSchema = new mongoose.Schema({
     required: true,
     default: Date.now()
   },
-  exercises: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: 'Exercise',
+  sets: {
+    type: [SetSchema]
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
 });

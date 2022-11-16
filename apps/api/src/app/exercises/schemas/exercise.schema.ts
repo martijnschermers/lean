@@ -1,7 +1,7 @@
 import * as mongoose from "mongoose";
 import { ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
 
-export const ExercisesSchema = new mongoose.Schema({
+export const ExerciseSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -29,6 +29,4 @@ export const ExercisesSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  reps: Number,
-  weight: Number
 });

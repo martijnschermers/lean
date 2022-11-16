@@ -1,6 +1,5 @@
-import { Exercise } from "./exercise";
-import { User } from "./user";
-import { IsArray, IsDate, IsInt, IsMongoId, IsObject, IsString } from "class-validator";
+import { Set } from "./set";
+import { IsArray, IsDate, IsInt, IsMongoId, IsString } from "class-validator";
 
 export class Workout {
   @IsString()
@@ -23,8 +22,5 @@ export class Workout {
   date: Date;
 
   @IsArray()
-  exercises: Exercise[];
-
-  @IsObject()
-  user: User;
+  sets: Set[];
 }

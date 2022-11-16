@@ -1,7 +1,7 @@
 import { ExerciseType } from "./type";
 import { ExerciseCategory } from "./category";
 import { Muscle } from "./muscle";
-import { IsEnum, IsInt, IsMongoId, IsString, IsUrl } from "class-validator";
+import { IsEnum, IsMongoId, IsString, IsUrl } from "class-validator";
 
 export class Exercise {
   @IsString()
@@ -26,13 +26,4 @@ export class Exercise {
   @IsString()
   @IsUrl()
   image: string;
-
-  @IsInt()
-  workoutId?: number;
-
-  @IsInt()
-  reps?: number;
-
-  @IsInt()
-  weight?: number;
 }
