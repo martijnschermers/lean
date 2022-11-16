@@ -22,6 +22,10 @@ export const WorkoutSchema = new mongoose.Schema({
     required: true,
     default: Date.now()
   },
+  exercises: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Exercise',
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

@@ -29,10 +29,6 @@ export const ExercisesSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  workout: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Workout'
-  },
   reps: Number,
   weight: Number
 });

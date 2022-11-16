@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExercisesService } from '../exercises.service';
+import { ExerciseService } from '../exercise.service';
 import { Exercise } from "@lean/api-interfaces";
 
 @Component({
@@ -7,10 +7,10 @@ import { Exercise } from "@lean/api-interfaces";
   templateUrl: './exercises.component.html',
   styleUrls: ['./exercises.component.css'],
 })
-export class ExercisesListComponent implements OnInit {
+export class ExerciseComponent implements OnInit {
   exercises$: Exercise[] = [];
 
-  constructor(private service: ExercisesService) {}
+  constructor(private service: ExerciseService) {}
 
   ngOnInit(): void {
      this.service.getExercises().subscribe((exercises: Exercise[]) => this.exercises$ = exercises);

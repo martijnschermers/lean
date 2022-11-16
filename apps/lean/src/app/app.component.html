@@ -1,3 +1,13 @@
-<h1 class="text-3xl text-blue-500 font-bold">Lean</h1>
+<div class="navbar bg-base-100">
+  <div class="flex-1">
+    <a class="btn btn-ghost normal-case text-xl">Lean</a>
+  </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal p-0">
+      <li><a routerLink="/workout">Workouts</a></li>
+      <li><a routerLink="/about">About</a></li>
+    </ul>
+  </div>
+</div>
+<router-outlet></router-outlet>
 <lean-exercises></lean-exercises>
-
