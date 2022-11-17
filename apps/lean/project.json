@@ -11,6 +11,9 @@
         "{options.outputPath}"
       ],
       "options": {
+        "allowedCommonJsDependencies": [
+          "validator"
+        ],
         "outputPath": "dist/apps/lean",
         "index": "apps/lean/src/index.html",
         "main": "apps/lean/src/main.ts",
