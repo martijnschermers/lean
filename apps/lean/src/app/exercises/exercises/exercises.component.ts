@@ -3,7 +3,7 @@ import { ExerciseService } from '../exercise.service';
 import { Exercise } from "@lean/api-interfaces";
 
 @Component({
-  selector: 'lean-exercises',
+  selector: 'lean-exercise',
   templateUrl: './exercises.component.html',
   styleUrls: ['./exercises.component.css'],
 })

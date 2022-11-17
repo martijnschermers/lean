@@ -10,12 +10,12 @@ import {
   Post,
   Put
 } from "@nestjs/common";
-import { ExercisesService } from "../services/exercises.service";
+import { ExerciseService } from "./exercise.service";
 
-@Controller("exercises")
-export class ExercisesController {
+@Controller("exercise")
+export class ExerciseController {
 
-  constructor(private exercisesService: ExercisesService) {
+  constructor(private exercisesService: ExerciseService) {
   }
 
   @Post()

@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { SetSchema } from './set.schema';
+import { SetSchema } from '../set/set.schema';
 
 export const WorkoutSchema = new mongoose.Schema({
   name: {

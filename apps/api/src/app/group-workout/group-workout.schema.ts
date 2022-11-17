@@ -1,5 +1,5 @@
-import { Exercise } from '@lean/api-interfaces';
 import * as mongoose from 'mongoose';
+import { ExerciseSchema } from "../exercise/exercise.schema";
 
 export const GroupWorkoutSchema = new mongoose.Schema({
   name: {
@@ -19,7 +19,7 @@ export const GroupWorkoutSchema = new mongoose.Schema({
     required: true
   },
   exercises: {
-    type: [Exercise], 
-    required: true, 
+    type: [ExerciseSchema],
+    required: true,
   },
 });

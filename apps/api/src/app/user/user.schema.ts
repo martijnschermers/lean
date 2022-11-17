@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
-import { ExerciseSchema } from './exercise.schema';
-import { GroupWorkoutSchema } from './group-workout.schema';
+import { ExerciseSchema } from '../exercise/exercise.schema';
+import { GroupWorkoutSchema } from '../group-workout/group-workout.schema';
 
 export const UserSchema = new mongoose.Schema({
   name: {
@@ -15,17 +15,20 @@ export const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  followers: {
-    type: [this],
-  },
   workouts: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: 'Workout'
   },
   groupWorkouts: {
     type: [GroupWorkoutSchema],
-  }, 
+  },
   exercises: {
-    type: [ExerciseSchema], 
+    type: [ExerciseSchema],
   },
 });
+
+UserSchema.add({
+  followers: {
+    type: [UserSchema],
+  }
+})
