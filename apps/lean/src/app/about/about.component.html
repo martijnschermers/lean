@@ -1,7 +1,20 @@
-<div class="prose m-auto">
-  <div class="m-5">
-    <h2 class="mb-2">About</h2>
+<div class="m-auto">
+  <div class="prose m-auto">
+    <div class="flex flex-col md:flex-row justify-center items-center">
+      <div class="w-1/2 md:w-1/3">
+        <img class="rounded-full w-32 h-32 mx-auto" src="https://avatars.githubusercontent.com/u/70104745?v=4"
+             alt="Avatar">
+      </div>
+      <div class="w-1/2 md:w-2/3">
+        <div class="flex flex-col justify-center items-center">
+          <h3 class="text-2xl">Martijn Schermers</h3>
+          <p class="text-lg mb-1">Studentnummer: 2184875</p>
+          <p class="text-lg mt-0">HBO Informatica Avans Hogeschool</p>
+        </div>
+      </div>
+    </div>
 
+    <h2 class="mb-2">About</h2>
     <p>
       Workout tracker die het mogelijk maakt om je workouts bij te houden en te delen met anderen. Het is mogelijk om
       custom oefeningen toe te voegen, andere gebruikers te volgen, simpel je workout te tracken en om eventueel deel te
@@ -9,10 +22,94 @@
       bijvoorbeeld 3 sets van 10 herhalingen voor de oefening bankdrukken uitvoeren.
     </p>
 
-
+    <h3>Entiteiten</h3>
     <figure class="w-full">
       <img class="max-w-full h-auto rounded-lg" src="../../assets/ERD.png" alt="Entity Relation Diagram">
       <figcaption class="mt-2 text-center text-base-content">Entity Relation Diagram (ERD)</figcaption>
     </figure>
+
+    <div class="grid grid-cols-2">
+      <div>
+        <p class="font-bold">Workout</p>
+        <ul>
+          <li>_id: string</li>
+          <li>name: string</li>
+          <li>duration: number</li>
+          <li>volume: number</li>
+          <li>prs: number</li>
+          <li>date: Date</li>
+          <li>sets: Set[]</li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-bold">Group Workout</p>
+        <ul>
+          <li>_id: string</li>
+          <li>name: string</li>
+          <li>duration: number</li>
+          <li>location: string</li>
+          <li>date: Date</li>
+          <li>exercises: Exercise[]</li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-bold">Exercise</p>
+        <ul>
+          <li>_id: string</li>
+          <li>name: string</li>
+          <li>description: string</li>
+          <li>type: ExerciseType</li>
+          <li>category: ExerciseCategory</li>
+          <li>primaryMuscle: Muscle</li>
+          <li>image: string</li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-bold">Set</p>
+        <ul>
+          <li>_id: string</li>
+          <li>reps: number</li>
+          <li>weight: number</li>
+          <li>exercise: Exercise</li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-bold">User</p>
+        <ul>
+          <li>_id: string</li>
+          <li>name: string</li>
+          <li>email: string</li>
+          <li>password: string</li>
+          <li>followers: User[]</li>
+          <li>workouts: Workout[]</li>
+          <li>groupWorkouts: GroupWorkout[]</li>
+          <li>exercises: Exercise[]</li>
+        </ul>
+      </div>
+    </div>
+    <h3>User Stories</h3>
+  </div>
+
+  <div class="overflow-x-auto my-3">
+    <table class="table m-auto">
+      <thead>
+      <tr>
+        <th>Nr</th>
+        <th>Userstory</th>
+        <th>Toelichting</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="hover" *ngFor="let userStory of userStories; let i = index;">
+        <th>{{i + 1}}</th>
+        <td>{{userStory}}</td>
+        <td>...</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
