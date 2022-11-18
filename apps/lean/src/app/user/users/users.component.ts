@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@lean/api-interfaces';
-import { USERS } from './mock-users';
-import { UserService } from './user.service';
+import { USERS } from '../mock-users';
+import { UserService } from '../user.service';
 
 @Component({
-  selector: 'lean-users',
+  selector: 'lean-user',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
   users: User[] = USERS;
-  user: User = new User(); 
+  user: User = new User();
 
   constructor(private userService: UserService) {}
 

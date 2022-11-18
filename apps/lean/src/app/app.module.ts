@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ExerciseModule } from './exercises/exercise.module';
-import { WorkoutsModule } from './workouts/workouts.module';
+import { ExerciseModule } from './exercise/exercise.module';
+import { WorkoutsModule } from './workout/workouts.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AboutComponent } from './about/about.component';
-import { UsersModule } from './users/users.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [AppComponent, AboutComponent],
@@ -17,7 +17,7 @@ import { UsersModule } from './users/users.module';
     HttpClientModule,
     ExerciseModule,
     WorkoutsModule,
-    UsersModule,
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
