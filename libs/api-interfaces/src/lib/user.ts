@@ -9,14 +9,11 @@ export class User {
   _id: string;
 
   @IsString()
-  name: string;
+  username: string;
 
   @IsString()
   @IsEmail()
   email: string;
-
-  @IsString()
-  password: string;
 
   @IsArray()
   workouts?: Workout[];

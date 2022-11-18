@@ -1,6 +1,10 @@
-export { Exercise } from './lib/exercise';
-export { ExerciseCategory } from './lib/category';
-export { ExerciseType } from './lib/type';
-export { Muscle } from './lib/muscle';
-export { User } from './lib/user';
-export { GroupWorkout } from './lib/group-workout';
+export { Exercise } from "./lib/exercise";
+export { ExerciseCategory } from "./lib/category";
+export { ExerciseType } from "./lib/type";
+export { Muscle } from "./lib/muscle";
+export { User } from "./lib/user";
+export { GroupWorkout } from "./lib/group-workout";
+export { Workout } from "./lib/workout";
+export { Set } from "./lib/set";
+export { UserCredentials, UserRegistration, Token, ResourceId, Id } from "./lib/auth";
+export { Response } from "./lib/response";
