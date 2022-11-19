@@ -19,6 +19,8 @@ export class AboutComponent implements OnInit {
     'Als gebruiker wil ik een custom oefening toe kunnen voegen, zodat ik niet afhankelijk ben van de oefeningen die al bestaan.',
     'Als gebruiker wil ik een custom oefening kunnen aanpassen, zodat ik eventuele fouten kan corrigeren.',
     'Als gebruiker wil ik een custom oefening kunnen verwijderen, zodat ik ongewenste oefeningen kan verwijderen.',
+    'Als gebruiker wil ik een account aan kunnen maken, zodat mijn workouts en oefeningen bewaard blijven.',
+    'Als gebruiker wil ik in kunnen loggen met mijn account, zodat ik mijn workouts en oefeningen kan bekijken.',
   ]
 
   constructor() {}

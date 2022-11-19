@@ -6,5 +6,5 @@ export { User } from "./lib/user";
 export { GroupWorkout } from "./lib/group-workout";
 export { Workout } from "./lib/workout";
 export { Set } from "./lib/set";
-export { UserCredentials, UserRegistration, Token, ResourceId, Id } from "./lib/auth";
+export { UserCredentials, UserRegistration } from "./lib/auth";
 export { Response } from "./lib/response";

@@ -21,13 +21,11 @@ export class ExerciseController {
 
   @Post()
   async createExercise(@InjectToken() token: Token, @Body() exercise: Exercise): Promise<Exercise> {
-    console.log(token);
     return this.exercisesService.createExercise(exercise);
   }
 
   @Get()
   async findAll(@InjectToken() token: Token): Promise<Exercise[]> {
-    console.log(token);
     return this.exercisesService.findAll();
   }
 

@@ -4,15 +4,5 @@ export interface UserCredentials {
 }
 
 export interface UserRegistration extends UserCredentials {
-  email: string
-}
-
-export interface Token {
-  token: string
-}
-
-export type Id = string;
-
-export type ResourceId = {
-  id: Id;
+  email: string;
 }

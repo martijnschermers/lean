@@ -33,7 +33,6 @@ export class AuthService {
     const generatedHash = await hash(password, parseInt(process.env.SALT_ROUNDS, 10));
 
     const identity = new this.identityModel({ username, hash: generatedHash, email });
-    console.log(identity);
 
     await identity.save();
   }
@@ -43,7 +42,7 @@ export class AuthService {
 
     if (!identity || !(await compare(password, identity.hash))) throw new Error("User is not authorized");
 
-    const user = await this.userModel.findOne({ name: username });
+    const user = await this.userModel.findOne({ username });
 
     return new Promise((resolve, reject) => {
       sign({ username, id: user.id }, process.env.JWT_SECRET, (err: Error, token: string) => {

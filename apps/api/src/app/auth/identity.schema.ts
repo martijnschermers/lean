@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { IsEmail } from "class-validator";
+import { isEmail } from "class-validator";
 
 @Schema()
 export class Identity {
   @Prop({
     required: true, unique: true,
     validate: {
-      validator: (v: string) => IsEmail(v),
+      validator: isEmail,
       message: props => `${props.value} is not a valid email address`
     }
   })
