@@ -26,6 +26,10 @@ import { TokenMiddleware } from "./auth/token.middleware";
       {
         path: "exercise",
         module: ExerciseModule
+      },
+      {
+        path: "workout",
+        module: WorkoutModule
       }
     ])
   ],
@@ -41,7 +45,8 @@ export class AppModule {
         { path: "api/register", method: RequestMethod.POST }
       )
       .forRoutes(
-        'exercise'
+        'exercise',
+        'workout',
       );
   }
 }
