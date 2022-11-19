@@ -6,7 +6,7 @@ import { UserService } from "../user/user.service";
 
 @Injectable()
 export class WorkoutService {
-  constructor(@InjectModel("Workout") private workoutModel: Model<Workout>, private userService: UserService) {
+  constructor(@InjectModel(Workout.name) private workoutModel: Model<Workout>, private userService: UserService) {
   }
 
   async findAll(id: string): Promise<Workout[]> {

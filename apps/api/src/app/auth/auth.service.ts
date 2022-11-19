@@ -9,8 +9,8 @@ import { Identity } from "./identity.schema";
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel("Identity") private identityModel: Model<Identity>,
-    @InjectModel("User") private userModel: Model<User>
+    @InjectModel(Identity.name) private identityModel: Model<Identity>,
+    @InjectModel(User.name) private userModel: Model<User>
   ) {
   }
 

@@ -6,7 +6,7 @@ import { InjectModel } from "@nestjs/mongoose";
 @Injectable()
 export class ExerciseService {
 
-  constructor(@InjectModel("Exercise") private exerciseModel: Model<Exercise>) {
+  constructor(@InjectModel(Exercise.name) private exerciseModel: Model<Exercise>) {
   }
 
   async findAll(): Promise<Exercise[]> {

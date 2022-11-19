@@ -15,7 +15,6 @@ export class WorkoutController {
 
   @Post()
   createWorkout(@InjectToken() token: Token, @Body() workout: Workout): Promise<Workout> {
-    console.log(token);
     return this.workoutService.createWorkout(token.id, workout);
   }
 }

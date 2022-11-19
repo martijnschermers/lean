@@ -5,7 +5,7 @@ import { Model } from "mongoose";
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel("User") private userModel: Model<User>) {
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {
   }
 
   async findOne(id: string): Promise<User> {
@@ -20,7 +20,6 @@ export class UserService {
 
   async findAllWorkouts(id: string): Promise<Workout[]> {
     const user = await this.userModel.findById(id).populate("workouts");
-    console.log(user);
     return user.workouts;
   }
 }
