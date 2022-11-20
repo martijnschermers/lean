@@ -14,10 +14,10 @@ export class AuthService {
   ) {
   }
 
-  async createUser(username: string, email: string): Promise<string> {
+  async createUser(username: string, email: string): Promise<User> {
     const user = new this.userModel({ username, email });
     await user.save();
-    return user.id;
+    return user;
   }
 
   async verifyToken(token: string): Promise<string | JwtPayload> {
@@ -37,15 +37,15 @@ export class AuthService {
     await identity.save();
   }
 
-  async generateToken(username: string, password: string): Promise<string> {
-    const identity = await this.identityModel.findOne({ username });
+  async generateToken(email: string, password: string): Promise<string> {
+    const identity = await this.identityModel.findOne({ email });
 
     if (!identity || !(await compare(password, identity.hash))) throw new Error("User is not authorized");
 
-    const user = await this.userModel.findOne({ username });
+    const user = await this.userModel.findOne({ email });
 
     return new Promise((resolve, reject) => {
-      sign({ username, id: user.id }, process.env.JWT_SECRET, (err: Error, token: string) => {
+      sign({ id: user.id }, process.env.JWT_SECRET, (err: Error, token: string) => {
         if (err) reject(err);
         else resolve(token);
       });

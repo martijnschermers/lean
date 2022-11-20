@@ -1,8 +1,9 @@
 export interface UserCredentials {
-  username: string;
+  email: string;
   password: string;
 }
 
 export interface UserRegistration extends UserCredentials {
-  email: string;
+  username: string;
+  repeatPassword: string;
 }
