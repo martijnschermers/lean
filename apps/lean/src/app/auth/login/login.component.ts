@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { catchError, map } from "rxjs";
 
 @Component({
   selector: "lean-login",
@@ -35,7 +36,17 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.authService.login(this.loginForm.value).subscribe();
-    await this.router.navigate(["/"]);
+    this.authService.login(this.loginForm.value)
+      .pipe(
+        map((token) => {
+          if (token) {
+            this.router.navigate(["/"]);
+          }
+        }),
+        catchError((err) => {
+          this.loginForm.setErrors({ invalidCredentials: true, message: err.error.message });
+          throw err;
+        })
+      ).subscribe();
   }
 }

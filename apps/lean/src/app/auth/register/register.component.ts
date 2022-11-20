@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, OnInit } from "@angular/core";
-import { UserRegistration } from "@lean/api-interfaces";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { catchError, map } from "rxjs";
 
 @Component({
   selector: "lean-register",
@@ -46,8 +46,17 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    const userRegistration: UserRegistration = this.registerForm.value;
-    await this.authService.register(userRegistration);
-    await this.router.navigate(["/"]);
+    this.authService.register(this.registerForm.value)
+      .pipe(
+        map((token) => {
+          if (token) {
+            this.router.navigate(["/"]);
+          }
+        }),
+        catchError((err) => {
+          this.registerForm.setErrors({ invalidCredentials: true, message: err.error.message });
+          throw err;
+        })
+      ).subscribe();
   }
 }

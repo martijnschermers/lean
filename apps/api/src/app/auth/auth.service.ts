@@ -32,6 +32,9 @@ export class AuthService {
   async registerUser(username: string, password: string, email: string) {
     const generatedHash = await hash(password, parseInt(process.env.SALT_ROUNDS, 10));
 
+    const user = await this.identityModel.findOne({ $or: [{ username }, { email }] });
+    if (user) throw new Error("User already exists");
+
     const identity = new this.identityModel({ username, hash: generatedHash, email });
 
     await identity.save();

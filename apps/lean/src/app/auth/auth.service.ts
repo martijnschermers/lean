@@ -24,7 +24,6 @@ export class AuthService {
           return user;
         }),
         catchError((err) => {
-          console.log(err);
           throw err;
         })
       );
@@ -37,6 +36,9 @@ export class AuthService {
           localStorage.setItem(this.CURRENT_USER, JSON.stringify(token));
           this.currentUser$.next(token);
           return token;
+        }),
+        catchError((err) => {
+          throw err;
         })
       );
   }
