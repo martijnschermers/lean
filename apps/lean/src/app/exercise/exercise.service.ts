@@ -11,10 +11,10 @@ export class ExerciseService {
   constructor(private http: HttpClient) { }
 
   getExercises(): Observable<Exercise[]> {
-    return this.http.get<Exercise[]>('/api/exercises');
+    return this.http.get<Exercise[]>('/api/exercise');
   }
 
   getExercise(id: string | null): Observable<Exercise> {
-    return this.http.get<Exercise>(`/api/exercises/${id}`);
+    return this.http.get<Exercise>(`/api/exercise/${id}`);
   }
 }
