@@ -1,11 +1,10 @@
-<div class="m-auto">
+<div class="m-5">
   <div class="prose m-auto">
     <div class="flex flex-col md:flex-row justify-center items-center">
-      <div class="w-1/2 md:w-1/3">
-        <img class="rounded-full w-32 h-32 mx-auto" src="https://avatars.githubusercontent.com/u/70104745?v=4"
-             alt="Avatar">
+      <div class="w-36">
+        <img alt="Avatar" class="rounded-full" src="https://avatars.githubusercontent.com/u/70104745?v=4" />
       </div>
-      <div class="w-1/2 md:w-2/3">
+      <div class="md:w-2/3">
         <div class="flex flex-col justify-center items-center">
           <h3 class="text-2xl">Martijn Schermers</h3>
           <p class="text-lg mb-1">Studentnummer: 2184875</p>
@@ -22,7 +21,7 @@
       bijvoorbeeld 3 sets van 10 herhalingen voor de oefening bankdrukken uitvoeren.
     </p>
 
-    <h3>Entiteiten</h3>
+    <h2>Entiteiten</h2>
     <figure class="w-full">
       <img class="max-w-full h-auto rounded-lg" src="../../assets/ERD.png" alt="Entity Relation Diagram">
       <figcaption class="mt-2 text-center text-base-content">Entity Relation Diagram (ERD)</figcaption>
@@ -91,7 +90,7 @@
         </ul>
       </div>
     </div>
-    <h3>User Stories</h3>
+    <h2>User Stories</h2>
   </div>
 
   <div class="overflow-x-auto my-3">
@@ -99,15 +98,13 @@
       <thead>
       <tr>
         <th>Nr</th>
-        <th>Userstory</th>
-        <th>Toelichting</th>
+        <th>User story</th>
       </tr>
       </thead>
       <tbody>
       <tr class="hover" *ngFor="let userStory of userStories; let i = index;">
         <th>{{i + 1}}</th>
         <td>{{userStory}}</td>
-        <td>...</td>
       </tr>
       </tbody>
     </table>
