@@ -34,4 +34,9 @@ export class AuthController {
       throw new UnauthorizedException("Invalid credentials");
     }
   }
+
+  @Post("verify")
+  async verify(@Body() token: string): Promise<boolean> {
+    return this.authService.verifyToken(token);
+  }
 }
