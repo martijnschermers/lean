@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Exercise } from '@lean/api-interfaces';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,11 @@ export class ExerciseService {
   }
 
   createExercise(value: Exercise): Observable<Exercise> {
-    return this.http.post<Exercise>('/api/exercise', value);
+    return this.http.post<Exercise>('/api/exercise', value)
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
   }
 }

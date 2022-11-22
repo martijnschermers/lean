@@ -12,7 +12,7 @@ import { ExerciseComponent } from "./exercise/exercises/exercises.component";
 import { ExerciseDetailComponent } from "./exercise/exercise-detail/exercise-detail.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "/user", pathMatch: "full" },
+  { path: "", redirectTo: "/exercise", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "about", component: AboutComponent },

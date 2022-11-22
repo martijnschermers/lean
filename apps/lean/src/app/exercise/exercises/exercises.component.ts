@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, OnInit } from "@angular/core";
 import { ExerciseService } from "../exercise.service";
 import { Exercise, ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
@@ -31,11 +32,22 @@ export class ExerciseComponent implements OnInit {
     });
   }
 
+  get name() {
+    return this.exerciseForm.get("name")!;
+  }
+
+  get description() {
+    return this.exerciseForm.get("description")!;
+  }
+
   createExercise(): void {
+    if (this.exerciseForm.invalid) {
+      return;
+    }
+
     this.service.createExercise(this.exerciseForm.value).subscribe((exercise: Exercise) => {
       this.exercises$.push(exercise);
       this.exerciseForm.reset();
     });
   }
-
 }
