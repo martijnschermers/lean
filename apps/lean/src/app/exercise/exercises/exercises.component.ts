@@ -1,18 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { ExerciseService } from '../exercise.service';
-import { Exercise } from "@lean/api-interfaces";
+import { Component, OnInit } from "@angular/core";
+import { ExerciseService } from "../exercise.service";
+import { Exercise, ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'lean-exercise',
-  templateUrl: './exercises.component.html',
-  styleUrls: ['./exercises.component.css'],
+  selector: "lean-exercise",
+  templateUrl: "./exercises.component.html",
+  styleUrls: ["./exercises.component.css"]
 })
 export class ExerciseComponent implements OnInit {
   exercises$: Exercise[] = [];
+  exerciseForm!: FormGroup;
+  exerciseTypes = Object.values(ExerciseType);
+  exerciseCategories = Object.values(ExerciseCategory);
+  muscles = Object.values(Muscle);
 
-  constructor(private service: ExerciseService) {}
+  constructor(private service: ExerciseService, private formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
-     this.service.getExercises().subscribe((exercises: Exercise[]) => this.exercises$ = exercises);
+    this.service.getExercises().subscribe((exercises: Exercise[]) => this.exercises$ = exercises);
+
+    this.exerciseForm = this.formBuilder.group({
+      name: ["", Validators.required],
+      description: ["", Validators.required],
+      type: [this.exerciseTypes[0], Validators.required],
+      category: [this.exerciseCategories[0], Validators.required],
+      primaryMuscle: [this.muscles[0], Validators.required],
+      image: [""]
+    });
   }
+
+  createExercise(): void {
+    this.service.createExercise(this.exerciseForm.value).subscribe((exercise: Exercise) => {
+      this.exercises$.push(exercise);
+      this.exerciseForm.reset();
+    });
+  }
+
 }

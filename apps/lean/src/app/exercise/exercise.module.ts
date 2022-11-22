@@ -1,18 +1,18 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { ExerciseComponent } from "./exercises/exercises.component";
-import { ExerciseDetailComponent } from "./exercise-detail/exercise-detail.component";
-import { RouterLinkWithHref } from "@angular/router";
-import { FormsModule } from "@angular/forms";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ExerciseComponent } from './exercises/exercises.component';
+import { ExerciseDetailComponent } from './exercise-detail/exercise-detail.component';
+import { RouterLinkWithHref } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ExerciseFormComponent } from './exercise-form/exercise-form.component';
 
 @NgModule({
-  declarations: [ExerciseComponent, ExerciseDetailComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterLinkWithHref,
+  declarations: [
+    ExerciseComponent,
+    ExerciseDetailComponent,
+    ExerciseFormComponent,
   ],
-  exports: [ExerciseComponent]
+  imports: [CommonModule, FormsModule, RouterLinkWithHref, ReactiveFormsModule],
+  exports: [ExerciseComponent],
 })
-export class ExerciseModule {
-}
+export class ExerciseModule {}

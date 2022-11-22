@@ -3,3 +3,61 @@
     <a [routerLink]="['/exercise', exercise._id]" class="link link-primary">{{exercise.name}}</a>
   </li>
 </ul>
+
+<form [formGroup]="exerciseForm" (ngSubmit)="createExercise()">
+  <div class="card-body">
+    <h1 class="text-center">Add Exercise</h1>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Name</span>
+      </label>
+      <input type="text" class="input input-bordered" name="name" formControlName="name" placeholder="Name">
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Description</span>
+      </label>
+      <input type="text" class="input input-bordered" name="description" formControlName="description"
+             placeholder="Description">
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Type</span>
+      </label>
+      <select class="select select-bordered" formControlName="type" name="type">
+        <option *ngFor="let type of exerciseTypes" [value]="type">{{type}}</option>
+      </select>
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Equipment</span>
+      </label>
+      <select class="select select-bordered" formControlName="category" name="category">
+        <option *ngFor="let category of exerciseCategories" [value]="category">{{category}}</option>
+      </select>
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Primary Muscle</span>
+      </label>
+      <select class="select select-bordered" formControlName="primaryMuscle" name="primaryMuscle">
+        <option *ngFor="let muscle of muscles" [value]="muscle">{{muscle}}</option>
+      </select>
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Image</span>
+      </label>
+      <input type="url" class="input input-bordered" name="image" formControlName="image"
+             placeholder="Image Url">
+    </div>
+
+    <button [disabled]="exerciseForm.invalid" class="btn btn-primary mt-2" type="submit">Add</button>
+  </div>
+</form>

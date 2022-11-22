@@ -27,6 +27,5 @@ export const ExerciseSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: true
   },
 });

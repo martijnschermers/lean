@@ -17,4 +17,8 @@ export class ExerciseService {
   getExercise(id: string | null): Observable<Exercise> {
     return this.http.get<Exercise>(`/api/exercise/${id}`);
   }
+
+  createExercise(value: Exercise): Observable<Exercise> {
+    return this.http.post<Exercise>('/api/exercise', value);
+  }
 }

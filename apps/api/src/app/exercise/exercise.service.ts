@@ -32,6 +32,6 @@ export class ExerciseService {
   }
 
   async findOne(id: string): Promise<Exercise> {
-    return this.exerciseModel.findOne({ _id: id }, { __v: 0 });
+    return this.exerciseModel.findById(id, { __v: 0 });
   }
 }
