@@ -15,16 +15,6 @@ export class AuthGuard implements CanActivate {
     return this.authService.currentUser$.pipe(
       map((token) => {
         if (token) {
-          // this.http.post("api/verify", `Bearer ${token.token}`)
-          //   .pipe(
-          //     map((res) => {
-          //       if (res) {
-          //         return true;
-          //       }
-          //       return this.router.parseUrl("/login");
-          //     })
-          //   )
-          //   .subscribe();
           return true;
         }
 
