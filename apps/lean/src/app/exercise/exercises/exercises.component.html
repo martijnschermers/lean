@@ -1,5 +1,93 @@
-<ul>
-  <li *ngFor="let exercise of exercises$">
-    <a [routerLink]="['/exercise', exercise._id]" class="link link-primary">{{exercise.name}}</a>
-  </li>
-</ul>
+<div class="overflow-x-auto w-full">
+  <table class="table w-full">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Primary Muscle</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let exercise of exercises$" [routerLink]="['/exercise', exercise._id]" class="hover cursor-pointer">
+      <td>
+        <div class="flex items-center space-x-3">
+          <div *ngIf="exercise.image" class="avatar">
+            <div class="mask mask-squircle w-12 h-12">
+              <img src="{{exercise.image}}" alt="Exercise image"/>
+            </div>
+          </div>
+          <div class="font-bold">{{exercise.name}}</div>
+        </div>
+      </td>
+      <td>{{exercise.type}}</td>
+      <td>{{exercise.primaryMuscle}}</td>
+    </tr>
+  </table>
+</div>
+
+<div class="divider"></div>
+
+<form class="prose card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 m-auto" [formGroup]="exerciseForm"
+      (ngSubmit)="createExercise()">
+  <div class="card-body">
+    <h1 class="text-center">Add Exercise</h1>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Name</span>
+      </label>
+      <input type="text" class="input input-bordered" name="name" formControlName="name" placeholder="Name">
+      <span *ngIf="name.invalid && (name.dirty || name.touched)">
+        <span class="text-error" *ngIf="name.errors?.['required']">Name is required</span>
+      </span>
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Description</span>
+      </label>
+      <input type="text" class="input input-bordered" name="description" formControlName="description"
+             placeholder="Description">
+      <span *ngIf="description.invalid && (description.dirty || description.touched)">
+        <span class="text-error" *ngIf="description.errors?.['required']">Description is required</span>
+      </span>
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Type</span>
+      </label>
+      <select class="select select-bordered" formControlName="type" name="type">
+        <option *ngFor="let type of exerciseTypes" [value]="type">{{type}}</option>
+      </select>
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Equipment</span>
+      </label>
+      <select class="select select-bordered" formControlName="category" name="category">
+        <option *ngFor="let category of exerciseCategories" [value]="category">{{category}}</option>
+      </select>
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Primary Muscle</span>
+      </label>
+      <select class="select select-bordered" formControlName="primaryMuscle" name="primaryMuscle">
+        <option *ngFor="let muscle of muscles" [value]="muscle">{{muscle}}</option>
+      </select>
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Image</span>
+      </label>
+      <input type="url" class="input input-bordered" name="image" formControlName="image"
+             placeholder="Image Url">
+    </div>
+
+    <button [disabled]="exerciseForm.invalid" class="btn btn-primary mt-2" type="submit">Add</button>
+  </div>
+</form>

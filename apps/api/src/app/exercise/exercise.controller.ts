@@ -11,21 +11,22 @@ import {
   Put
 } from "@nestjs/common";
 import { ExerciseService } from "./exercise.service";
+import { InjectToken, Token } from "../auth/token.decorator";
 
-@Controller("exercise")
+@Controller()
 export class ExerciseController {
 
   constructor(private exercisesService: ExerciseService) {
   }
 
   @Post()
-  async createExercise(@Body() exercise: Exercise): Promise<Exercise> {
-    return this.exercisesService.createExercise(exercise);
+  async createExercise(@InjectToken() token: Token, @Body() exercise: Exercise): Promise<Exercise> {
+    return this.exercisesService.createExercise(token.id, exercise);
   }
 
   @Get()
-  async findAll(): Promise<Exercise[]> {
-    return this.exercisesService.findAll();
+  async findAll(@InjectToken() token: Token): Promise<Exercise[]> {
+    return this.exercisesService.findAll(token.id);
   }
 
   @Get(":id")

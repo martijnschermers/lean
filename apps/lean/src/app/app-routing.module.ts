@@ -1,28 +1,33 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { WorkoutsComponent } from "./workout/workouts/workouts.component";
 import { AboutComponent } from "./about/about.component";
 import { WorkoutDetailComponent } from "./workout/workout-detail/workout-detail.component";
+import { UsersComponent } from "./user/users/users.component";
+import { UserDetailComponent } from "./user/user-detail/user-detail.component";
+import { LoginComponent } from "./auth/login/login.component";
+import { RegisterComponent } from "./auth/register/register.component";
+import { AuthGuard } from "./auth/auth.guard";
 import { ExerciseComponent } from "./exercise/exercises/exercises.component";
 import { ExerciseDetailComponent } from "./exercise/exercise-detail/exercise-detail.component";
-import { UsersComponent } from "./user/users/users.component";
-import { UserDetailComponent } from './user/user-detail/user-detail.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/user', pathMatch: 'full' },
-  { path: 'about', component: AboutComponent },
-  { path: 'workout', component: WorkoutsComponent },
-  { path: 'workout/:id', component: WorkoutDetailComponent },
-  { path: 'exercise', component: ExerciseComponent },
-  { path: 'exercise/:id', component: ExerciseDetailComponent },
-  { path: 'user', component: UsersComponent },
-  { path: 'user/:id', component: UserDetailComponent }
+  { path: "", redirectTo: "/exercise", pathMatch: "full" },
+  { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
+  { path: "about", component: AboutComponent },
+  { path: "exercise", component: ExerciseComponent, canActivate: [AuthGuard] },
+  { path: "exercise/:id", component: ExerciseDetailComponent, canActivate: [AuthGuard] },
+  { path: "workout", component: WorkoutsComponent, canActivate: [AuthGuard] },
+  { path: "workout/:id", component: WorkoutDetailComponent },
+  { path: "user", component: UsersComponent },
+  { path: "user/:id", component: UserDetailComponent }
 ];
 
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

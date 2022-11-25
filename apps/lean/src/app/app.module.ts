@@ -8,6 +8,8 @@ import { WorkoutsModule } from './workout/workouts.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AboutComponent } from './about/about.component';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { ComponentsModule } from "./components/components.module";
 
 @NgModule({
   declarations: [AppComponent, AboutComponent],
@@ -18,6 +20,8 @@ import { UserModule } from './user/user.module';
     ExerciseModule,
     WorkoutsModule,
     UserModule,
+    AuthModule,
+    ComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

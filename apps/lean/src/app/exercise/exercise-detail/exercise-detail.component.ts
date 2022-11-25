@@ -9,9 +9,9 @@ import { Exercise } from "@lean/api-interfaces";
   styleUrls: ['./exercise-detail.component.css'],
 })
 export class ExerciseDetailComponent implements OnInit {
-  exercise?: Exercise;
+  exercise: Exercise;
 
-  constructor(private route: ActivatedRoute, private exerciseService: ExerciseService, private location: Location) {
+  constructor(private route: ActivatedRoute, private exerciseService: ExerciseService) {
   }
 
   ngOnInit(): void {
