@@ -7,10 +7,8 @@ import { USERS } from './mock-users';
   providedIn: 'root'
 })
 export class UserService {
-
-  constructor() { }
-
   getUser(id: string): Observable<User> {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return of(USERS.find(user => user._id === id)!);
   }
 
@@ -20,7 +18,6 @@ export class UserService {
     USERS.push(user);
     return of(user);
   }
-
 
   updateUser(user: User): Observable<User> {
     const index = USERS.findIndex(u => u._id === user._id);
