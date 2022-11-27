@@ -60,7 +60,6 @@ export class ExerciseFormComponent implements OnInit {
     if (this.exerciseForm.invalid) {
       return;
     }
-    console.log("onsubmit");
 
     this.exerciseEvent.emit(this.exerciseForm);
   }

@@ -7,7 +7,8 @@
       <label class="label">
         <span class="label-text">Name</span>
       </label>
-      <input type="text" class="input input-bordered" name="name" formControlName="name" placeholder="Name">
+      <input type="text" class="input input-bordered" name="name" formControlName="name"
+             (ngModelChange)="exercise ? exercise.name = $event : ''" placeholder="Name">
       <span *ngIf="name.invalid && (name.dirty || name.touched)">
         <span class="text-error" *ngIf="name.errors?.['required']">Name is required</span>
       </span>
@@ -18,7 +19,7 @@
         <span class="label-text">Description</span>
       </label>
       <input type="text" class="input input-bordered" name="description" formControlName="description"
-             placeholder="Description">
+             (ngModelChange)="exercise ? exercise.description = $event : ''" placeholder="Description">
       <span *ngIf="description.invalid && (description.dirty || description.touched)">
         <span class="text-error" *ngIf="description.errors?.['required']">Description is required</span>
       </span>
@@ -28,7 +29,8 @@
       <label class="label">
         <span class="label-text">Type</span>
       </label>
-      <select class="select select-bordered" formControlName="type" name="type">
+      <select class="select select-bordered" formControlName="type"
+              (ngModelChange)="exercise ? exercise.type = $event : ''" name="type">
         <option *ngFor="let type of exerciseTypes" [value]="type">{{type}}</option>
       </select>
     </div>
@@ -37,7 +39,8 @@
       <label class="label">
         <span class="label-text">Equipment</span>
       </label>
-      <select class="select select-bordered" formControlName="category" name="category">
+      <select class="select select-bordered" formControlName="category"
+              (ngModelChange)="exercise ? exercise.category = $event : ''" name="category">
         <option *ngFor="let category of exerciseCategories" [value]="category">{{category}}</option>
       </select>
     </div>
@@ -46,7 +49,8 @@
       <label class="label">
         <span class="label-text">Primary Muscle</span>
       </label>
-      <select class="select select-bordered" formControlName="primaryMuscle" name="primaryMuscle">
+      <select class="select select-bordered" formControlName="primaryMuscle"
+              (ngModelChange)="exercise ? exercise.primaryMuscle = $event : ''" name="primaryMuscle">
         <option *ngFor="let muscle of muscles" [value]="muscle">{{muscle}}</option>
       </select>
     </div>
@@ -55,7 +59,8 @@
       <label class="label">
         <span class="label-text">Image</span>
       </label>
-      <input type="url" class="input input-bordered" name="image" formControlName="image"
+      <input type="url" class="input input-bordered" (ngModelChange)="exercise ? exercise.image = $event : ''"
+             name="image" formControlName="image"
              placeholder="Image Url">
     </div>
 
