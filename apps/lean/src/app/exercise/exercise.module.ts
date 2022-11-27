@@ -5,6 +5,8 @@ import { ExerciseDetailComponent } from './exercise-detail/exercise-detail.compo
 import { RouterLink, RouterLinkWithHref } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ExerciseFormComponent } from './exercise-form/exercise-form.component';
+import { ExerciseMockService } from "./exercise-mock.service";
+import { ExerciseService } from "./exercise.service";
 
 @NgModule({
   declarations: [
@@ -14,5 +16,6 @@ import { ExerciseFormComponent } from './exercise-form/exercise-form.component';
   ],
   imports: [CommonModule, FormsModule, RouterLinkWithHref, ReactiveFormsModule, RouterLink],
   exports: [ExerciseComponent],
+  providers: [ExerciseMockService, ExerciseService]
 })
 export class ExerciseModule {}
