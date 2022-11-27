@@ -7,7 +7,6 @@ import { UsersComponent } from "./user/users/users.component";
 import { UserDetailComponent } from "./user/user-detail/user-detail.component";
 import { LoginComponent } from "./auth/login/login.component";
 import { RegisterComponent } from "./auth/register/register.component";
-import { AuthGuard } from "./auth/auth.guard";
 import { ExerciseComponent } from "./exercise/exercises/exercises.component";
 import { ExerciseDetailComponent } from "./exercise/exercise-detail/exercise-detail.component";
 
@@ -16,9 +15,9 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "about", component: AboutComponent },
-  { path: "exercise", component: ExerciseComponent, canActivate: [AuthGuard] },
-  { path: "exercise/:id", component: ExerciseDetailComponent, canActivate: [AuthGuard] },
-  { path: "workout", component: WorkoutsComponent, canActivate: [AuthGuard] },
+  { path: "exercise", component: ExerciseComponent },
+  { path: "exercise/:id", component: ExerciseDetailComponent },
+  { path: "workout", component: WorkoutsComponent },
   { path: "workout/:id", component: WorkoutDetailComponent },
   { path: "user", component: UsersComponent },
   { path: "user/:id", component: UserDetailComponent }
