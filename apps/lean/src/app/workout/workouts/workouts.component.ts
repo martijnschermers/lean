@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Workout } from "@lean/api-interfaces";
+import { WorkoutService } from "../workout.service";
 
 @Component({
   selector: 'lean-workout',
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./workouts.component.css'],
 })
 export class WorkoutsComponent implements OnInit {
-  constructor() {}
+  workouts$: Workout[];
 
-  ngOnInit(): void {}
+  constructor(private workoutService: WorkoutService) {}
+
+  ngOnInit(): void {
+    this.workoutService.findAll().subscribe(workouts => this.workouts$ = workouts);
+  }
 }

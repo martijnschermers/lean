@@ -19,8 +19,18 @@ export class UserService {
   }
 
   async findAllWorkouts(id: string): Promise<Workout[]> {
-    const user = await this.userModel.findById(id).populate("workouts");
-    return user.workouts;
+    // const user = await this.userModel.findById(id).populate("workouts");
+    const workouts = [];
+    const workout1 = new Workout();
+    workout1.name = "Bench press";
+
+    const workout2 = new Workout();
+    workout2.name = "Squat";
+
+    workouts.push(workout1);
+    workouts.push(workout2);
+
+    return workouts;
   }
 
   async addExercise(id: string, exercise: Exercise) {

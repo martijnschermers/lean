@@ -1,1 +1,9 @@
-<p>workouts works!</p>
+<div>
+  <ul>
+    <li *ngFor="let workout of workouts$">
+      <a [routerLink]="['/workouts', workout._id]">
+        {{ workout.name }}
+      </a>
+    </li>
+  </ul>
+</div>
