@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, OnInit } from "@angular/core";
 import { Exercise } from "@lean/api-interfaces";
-import { ExerciseMockService } from "../exercise-mock.service";
 import { FormGroup } from "@angular/forms";
+import { ExerciseService } from "../exercise.service";
 
 @Component({
   selector: "lean-exercise",
@@ -12,7 +12,7 @@ import { FormGroup } from "@angular/forms";
 export class ExerciseComponent implements OnInit {
   exercises$: Exercise[] = [];
 
-  constructor(private service: ExerciseMockService) {
+  constructor(private service: ExerciseService) {
   }
 
   ngOnInit(): void {
@@ -26,8 +26,6 @@ export class ExerciseComponent implements OnInit {
   }
 
   deleteExercise(exerciseId: string): void {
-    this.service.deleteExercise(exerciseId).subscribe(() => {
-      this.exercises$ = this.exercises$.filter(exercise => exercise._id !== exerciseId);
-    });
+    this.service.deleteExercise(exerciseId).subscribe();
   }
 }

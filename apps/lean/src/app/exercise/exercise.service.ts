@@ -26,4 +26,12 @@ export class ExerciseService {
         })
       );
   }
+
+  updateExercise(value: Exercise): Observable<Exercise> {
+    return this.http.put<Exercise>(`/api/exercise/${value._id}`, value);
+  }
+
+  deleteExercise(exerciseId: string): Observable<Exercise> {
+    return this.http.delete<Exercise>(`/api/exercise/${exerciseId}`);
+  }
 }
