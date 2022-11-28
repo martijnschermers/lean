@@ -2,7 +2,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Exercise } from "@lean/api-interfaces";
 import { FormGroup } from "@angular/forms";
-import { ExerciseService } from "../exercise.service";
+import { ExerciseMockService } from "../exercise-mock.service";
 
 @Component({
   selector: "lean-exercise",
@@ -12,7 +12,7 @@ import { ExerciseService } from "../exercise.service";
 export class ExerciseComponent implements OnInit {
   exercises$: Exercise[] = [];
 
-  constructor(private service: ExerciseService) {
+  constructor(private service: ExerciseMockService) {
   }
 
   ngOnInit(): void {

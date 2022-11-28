@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Exercise } from "@lean/api-interfaces";
 import { FormGroup } from "@angular/forms";
 import { Location } from "@angular/common";
-import { ExerciseService } from "../exercise.service";
+import { ExerciseMockService } from "../exercise-mock.service";
 
 @Component({
   selector: 'lean-exercise-detail',
@@ -13,7 +13,7 @@ import { ExerciseService } from "../exercise.service";
 export class ExerciseDetailComponent implements OnInit {
   exercise: Exercise;
 
-  constructor(private route: ActivatedRoute, private exerciseService: ExerciseService, private location: Location) {
+  constructor(private route: ActivatedRoute, private exerciseService: ExerciseMockService, private location: Location) {
   }
 
   ngOnInit(): void {
