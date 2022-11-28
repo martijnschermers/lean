@@ -48,7 +48,8 @@ jobs:
         npm run build:api --if-present
         # npm run test --if-present
 
-    - run: zip lean.zip . 
+    - run: |
+        zip lean.zip . 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
       with:
