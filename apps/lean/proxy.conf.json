@@ -1,8 +1,6 @@
 {
   "/api": {
-    "target": "https://lean.azurewebsites.net",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
+    "target": "http://localhost:3333",
+    "secure": false
   }
 }

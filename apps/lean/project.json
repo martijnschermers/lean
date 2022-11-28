@@ -47,6 +47,10 @@
             {
               "replace": "apps/lean/src/environments/environment.ts",
               "with": "apps/lean/src/environments/environment.prod.ts"
+            },
+            {
+              "replace": "apps/lean/proxy.conf.json",
+              "with": "apps/lean/proxy.conf.prod.json"
             }
           ],
           "outputHashing": "all"
@@ -67,11 +71,11 @@
       "configurations": {
         "production": {
           "browserTarget": "lean:build:production",
-          "proxyConfig": "apps/lean/proxy.conf.json"
+          "proxyConfig": "apps/lean/proxy.conf.prod.json"
         },
         "development": {
           "browserTarget": "lean:build:development",
-          "proxyConfig": "apps/lean/proxy.dev.conf.json"
+          "proxyConfig": "apps/lean/proxy.conf.json"
         }
       },
       "defaultConfiguration": "development",
