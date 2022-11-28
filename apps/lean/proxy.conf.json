@@ -2,6 +2,7 @@
   "/api": {
     "target": "https://lean.azurewebsites.net",
     "secure": false,
-    "changeOrigin": true
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }
