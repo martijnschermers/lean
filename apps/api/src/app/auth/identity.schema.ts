@@ -1,5 +1,8 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document } from "mongoose";
 import { isEmail } from "class-validator";
+
+export type IdentityDocument = Identity & Document;
 
 @Schema()
 export class Identity {

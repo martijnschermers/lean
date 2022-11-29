@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from "@lean/api-interfaces";
+import { UserInterface } from "@lean/api-interfaces";
 
 @Component({
   selector: 'lean-user-form',
@@ -8,7 +8,7 @@ import { User } from "@lean/api-interfaces";
 })
 export class UserFormComponent implements OnInit {
   @Input()
-  user: User;
+  user: UserInterface;
 
   constructor() {}
 

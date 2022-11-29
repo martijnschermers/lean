@@ -1,38 +1,40 @@
-import * as mongoose from 'mongoose';
-import { ExerciseSchema } from '../exercise/exercise.schema';
-import { GroupWorkoutSchema } from '../group-workout/group-workout.schema';
+import { Document, Schema as MongooseSchema } from "mongoose";
+import { Exercise, ExerciseSchema } from "../exercise/exercise.schema";
+import { GroupWorkout, GroupWorkoutSchema } from "../group-workout/group-workout.schema";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { isEmail, isString } from "class-validator";
+import { Workout } from "../workout/workout.schema";
+import { UserInterface } from "@lean/api-interfaces";
 
-export const UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  workoutsIds: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: 'Workout',
-    default: []
-  },
-  groupWorkouts: {
-    type: [GroupWorkoutSchema],
-  },
-  exercises: {
-    type: [ExerciseSchema],
-  },
-});
+export type UserDocument = User & Document;
+
+@Schema()
+export class User implements UserInterface {
+  _id: string;
+
+  @Prop({ required: true, validate: isString })
+  username: string;
+
+  @Prop({ required: true, validate: isEmail })
+  email: string;
+
+  @Prop({ required: true, type: [MongooseSchema.Types.ObjectId], ref: "Workout" })
+  workouts: Workout[];
+
+  @Prop({ required: true, type: [GroupWorkoutSchema] })
+  groupWorkouts: GroupWorkout[];
+
+  @Prop({ required: true, type: [ExerciseSchema] })
+  exercises: Exercise[];
+
+  @Prop({ required: true })
+  followers: User[];
+}
+
+export const UserSchema = SchemaFactory.createForClass(User);
 
 UserSchema.add({
   followers: {
-    type: [UserSchema],
+    type: [UserSchema]
   }
-})
-
-UserSchema.virtual('workouts', {
-  ref: 'Workout',
-  localField: 'workoutsIds',
-  foreignField: '_id',
-  justOne: false
 });

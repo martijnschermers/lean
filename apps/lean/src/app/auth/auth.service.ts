@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { User, UserCredentials, UserRegistration } from "@lean/api-interfaces";
+import { UserInterface, UserCredentials, UserRegistration } from "@lean/api-interfaces";
 import { BehaviorSubject, catchError, map, Observable } from "rxjs";
 
 @Injectable({
@@ -17,8 +17,8 @@ export class AuthService {
     }
   }
 
-  register(credentials: UserRegistration): Observable<User> {
-    return this.http.post<User>("/api/register", credentials)
+  register(credentials: UserRegistration): Observable<UserInterface> {
+    return this.http.post<UserInterface>("/api/register", credentials)
       .pipe(
         map((user) => {
           return user;

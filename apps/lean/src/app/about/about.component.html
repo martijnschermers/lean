@@ -16,7 +16,7 @@
 
     <h2 class="mb-2">About</h2>
     <p>
-      Workout tracker die het mogelijk maakt om je workouts bij te houden en te delen met anderen. Het is mogelijk om
+      WorkoutInterface tracker die het mogelijk maakt om je workouts bij te houden en te delen met anderen. Het is mogelijk om
       custom oefeningen toe te voegen, andere gebruikers te volgen, simpel je workout te tracken en om eventueel deel te
       nemen aan een groep workout. Een workout bestaat uit een aantal sets met daaraan gekoppeld een oefening. Zo kan je
       bijvoorbeeld 3 sets van 10 herhalingen voor de oefening bankdrukken uitvoeren.
@@ -30,7 +30,7 @@
 
     <div class="grid grid-cols-2">
       <div>
-        <p class="font-bold">Workout</p>
+        <p class="font-bold">WorkoutInterface</p>
         <ul>
           <li>_id: string</li>
           <li>name: string</li>
@@ -38,60 +38,60 @@
           <li>volume: number</li>
           <li>prs: number</li>
           <li>date: Date</li>
-          <li>sets: Set[]</li>
+          <li>sets: SetInterface[]</li>
         </ul>
       </div>
 
       <div>
-        <p class="font-bold">Group Workout</p>
+        <p class="font-bold">Group WorkoutInterface</p>
         <ul>
           <li>_id: string</li>
           <li>name: string</li>
           <li>duration: number</li>
           <li>location: string</li>
           <li>date: Date</li>
-          <li>exercises: Exercise[]</li>
+          <li>exercises: ExerciseInterface[]</li>
         </ul>
       </div>
 
       <div>
-        <p class="font-bold">Exercise</p>
+        <p class="font-bold">ExerciseInterface</p>
         <ul>
           <li>_id: string</li>
           <li>name: string</li>
           <li>description: string</li>
           <li>type: ExerciseType</li>
           <li>category: ExerciseCategory</li>
-          <li>primaryMuscle: Muscle</li>
+          <li>primaryMuscle: MuscleEnum</li>
           <li>image: string</li>
         </ul>
       </div>
 
       <div>
-        <p class="font-bold">Set</p>
+        <p class="font-bold">SetInterface</p>
         <ul>
           <li>_id: string</li>
           <li>reps: number</li>
           <li>weight: number</li>
-          <li>exercise: Exercise</li>
+          <li>exercise: ExerciseInterface</li>
         </ul>
       </div>
 
       <div>
-        <p class="font-bold">User</p>
+        <p class="font-bold">UserInterface</p>
         <ul>
           <li>_id: string</li>
           <li>name: string</li>
           <li>email: string</li>
           <li>password: string</li>
-          <li>followers: User[]</li>
-          <li>workouts: Workout[]</li>
-          <li>groupWorkouts: GroupWorkout[]</li>
-          <li>exercises: Exercise[]</li>
+          <li>followers: UserInterface[]</li>
+          <li>workouts: WorkoutInterface[]</li>
+          <li>groupWorkouts: GroupWorkoutInterface[]</li>
+          <li>exercises: ExerciseInterface[]</li>
         </ul>
       </div>
     </div>
-    <h2>User Stories</h2>
+    <h2>UserInterface Stories</h2>
   </div>
 
   <div class="overflow-x-auto my-3">
@@ -99,7 +99,7 @@
       <thead>
       <tr>
         <th>Nr</th>
-        <th>User story</th>
+        <th>UserInterface story</th>
       </tr>
       </thead>
       <tbody>

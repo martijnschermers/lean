@@ -1,13 +1,13 @@
 import { Injectable } from "@nestjs/common";
-import { Exercise } from "@lean/api-interfaces";
 import { Model } from "mongoose";
 import { InjectModel } from "@nestjs/mongoose";
 import { UserService } from "../user/user.service";
+import { Exercise, ExerciseDocument } from "./exercise.schema";
 
 @Injectable()
 export class ExerciseService {
 
-  constructor(@InjectModel(Exercise.name) private exerciseModel: Model<Exercise>, private userService: UserService) {
+  constructor(@InjectModel(Exercise.name) private exerciseModel: Model<ExerciseDocument>, private userService: UserService) {
   }
 
   async findAll(id: string): Promise<Exercise[]> {

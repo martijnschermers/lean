@@ -1,4 +1,3 @@
-import { Exercise } from "@lean/api-interfaces";
 import {
   BadRequestException,
   Body,
@@ -12,6 +11,7 @@ import {
 } from "@nestjs/common";
 import { ExerciseService } from "./exercise.service";
 import { InjectToken, Token } from "../auth/token.decorator";
+import { Exercise } from "./exercise.schema";
 
 @Controller()
 export class ExerciseController {

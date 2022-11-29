@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { User } from "@lean/api-interfaces";
+import { UserInterface } from "@lean/api-interfaces";
 import { UserService } from "../user.service";
 import { Location } from "@angular/common";
 
@@ -11,7 +11,7 @@ import { Location } from "@angular/common";
 })
 export class UserDetailComponent implements OnInit {
   @Input()
-  user: User;
+  user: UserInterface;
 
   constructor(private route: ActivatedRoute, private userService: UserService, private location: Location) {
   }

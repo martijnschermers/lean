@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Exercise } from '@lean/api-interfaces';
+import { ExerciseInterface } from '@lean/api-interfaces';
 import { catchError, Observable } from 'rxjs';
 
 @Injectable({
@@ -10,16 +10,16 @@ export class ExerciseService {
 
   constructor(private http: HttpClient) { }
 
-  getExercises(): Observable<Exercise[]> {
-    return this.http.get<Exercise[]>('/api/exercise');
+  getExercises(): Observable<ExerciseInterface[]> {
+    return this.http.get<ExerciseInterface[]>('/api/exercise');
   }
 
-  getExercise(id: string | null): Observable<Exercise> {
-    return this.http.get<Exercise>(`/api/exercise/${id}`);
+  getExercise(id: string | null): Observable<ExerciseInterface> {
+    return this.http.get<ExerciseInterface>(`/api/exercise/${id}`);
   }
 
-  createExercise(value: Exercise): Observable<Exercise> {
-    return this.http.post<Exercise>('/api/exercise', value)
+  createExercise(value: ExerciseInterface): Observable<ExerciseInterface> {
+    return this.http.post<ExerciseInterface>('/api/exercise', value)
       .pipe(
         catchError((err) => {
           throw err;
@@ -27,11 +27,11 @@ export class ExerciseService {
       );
   }
 
-  updateExercise(value: Exercise): Observable<Exercise> {
-    return this.http.put<Exercise>(`/api/exercise/${value._id}`, value);
+  updateExercise(value: ExerciseInterface): Observable<ExerciseInterface> {
+    return this.http.put<ExerciseInterface>(`/api/exercise/${value._id}`, value);
   }
 
-  deleteExercise(exerciseId: string): Observable<Exercise> {
-    return this.http.delete<Exercise>(`/api/exercise/${exerciseId}`);
+  deleteExercise(exerciseId: string): Observable<ExerciseInterface> {
+    return this.http.delete<ExerciseInterface>(`/api/exercise/${exerciseId}`);
   }
 }

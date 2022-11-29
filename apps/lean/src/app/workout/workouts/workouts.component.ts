@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Workout } from "@lean/api-interfaces";
+import { WorkoutInterface } from "@lean/api-interfaces";
 import { WorkoutService } from "../workout.service";
 
 @Component({
@@ -8,7 +8,7 @@ import { WorkoutService } from "../workout.service";
   styleUrls: ['./workouts.component.css'],
 })
 export class WorkoutsComponent implements OnInit {
-  workouts$: Workout[];
+  workouts$: WorkoutInterface[];
 
   constructor(private workoutService: WorkoutService) {}
 

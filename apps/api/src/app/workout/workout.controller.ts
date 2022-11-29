@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { WorkoutService } from "./workout.service";
-import { Workout } from "@lean/api-interfaces";
 import { InjectToken, Token } from "../auth/token.decorator";
+import { Workout } from "./workout.schema";
 
 @Controller()
 export class WorkoutController {

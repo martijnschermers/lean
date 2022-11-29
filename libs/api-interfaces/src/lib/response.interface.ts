@@ -4,7 +4,7 @@ export interface MetaInfo {
   count: number
 }
 
-export interface Response<T> {
+export interface ResponseInterface<T> {
   results?: T[] | T
   info: MetaInfo
 }

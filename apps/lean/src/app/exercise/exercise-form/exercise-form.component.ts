@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Exercise, ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
+import { ExerciseInterface, ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
 
 @Component({
   selector: "lean-exercise-form",
@@ -13,7 +13,7 @@ export class ExerciseFormComponent implements OnInit {
   title: string;
 
   @Input()
-  exercise?: Exercise;
+  exercise?: ExerciseInterface;
 
   @Output()
   exerciseEvent: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();

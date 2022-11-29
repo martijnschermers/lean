@@ -1,28 +1,32 @@
-import * as mongoose from 'mongoose';
-import { SetSchema } from '../set/set.schema';
+import { Set, SetSchema } from "../set/set.schema";
+import { Document } from "mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { isDate, isNumber, isString } from "class-validator";
+import { WorkoutInterface } from "@lean/api-interfaces";
 
-export const WorkoutSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  duration: {
-    type: Number,
-    required: true
-  },
-  volume: {
-    type: Number,
-    required: true
-  },
-  prs: {
-    type: Number,
-    default: 0,
-  },
-  date: {
-    type: Date,
-    default: Date.now()
-  },
-  sets: {
-    type: [SetSchema]
-  },
-});
+export type WorkoutDocument = Workout & Document;
+
+@Schema()
+export class Workout implements WorkoutInterface {
+  _id: string;
+
+  @Prop({ required: true, validate: isString })
+  name: string;
+
+  @Prop({ required: true, validate: isNumber })
+  duration: number;
+
+  @Prop({ required: true, validate: isNumber })
+  volume: number;
+
+  @Prop({ required: true, default: 0, validate: isNumber })
+  prs: number;
+
+  @Prop({ required: true, default: Date.now(), validate: isDate })
+  date: Date;
+
+  @Prop({ required: false, type: [SetSchema] })
+  sets?: Set[];
+}
+
+export const WorkoutSchema = SchemaFactory.createForClass(Workout);

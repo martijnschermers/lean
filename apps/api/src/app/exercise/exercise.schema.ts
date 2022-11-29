@@ -1,31 +1,31 @@
-import * as mongoose from "mongoose";
-import { ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
+import { Document } from "mongoose";
+import { ExerciseCategory, ExerciseInterface, ExerciseType, Muscle } from "@lean/api-interfaces";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { isEnum, isString, isURL } from "class-validator";
 
-export const ExerciseSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  type: {
-    type: String,
-    enum: [ExerciseType.STRENGTH, ExerciseType.CARDIO],
-    required: true
-  },
-  category: {
-    type: String,
-    enum: [ExerciseCategory.BARBELL, ExerciseCategory.BAND, ExerciseCategory.CABLE, ExerciseCategory.BODYWEIGHT, ExerciseCategory.KETTLEBELL, ExerciseCategory.MACHINE, ExerciseCategory.DUMBBELL, ExerciseCategory.OTHER],
-    required: true
-  },
-  primaryMuscle: {
-    type: String,
-    enum: [Muscle.LATS, Muscle.BACK, Muscle.CHEST, Muscle.BICEPS, Muscle.TRICEPS, Muscle.FOREARMS, Muscle.ABS, Muscle.TRAPS, Muscle.SHOULDERS, Muscle.CALVES, Muscle.GLUTES, Muscle.HAMSTRINGS, Muscle.QUADS, Muscle.OTHER],
-    required: true
-  },
-  image: {
-    type: String,
-  },
-});
+export type ExerciseDocument = Exercise & Document;
+
+@Schema()
+export class Exercise implements ExerciseInterface {
+  _id: string;
+
+  @Prop({ required: true, validate: isString })
+  name: string;
+
+  @Prop({ required: true, validate: isString })
+  description: string;
+
+  @Prop({ required: true, type: String, enum: ExerciseCategory, validate: (v) => isEnum(v, ExerciseCategory) })
+  category: ExerciseCategory;
+
+  @Prop({ required: true, type: String, enum: ExerciseType, validate: (v) => isEnum(v, ExerciseType) })
+  type: ExerciseType;
+
+  @Prop({ required: true, type: String, enum: Muscle, validate: (v) => isEnum(v, Muscle) })
+  primaryMuscle: Muscle;
+
+  @Prop({ required: false, validate: (v) => isURL(v) || v === "" })
+  image?: string;
+}
+
+export const ExerciseSchema = SchemaFactory.createForClass(Exercise);

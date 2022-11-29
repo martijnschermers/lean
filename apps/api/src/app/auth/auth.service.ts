@@ -3,14 +3,14 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { hash, compare } from "bcrypt";
 import { JwtPayload, sign, verify } from "jsonwebtoken";
-import { User } from "@lean/api-interfaces";
-import { Identity } from "./identity.schema";
+import { Identity, IdentityDocument } from "./identity.schema";
+import { User, UserDocument } from "../user/user.schema";
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel(Identity.name) private identityModel: Model<Identity>,
-    @InjectModel(User.name) private userModel: Model<User>
+    @InjectModel(Identity.name) private identityModel: Model<IdentityDocument>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>
   ) {
   }
 
@@ -22,7 +22,7 @@ export class AuthService {
 
   async verifyToken(token: string): Promise<string | JwtPayload> {
     return new Promise((resolve, reject) => {
-      verify(token.replace(/^Bearer\s/, ''), process.env.JWT_SECRET, (err, payload) => {
+      verify(token.replace(/^Bearer\s/, ""), process.env.JWT_SECRET, (err, payload) => {
         if (err) reject(err);
         else resolve(payload);
       });
@@ -33,7 +33,7 @@ export class AuthService {
     const generatedHash = await hash(password, parseInt(process.env.SALT_ROUNDS, 10));
 
     const user = await this.identityModel.findOne({ $or: [{ username }, { email }] });
-    if (user) throw new Error("User already exists");
+    if (user) throw new Error("UserInterface already exists");
 
     const identity = new this.identityModel({ username, hash: generatedHash, email });
 
@@ -43,7 +43,7 @@ export class AuthService {
   async generateToken(email: string, password: string): Promise<string> {
     const identity = await this.identityModel.findOne({ email });
 
-    if (!identity || !(await compare(password, identity.hash))) throw new Error("User is not authorized");
+    if (!identity || !(await compare(password, identity.hash))) throw new Error("UserInterface is not authorized");
 
     const user = await this.userModel.findOne({ email });
 
