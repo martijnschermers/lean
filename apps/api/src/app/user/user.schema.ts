@@ -11,9 +11,10 @@ export const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  workouts: {
+  workoutsIds: {
     type: [mongoose.Schema.Types.ObjectId],
-    ref: 'Workout'
+    ref: 'Workout',
+    default: []
   },
   groupWorkouts: {
     type: [GroupWorkoutSchema],
@@ -28,3 +29,10 @@ UserSchema.add({
     type: [UserSchema],
   }
 })
+
+UserSchema.virtual('workouts', {
+  ref: 'Workout',
+  localField: 'workoutsIds',
+  foreignField: '_id',
+  justOne: false
+});
