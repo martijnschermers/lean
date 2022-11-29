@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Workout } from "@lean/api-interfaces";
+import { WorkoutService } from "../workout.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'lean-workout-detail',
@@ -6,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./workout-detail.component.css'],
 })
 export class WorkoutDetailComponent implements OnInit {
-  constructor() {}
+  workout: Workout;
 
-  ngOnInit(): void {}
+  constructor(private workoutService: WorkoutService, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.workoutService.findOne(id).subscribe(workout => this.workout = workout);
+  }
 }

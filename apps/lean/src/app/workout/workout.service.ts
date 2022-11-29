@@ -13,4 +13,8 @@ export class WorkoutService {
   findAll(): Observable<Workout[]> {
     return this.http.get<Workout[]>('/api/workout');
   }
+
+  findOne(id: string | null): Observable<Workout> {
+    return this.http.get<Workout>(`/api/workout/${id}`);
+  }
 }
