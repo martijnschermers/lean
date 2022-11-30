@@ -1,14 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { AddExerciseComponent } from "./add-exercise.component";
+import { ExerciseService } from "../exercise.service";
+import { HttpClient, HttpHandler } from "@angular/common/http";
+import { ExerciseFormComponent } from "../exercise-form/exercise-form.component";
+import { FormBuilder } from "@angular/forms";
 
-import { AddExerciseComponent } from './add-exercise.component';
-
-describe('AddExerciseComponent', () => {
+describe("AddExerciseComponent", () => {
   let component: AddExerciseComponent;
   let fixture: ComponentFixture<AddExerciseComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddExerciseComponent],
+      declarations: [AddExerciseComponent, ExerciseFormComponent],
+      providers: [ExerciseService, HttpClient, HttpHandler, FormBuilder]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AddExerciseComponent);
@@ -16,7 +20,7 @@ describe('AddExerciseComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
