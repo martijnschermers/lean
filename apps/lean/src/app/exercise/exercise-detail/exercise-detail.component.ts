@@ -1,19 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ExerciseInterface } from "@lean/api-interfaces";
-import { FormGroup } from "@angular/forms";
-import { Location } from "@angular/common";
 import { ExerciseService } from "../exercise.service";
 
 @Component({
-  selector: 'lean-exercise-detail',
-  templateUrl: './exercise-detail.component.html',
-  styleUrls: ['./exercise-detail.component.css'],
+  selector: "lean-exercise-detail",
+  templateUrl: "./exercise-detail.component.html",
+  styleUrls: ["./exercise-detail.component.css"]
 })
 export class ExerciseDetailComponent implements OnInit {
-  exercise: ExerciseInterface;
+  exercise$: ExerciseInterface | undefined;
 
-  constructor(private route: ActivatedRoute, private exerciseService: ExerciseService, private location: Location) {
+  constructor(private route: ActivatedRoute, private exerciseService: ExerciseService) {
   }
 
   ngOnInit(): void {
@@ -21,14 +19,13 @@ export class ExerciseDetailComponent implements OnInit {
   }
 
   getExercise(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.exerciseService.getExercise(id).subscribe(exercise => this.exercise = exercise);
-  }
+    const id = this.route.snapshot.paramMap.get("id");
+    const custom = this.route.snapshot.url[1].path == "custom";
 
-  updateExercise(exerciseForm: FormGroup): void {
-    exerciseForm.value._id = this.exercise._id;
-    this.exerciseService.updateExercise(exerciseForm.value).subscribe(() => {
-      this.location.back();
-    });
+    if (custom) {
+      this.exerciseService.getCustomExercise(id).subscribe(exercise => this.exercise$ = exercise);
+    } else {
+      this.exerciseService.getExercise(id).subscribe(exercise => this.exercise$ = exercise);
+    }
   }
 }

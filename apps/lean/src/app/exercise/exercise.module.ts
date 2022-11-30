@@ -1,21 +1,31 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ExerciseComponent } from './exercises/exercises.component';
-import { ExerciseDetailComponent } from './exercise-detail/exercise-detail.component';
-import { RouterLink, RouterLinkWithHref } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ExerciseComponent } from "./exercises/exercises.component";
+import { ExerciseDetailComponent } from "./exercise-detail/exercise-detail.component";
+import { RouterLink, RouterLinkWithHref } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ExerciseFormComponent } from './exercise-form/exercise-form.component';
-import { ExerciseMockService } from "./exercise-mock.service";
+import { ExerciseFormComponent } from "./exercise-form/exercise-form.component";
 import { ExerciseService } from "./exercise.service";
+import { AddExerciseComponent } from "./add-exercise/add-exercise.component";
+import { UpdateExerciseComponent } from "./update-exercise/update-exercise.component";
 
 @NgModule({
   declarations: [
     ExerciseComponent,
     ExerciseDetailComponent,
     ExerciseFormComponent,
+    AddExerciseComponent,
+    UpdateExerciseComponent
   ],
-  imports: [CommonModule, FormsModule, RouterLinkWithHref, ReactiveFormsModule, RouterLink],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLinkWithHref,
+    ReactiveFormsModule,
+    RouterLink
+  ],
   exports: [ExerciseComponent],
-  providers: [ExerciseMockService, ExerciseService]
+  providers: [ExerciseService]
 })
-export class ExerciseModule {}
+export class ExerciseModule {
+}

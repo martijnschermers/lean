@@ -1,19 +1,12 @@
 <div class="card w-96 bg-base-100 shadow-xl m-auto">
-  <figure *ngIf="exercise.image"><img src="{{exercise.image}}" alt="ExerciseInterface image"></figure>
+  <figure *ngIf="exercise$?.image"><img src="{{exercise$?.image}}" alt="ExerciseInterface image"></figure>
   <div class="card-body">
-    <h2 class="card-title">{{exercise.name}}</h2>
-    <p>{{exercise.description}}</p>
+    <h2 class="card-title">{{exercise$?.name}}</h2>
+    <p>{{exercise$?.description}}</p>
     <div class="card-actions justify-end">
-      <div class="badge badge-primary">{{exercise.primaryMuscle}}</div>
-      <div class="badge badge-primary">{{exercise.type}}</div>
-      <div class="badge badge-primary">{{exercise.category}}</div>
+      <div class="badge badge-primary">{{exercise$?.primaryMuscle}}</div>
+      <div class="badge badge-primary">{{exercise$?.type}}</div>
+      <div class="badge badge-primary">{{exercise$?.category}}</div>
     </div>
   </div>
 </div>
-
-<div class="divider"></div>
-
-<lean-exercise-form
-  [title]="'Update Exercise'" (exerciseEvent)="updateExercise($event)"
-  [exercise]="exercise">
-</lean-exercise-form>

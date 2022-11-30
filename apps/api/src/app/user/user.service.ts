@@ -14,7 +14,7 @@ export class UserService {
     return this.userModel.findById(id);
   }
 
-  async addWorkout(id: string, workoutId: string) {
+  async addWorkout(id: string, workoutId: string): Promise<void> {
     this.userModel.updateOne({ _id: id }, { $push: { workoutsIds: workoutId } });
   }
 
@@ -23,7 +23,7 @@ export class UserService {
     return user.workouts;
   }
 
-  async addExercise(id: string, exercise: Exercise) {
+  async addExercise(id: string, exercise: Exercise): Promise<void> {
     const user = await this.userModel.findById(id);
     user.exercises.push(exercise);
     await user.save();
@@ -32,5 +32,10 @@ export class UserService {
   async findAllExercises(id: string): Promise<Exercise[]> {
     const user = await this.userModel.findById(id).populate("exercises");
     return user.exercises;
+  }
+
+  async findExercise(id: string, exerciseId: string): Promise<Exercise> {
+    const user = await this.userModel.findById(id).populate("exercises");
+    return user.exercises.find((exercise: Exercise) => exercise["_id"] == exerciseId);
   }
 }

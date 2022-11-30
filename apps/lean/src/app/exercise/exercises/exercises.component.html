@@ -1,15 +1,20 @@
+<div class="flex justify-between items-center mb-2">
+  <h2>Custom Exercises</h2>
+  <button class="btn btn-sm btn-primary" routerLink="/exercise/add">Add Custom Exercise</button>
+</div>
 <div class="overflow-x-auto w-full">
   <table class="table w-full">
     <thead>
     <tr>
       <th>Name</th>
       <th>Type</th>
-      <th>Primary MuscleEnum</th>
+      <th>Primary Muscle</th>
       <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let exercise of exercises$" [routerLink]="['/exercise', exercise._id]" class="hover cursor-pointer">
+    <tr *ngFor="let exercise of customExercises$" [routerLink]="['/exercise/custom', exercise._id]"
+        class="hover cursor-pointer">
       <td>
         <div class="flex items-center space-x-3">
           <div *ngIf="exercise.image" class="avatar">
@@ -17,13 +22,13 @@
               <img src="{{exercise.image}}" alt="ExerciseInterface image" />
             </div>
           </div>
-          <div class="font-bold">{{exercise.name}}</div>
+          <div class="font-bold">{{exercise.name}} ({{exercise.category}})</div>
         </div>
       </td>
       <td>{{exercise.type}}</td>
       <td>{{exercise.primaryMuscle}}</td>
       <td>
-        <button class="link link-error" (click)="deleteExercise(exercise._id)">Delete</button>
+        <button class="btn btn-sm btn-error z-50" (click)="deleteExercise(exercise._id)">Delete</button>
       </td>
     </tr>
   </table>
@@ -31,4 +36,31 @@
 
 <div class="divider"></div>
 
-<lean-exercise-form [title]="'Add Exercise'" (exerciseEvent)="createExercise($event)"></lean-exercise-form>
+<h2>Predefined Exercises</h2>
+<div class="overflow-x-auto w-full">
+  <table class="table w-full">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Primary Muscle</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let exercise of predefinedExercises$" [routerLink]="['/exercise', exercise._id]"
+        class="hover cursor-pointer">
+      <td>
+        <div class="flex items-center space-x-3">
+          <div *ngIf="exercise.image" class="avatar">
+            <div class="mask mask-squircle w-12 h-12">
+              <img src="{{exercise.image}}" alt="ExerciseInterface image" />
+            </div>
+          </div>
+          <div class="font-bold">{{exercise.name}} ({{exercise.category}})</div>
+        </div>
+      </td>
+      <td>{{exercise.type}}</td>
+      <td>{{exercise.primaryMuscle}}</td>
+    </tr>
+  </table>
+</div>

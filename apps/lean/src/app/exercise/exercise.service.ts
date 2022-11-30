@@ -1,25 +1,44 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ExerciseInterface } from '@lean/api-interfaces';
-import { catchError, Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { ExerciseInterface } from "@lean/api-interfaces";
+import { catchError, Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ExerciseService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getExercises(): Observable<ExerciseInterface[]> {
-    return this.http.get<ExerciseInterface[]>('/api/exercise');
+  getCustomExercises(): Observable<ExerciseInterface[]> {
+    return this.http.get<ExerciseInterface[]>("/api/exercise/custom");
+  }
+
+  getCustomExercise(id: string | null): Observable<ExerciseInterface> {
+    return this.http.get<ExerciseInterface>(`/api/exercise/custom/${id}`)
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
+  }
+
+  getPredefinedExercises(): Observable<ExerciseInterface[]> {
+    return this.http.get<ExerciseInterface[]>("/api/exercise/");
   }
 
   getExercise(id: string | null): Observable<ExerciseInterface> {
-    return this.http.get<ExerciseInterface>(`/api/exercise/${id}`);
+    return this.http.get<ExerciseInterface>(`/api/exercise/${id}`)
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
   }
 
-  createExercise(value: ExerciseInterface): Observable<ExerciseInterface> {
-    return this.http.post<ExerciseInterface>('/api/exercise', value)
+  addExercise(value: ExerciseInterface): Observable<ExerciseInterface> {
+    return this.http.post<ExerciseInterface>("/api/exercise", value)
       .pipe(
         catchError((err) => {
           throw err;
