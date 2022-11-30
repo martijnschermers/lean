@@ -33,7 +33,7 @@ export class AuthService {
     const generatedHash = await hash(password, parseInt(process.env.SALT_ROUNDS, 10));
 
     const user = await this.identityModel.findOne({ $or: [{ username }, { email }] });
-    if (user) throw new Error("UserInterface already exists");
+    if (user) throw new Error("User already exists");
 
     const identity = new this.identityModel({ username, hash: generatedHash, email });
 
@@ -43,7 +43,7 @@ export class AuthService {
   async generateToken(email: string, password: string): Promise<string> {
     const identity = await this.identityModel.findOne({ email });
 
-    if (!identity || !(await compare(password, identity.hash))) throw new Error("UserInterface is not authorized");
+    if (!identity || !(await compare(password, identity.hash))) throw new Error("User is not authorized");
 
     const user = await this.userModel.findOne({ email });
 
