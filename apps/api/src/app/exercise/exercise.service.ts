@@ -10,28 +10,35 @@ export class ExerciseService {
   constructor(@InjectModel(Exercise.name) private exerciseModel: Model<ExerciseDocument>, private userService: UserService) {
   }
 
-  async findAll(id: string): Promise<Exercise[]> {
+  async findAllCustom(id: string): Promise<Exercise[]> {
     return this.userService.findAllExercises(id);
   }
 
-  async updateExercise(id: string, exercise: Partial<Exercise>): Promise<Exercise> {
-    return this.exerciseModel.findByIdAndUpdate(id, exercise, { new: true });
+  async findOneCustom(id: string, exerciseId: string): Promise<Exercise> {
+    return this.userService.findExercise(id, exerciseId);
   }
 
-  async deleteExercise(id: string): Promise<Exercise> {
-    return this.exerciseModel.findByIdAndDelete(id);
-  }
-
-  async createExercise(id: string, exercise: Partial<Exercise>): Promise<Exercise> {
-    const newExercise = new this.exerciseModel(exercise);
-    await newExercise.save();
-
-    await this.userService.addExercise(id, newExercise);
-
-    return newExercise.toObject({ versionKey: false });
+  async findAllPredefined(): Promise<Exercise[]> {
+    return this.exerciseModel.find({}, { __v: 0 });
   }
 
   async findOne(id: string): Promise<Exercise> {
     return this.exerciseModel.findById(id, { __v: 0 });
+  }
+
+  async updateExercise(userId: string, exerciseId: string, exercise: Partial<Exercise>): Promise<Exercise> {
+    return this.userService.updateExercise(userId, exerciseId, exercise);
+  }
+
+  async deleteExercise(userId: string, exerciseId: string): Promise<void> {
+    return this.userService.deleteExercise(userId, exerciseId);
+  }
+
+  async createExercise(id: string, exercise: Partial<Exercise>): Promise<Exercise> {
+    const newExercise = new this.exerciseModel(exercise);
+
+    await this.userService.addExercise(id, newExercise);
+
+    return newExercise.toObject({ versionKey: false });
   }
 }

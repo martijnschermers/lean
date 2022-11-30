@@ -42,11 +42,12 @@ export class AppModule {
       .apply(TokenMiddleware)
       .exclude(
         { path: "api/login", method: RequestMethod.POST },
-        { path: "api/register", method: RequestMethod.POST }
+        { path: "api/register", method: RequestMethod.POST },
+        { path: "api/exercise", method: RequestMethod.GET }
       )
       .forRoutes(
-        'exercise',
-        'workout',
+        "exercise",
+        "workout"
       );
   }
 }

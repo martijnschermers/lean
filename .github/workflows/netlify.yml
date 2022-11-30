@@ -8,7 +8,8 @@ on:
     branches:
       - main
 jobs:
-  run-npm-build:
+  build:
+    name: Build artifacts
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,9 +22,21 @@ jobs:
           name: Lean
           path: './dist/apps/lean'
 
-  netlify-deploy:
+  test:
+    name: Run tests
     runs-on: ubuntu-latest
-    needs: run-npm-build
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: npm install and run test
+        run: |
+          npm install
+          npm run test
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: test
     steps:
       - uses: actions/checkout@v2
       - name: Download artifact

@@ -9,5 +9,6 @@ export interface ExerciseInterface {
   type: ExerciseType;
   category: ExerciseCategory;
   primaryMuscle: Muscle;
+  predefined: boolean;
   image?: string;
 }

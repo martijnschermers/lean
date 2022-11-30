@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, OnInit } from "@angular/core";
 import { ExerciseInterface } from "@lean/api-interfaces";
-import { FormGroup } from "@angular/forms";
 import { ExerciseService } from "../exercise.service";
 
 @Component({
@@ -10,7 +9,8 @@ import { ExerciseService } from "../exercise.service";
   styleUrls: ["./exercises.component.css"]
 })
 export class ExerciseComponent implements OnInit {
-  exercises$: ExerciseInterface[] = [];
+  customExercises$: ExerciseInterface[] = [];
+  predefinedExercises$: ExerciseInterface[] = [];
 
   constructor(private service: ExerciseService) {
   }
@@ -20,19 +20,7 @@ export class ExerciseComponent implements OnInit {
   }
 
   getExercises(): void {
-    this.service.getExercises().subscribe((exercises: ExerciseInterface[]) => this.exercises$ = exercises);
-  }
-
-  createExercise(exerciseForm: FormGroup): void {
-    this.service.createExercise(exerciseForm.value).subscribe(() => {
-      this.getExercises();
-      exerciseForm.reset();
-    });
-  }
-
-  deleteExercise(exerciseId: string): void {
-    this.service.deleteExercise(exerciseId).subscribe(() => {
-      this.getExercises();
-    });
+    this.service.getCustomExercises().subscribe((exercises: ExerciseInterface[]) => this.customExercises$ = exercises);
+    this.service.getPredefinedExercises().subscribe((exercises: ExerciseInterface[]) => this.predefinedExercises$ = exercises);
   }
 }

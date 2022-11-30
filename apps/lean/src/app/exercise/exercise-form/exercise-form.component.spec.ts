@@ -1,14 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ExerciseFormComponent } from './exercise-form.component';
+import { ExerciseFormComponent } from "./exercise-form.component";
+import { FormBuilder } from "@angular/forms";
 
-describe('ExerciseFormComponent', () => {
+describe("ExerciseFormComponent", () => {
   let component: ExerciseFormComponent;
   let fixture: ComponentFixture<ExerciseFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ExerciseFormComponent],
+      providers: [FormBuilder]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ExerciseFormComponent);
@@ -16,7 +18,7 @@ describe('ExerciseFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

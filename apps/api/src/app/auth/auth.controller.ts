@@ -6,7 +6,8 @@ import {
   UnauthorizedException
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
-import { UserInterface, UserCredentials, UserRegistration } from "@lean/api-interfaces";
+import { UserCredentials, UserRegistration } from "@lean/api-interfaces";
+import { User } from "../user/user.schema";
 
 @Controller()
 export class AuthController {
@@ -14,7 +15,7 @@ export class AuthController {
   }
 
   @Post("register")
-  async register(@Body() credentials: UserRegistration): Promise<UserInterface> {
+  async register(@Body() credentials: UserRegistration): Promise<User> {
     try {
       await this.authService.registerUser(credentials.username, credentials.password, credentials.email);
 

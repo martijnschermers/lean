@@ -1,25 +1,22 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ExerciseInterface } from '@lean/api-interfaces';
-import { catchError, Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { ExerciseInterface } from "@lean/api-interfaces";
+import { catchError, Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ExerciseService {
 
-  constructor(private http: HttpClient) { }
-
-  getExercises(): Observable<ExerciseInterface[]> {
-    return this.http.get<ExerciseInterface[]>('/api/exercise');
+  constructor(private http: HttpClient) {
   }
 
-  getExercise(id: string | null): Observable<ExerciseInterface> {
-    return this.http.get<ExerciseInterface>(`/api/exercise/${id}`);
+  getCustomExercises(): Observable<ExerciseInterface[]> {
+    return this.http.get<ExerciseInterface[]>("/api/exercise/custom");
   }
 
-  createExercise(value: ExerciseInterface): Observable<ExerciseInterface> {
-    return this.http.post<ExerciseInterface>('/api/exercise', value)
+  getCustomExercise(id: string | null): Observable<ExerciseInterface> {
+    return this.http.get<ExerciseInterface>(`/api/exercise/custom/${id}`)
       .pipe(
         catchError((err) => {
           throw err;
@@ -27,11 +24,33 @@ export class ExerciseService {
       );
   }
 
-  updateExercise(value: ExerciseInterface): Observable<ExerciseInterface> {
-    return this.http.put<ExerciseInterface>(`/api/exercise/${value._id}`, value);
+  getPredefinedExercises(): Observable<ExerciseInterface[]> {
+    return this.http.get<ExerciseInterface[]>("/api/exercise/");
   }
 
-  deleteExercise(exerciseId: string): Observable<ExerciseInterface> {
-    return this.http.delete<ExerciseInterface>(`/api/exercise/${exerciseId}`);
+  getExercise(id: string | null): Observable<ExerciseInterface> {
+    return this.http.get<ExerciseInterface>(`/api/exercise/${id}`)
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
+  }
+
+  addExercise(value: ExerciseInterface): Observable<ExerciseInterface> {
+    return this.http.post<ExerciseInterface>("/api/exercise", value)
+      .pipe(
+        catchError((err) => {
+          throw err;
+        })
+      );
+  }
+
+  updateExercise(id: string | undefined, value: ExerciseInterface): Observable<ExerciseInterface> {
+    return this.http.put<ExerciseInterface>(`/api/exercise/${id}`, value);
+  }
+
+  deleteExercise(exerciseId: string): Observable<void> {
+    return this.http.delete<void>(`/api/exercise/${exerciseId}`);
   }
 }

@@ -24,9 +24,19 @@ export class ExerciseController {
     return this.exercisesService.createExercise(token.id, exercise);
   }
 
+  @Get("custom")
+  async findAllCustom(@InjectToken() token: Token): Promise<Exercise[]> {
+    return this.exercisesService.findAllCustom(token.id);
+  }
+
+  @Get("custom/:id")
+  async findOneCustom(@InjectToken() token: Token, @Param("id") id: string): Promise<Exercise> {
+   return this.exercisesService.findOneCustom(token.id, id);
+  }
+
   @Get()
-  async findAll(@InjectToken() token: Token): Promise<Exercise[]> {
-    return this.exercisesService.findAll(token.id);
+  async findAllPredefined(): Promise<Exercise[]> {
+    return this.exercisesService.findAllPredefined();
   }
 
   @Get(":id")
@@ -41,17 +51,17 @@ export class ExerciseController {
   }
 
   @Put(":id")
-  async updateExercise(@Param("id") id: string, @Body() exercise: Exercise): Promise<Exercise> {
+  async updateExercise(@InjectToken() token: Token, @Param("id") id: string, @Body() exercise: Exercise): Promise<Exercise> {
 
-    if (exercise._id) {
+    if (exercise["_id"]) {
       throw new BadRequestException("You cannot change the id");
     }
 
-    return this.exercisesService.updateExercise(id, exercise);
+    return this.exercisesService.updateExercise(token.id, id, exercise);
   }
 
   @Delete(":id")
-  async deleteExercise(@Param("id") id: string): Promise<Exercise> {
-    return this.exercisesService.deleteExercise(id);
+  async deleteExercise(@InjectToken() token: Token, @Param("id") id: string): Promise<void> {
+    return this.exercisesService.deleteExercise(token.id, id);
   }
 }

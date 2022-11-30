@@ -9,6 +9,8 @@ import { LoginComponent } from "./auth/login/login.component";
 import { RegisterComponent } from "./auth/register/register.component";
 import { ExerciseComponent } from "./exercise/exercises/exercises.component";
 import { ExerciseDetailComponent } from "./exercise/exercise-detail/exercise-detail.component";
+import { AddExerciseComponent } from "./exercise/add-exercise/add-exercise.component";
+import { UpdateExerciseComponent } from "./exercise/update-exercise/update-exercise.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/exercise", pathMatch: "full" },
@@ -16,6 +18,9 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "about", component: AboutComponent },
   { path: "exercise", component: ExerciseComponent },
+  { path: "exercise/add", component: AddExerciseComponent },
+  { path: "exercise/update/:id", component: UpdateExerciseComponent },
+  { path: "exercise/custom/:id", component: ExerciseDetailComponent },
   { path: "exercise/:id", component: ExerciseDetailComponent },
   { path: "workout", component: WorkoutsComponent },
   { path: "workout/:id", component: WorkoutDetailComponent },

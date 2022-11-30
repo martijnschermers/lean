@@ -47,7 +47,7 @@
 
     <div class="form-control">
       <label class="label">
-        <span class="label-text">Primary MuscleEnum</span>
+        <span class="label-text">Primary Muscle</span>
       </label>
       <select class="select select-bordered" formControlName="primaryMuscle"
               (ngModelChange)="exercise ? exercise.primaryMuscle = $event : ''" name="primaryMuscle">
@@ -62,6 +62,9 @@
       <input type="url" class="input input-bordered" (ngModelChange)="exercise ? exercise.image = $event : ''"
              name="image" formControlName="image"
              placeholder="Image Url">
+      <span *ngIf="image.invalid && (image.dirty || image.touched)">
+          <span class="text-error" *ngIf="image.errors?.['pattern']">Must be a valid image url</span>
+      </span>
     </div>
 
     <button [disabled]="exerciseForm.invalid" class="btn btn-primary mt-2" type="submit">{{title}}</button>
