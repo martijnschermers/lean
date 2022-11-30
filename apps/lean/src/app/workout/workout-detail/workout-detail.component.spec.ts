@@ -5,6 +5,9 @@ import { WorkoutService } from "../workout.service";
 import { HttpClient, HttpHandler } from "@angular/common/http";
 import { RouterTestingModule } from "@angular/router/testing";
 import { WorkoutInterface } from "@lean/api-interfaces";
+import { of } from "rxjs";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { MockService } from "ng-mocks";
 
 describe("WorkoutDetailComponent", () => {
   let component: WorkoutDetailComponent;
@@ -22,12 +25,13 @@ describe("WorkoutDetailComponent", () => {
       sets: []
     };
 
-    // workoutService = jest.fn(() => workout);
+    workoutService = MockService(WorkoutService);
+    workoutService.findOne = jest.fn().mockReturnValue(of(workout));
 
     await TestBed.configureTestingModule({
       declarations: [WorkoutDetailComponent],
       providers: [{ provide: WorkoutService, useValue: workoutService }, HttpClient, HttpHandler],
-      imports: [RouterTestingModule.withRoutes([])]
+      imports: [RouterTestingModule.withRoutes([]), HttpClientTestingModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(WorkoutDetailComponent);
