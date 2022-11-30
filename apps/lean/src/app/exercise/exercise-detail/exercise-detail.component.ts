@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ExerciseInterface } from "@lean/api-interfaces";
 import { ExerciseService } from "../exercise.service";
+import { Location } from "@angular/common";
 
 @Component({
   selector: "lean-exercise-detail",
@@ -11,7 +13,7 @@ import { ExerciseService } from "../exercise.service";
 export class ExerciseDetailComponent implements OnInit {
   exercise$: ExerciseInterface | undefined;
 
-  constructor(private route: ActivatedRoute, private exerciseService: ExerciseService) {
+  constructor(private route: ActivatedRoute, private exerciseService: ExerciseService, private location: Location) {
   }
 
   ngOnInit(): void {
@@ -27,5 +29,11 @@ export class ExerciseDetailComponent implements OnInit {
     } else {
       this.exerciseService.getExercise(id).subscribe(exercise => this.exercise$ = exercise);
     }
+  }
+
+  deleteExercise(exerciseId: string | undefined): void {
+    this.exerciseService.deleteExercise(exerciseId!).subscribe(() => {
+      this.location.back();
+    });
   }
 }

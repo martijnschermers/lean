@@ -61,7 +61,7 @@ export class ExerciseController {
   }
 
   @Delete(":id")
-  async deleteExercise(@Param("id") id: string): Promise<Exercise> {
-    return this.exercisesService.deleteExercise(id);
+  async deleteExercise(@InjectToken() token: Token, @Param("id") id: string): Promise<void> {
+    return this.exercisesService.deleteExercise(token.id, id);
   }
 }

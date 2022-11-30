@@ -3,13 +3,12 @@
   <button class="btn btn-sm btn-primary" routerLink="/exercise/add">Add Custom Exercise</button>
 </div>
 <div class="overflow-x-auto w-full">
-  <table class="table w-full">
+  <table class="table w-full z-0">
     <thead>
     <tr>
       <th>Name</th>
       <th>Type</th>
       <th>Primary Muscle</th>
-      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -27,9 +26,6 @@
       </td>
       <td>{{exercise.type}}</td>
       <td>{{exercise.primaryMuscle}}</td>
-      <td>
-        <button class="btn btn-sm btn-error z-50" (click)="deleteExercise(exercise._id)">Delete</button>
-      </td>
     </tr>
   </table>
 </div>
@@ -38,7 +34,7 @@
 
 <h2>Predefined Exercises</h2>
 <div class="overflow-x-auto w-full">
-  <table class="table w-full">
+  <table class="table w-full z-0">
     <thead>
     <tr>
       <th>Name</th>

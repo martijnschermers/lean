@@ -50,7 +50,7 @@ export class ExerciseService {
     return this.http.put<ExerciseInterface>(`/api/exercise/${id}`, value);
   }
 
-  deleteExercise(exerciseId: string): Observable<ExerciseInterface> {
-    return this.http.delete<ExerciseInterface>(`/api/exercise/${exerciseId}`);
+  deleteExercise(exerciseId: string): Observable<void> {
+    return this.http.delete<void>(`/api/exercise/${exerciseId}`);
   }
 }

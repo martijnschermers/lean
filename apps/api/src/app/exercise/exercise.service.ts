@@ -30,8 +30,8 @@ export class ExerciseService {
     return this.userService.updateExercise(userId, exerciseId, exercise);
   }
 
-  async deleteExercise(id: string): Promise<Exercise> {
-    return this.exerciseModel.findByIdAndDelete(id);
+  async deleteExercise(userId: string, exerciseId: string): Promise<void> {
+    return this.userService.deleteExercise(userId, exerciseId);
   }
 
   async createExercise(id: string, exercise: Partial<Exercise>): Promise<Exercise> {

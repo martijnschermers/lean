@@ -23,10 +23,4 @@ export class ExerciseComponent implements OnInit {
     this.service.getCustomExercises().subscribe((exercises: ExerciseInterface[]) => this.customExercises$ = exercises);
     this.service.getPredefinedExercises().subscribe((exercises: ExerciseInterface[]) => this.predefinedExercises$ = exercises);
   }
-
-  deleteExercise(exerciseId: string): void {
-    this.service.deleteExercise(exerciseId).subscribe(() => {
-      this.getExercises();
-    });
-  }
 }

@@ -48,4 +48,10 @@ export class UserService {
 
     return updatedExercise;
   }
+
+  async deleteExercise(userId: string, exerciseId: string): Promise<void> {
+    const user = await this.userModel.findById(userId).populate("exercises");
+    user.exercises = user.exercises.filter((exercise: Exercise) => exercise["_id"] != exerciseId);
+    await user.save();
+  }
 }
