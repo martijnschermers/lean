@@ -2,14 +2,11 @@ import { Exercise, ExerciseSchema } from "../exercise/exercise.schema";
 import { Document } from "mongoose";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { isDate, isNumber, isString } from "class-validator";
-import { GroupWorkoutInterface } from "@lean/api-interfaces";
 
 export type GroupWorkoutDocument = GroupWorkout & Document;
 
 @Schema()
-export class GroupWorkout implements GroupWorkoutInterface {
-  _id: string;
-
+export class GroupWorkout {
   @Prop({ required: true, validate: isString })
   name: string;
 

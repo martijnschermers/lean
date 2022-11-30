@@ -2,14 +2,11 @@ import { Exercise, ExerciseSchema } from "../exercise/exercise.schema";
 import { Document } from "mongoose";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { isBoolean, isNumber } from "class-validator";
-import { SetInterface } from "@lean/api-interfaces";
 
 export type SetDocument = Set & Document;
 
 @Schema()
-export class Set implements SetInterface {
-  _id: string;
-
+export class Set {
   @Prop({ required: true, default: 0, validate: isNumber })
   weight: number;
 

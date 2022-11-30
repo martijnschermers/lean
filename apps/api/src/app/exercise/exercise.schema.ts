@@ -1,14 +1,12 @@
 import { Document } from "mongoose";
-import { ExerciseCategory, ExerciseInterface, ExerciseType, Muscle } from "@lean/api-interfaces";
+import { ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { isEnum, isString, isURL } from "class-validator";
 
 export type ExerciseDocument = Exercise & Document;
 
 @Schema()
-export class Exercise implements ExerciseInterface {
-  _id: string;
-
+export class Exercise {
   @Prop({ required: true, validate: isString })
   name: string;
 

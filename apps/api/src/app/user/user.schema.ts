@@ -4,14 +4,11 @@ import { GroupWorkout, GroupWorkoutSchema } from "../group-workout/group-workout
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { isEmail, isString } from "class-validator";
 import { Workout } from "../workout/workout.schema";
-import { UserInterface } from "@lean/api-interfaces";
 
 export type UserDocument = User & Document;
 
 @Schema()
-export class User implements UserInterface {
-  _id: string;
-
+export class User {
   @Prop({ required: true, validate: isString })
   username: string;
 
