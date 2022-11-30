@@ -2,6 +2,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ExerciseInterface, ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
+import { IsUrl } from "class-validator";
 
 @Component({
   selector: "lean-exercise-form",
@@ -34,7 +35,7 @@ export class ExerciseFormComponent implements OnInit {
         type: [this.exercise.type, Validators.required],
         category: [this.exercise.category, Validators.required],
         primaryMuscle: [this.exercise.primaryMuscle, Validators.required],
-        image: [this.exercise.image ? this.exercise.image : ""]
+        image: [this.exercise.image ? this.exercise.image : "", Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g)]
       });
     } else {
       this.exerciseForm = this.formBuilder.group({
@@ -43,7 +44,7 @@ export class ExerciseFormComponent implements OnInit {
         type: [this.exerciseTypes[0], Validators.required],
         category: [this.exerciseCategories[0], Validators.required],
         primaryMuscle: [this.muscles[0], Validators.required],
-        image: [""]
+        image: ["", Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g)]
       });
     }
   }
@@ -54,6 +55,10 @@ export class ExerciseFormComponent implements OnInit {
 
   get description() {
     return this.exerciseForm.get("description")!;
+  }
+
+  get image() {
+    return this.exerciseForm.get("image")!;
   }
 
   onSubmit(): void {
