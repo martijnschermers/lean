@@ -26,8 +26,8 @@ export class ExerciseService {
     return this.exerciseModel.findById(id, { __v: 0 });
   }
 
-  async updateExercise(id: string, exercise: Partial<Exercise>): Promise<Exercise> {
-    return this.exerciseModel.findByIdAndUpdate(id, exercise, { new: true });
+  async updateExercise(userId: string, exerciseId: string, exercise: Partial<Exercise>): Promise<Exercise> {
+    return this.userService.updateExercise(userId, exerciseId, exercise);
   }
 
   async deleteExercise(id: string): Promise<Exercise> {

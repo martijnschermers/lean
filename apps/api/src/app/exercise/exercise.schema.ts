@@ -22,6 +22,9 @@ export class Exercise {
   @Prop({ required: true, type: String, enum: Muscle, validate: (v) => isEnum(v, Muscle) })
   primaryMuscle: Muscle;
 
+  @Prop({ required: true, type: Boolean, default: false })
+  predefined: boolean;
+
   @Prop({ required: false, validate: (v) => isURL(v) || v === "" })
   image?: string;
 }

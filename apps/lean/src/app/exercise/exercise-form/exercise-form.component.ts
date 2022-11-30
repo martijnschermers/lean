@@ -2,7 +2,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ExerciseInterface, ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
-import { IsUrl } from "class-validator";
 
 @Component({
   selector: "lean-exercise-form",

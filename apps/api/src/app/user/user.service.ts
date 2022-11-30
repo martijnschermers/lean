@@ -38,4 +38,14 @@ export class UserService {
     const user = await this.userModel.findById(id).populate("exercises");
     return user.exercises.find((exercise: Exercise) => exercise["_id"] == exerciseId);
   }
+
+  async updateExercise(userId: string, exerciseId: string, exercise: Partial<Exercise>): Promise<Exercise> {
+    const user = await this.userModel.findById(userId).populate("exercises");
+    const originalExercise = user.exercises.find((exercise: Exercise) => exercise["_id"] == exerciseId);
+    const updatedExercise = Object.assign(originalExercise, exercise);
+
+    await user.save();
+
+    return updatedExercise;
+  }
 }

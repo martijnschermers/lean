@@ -51,13 +51,13 @@ export class ExerciseController {
   }
 
   @Put(":id")
-  async updateExercise(@Param("id") id: string, @Body() exercise: Exercise): Promise<Exercise> {
+  async updateExercise(@InjectToken() token: Token, @Param("id") id: string, @Body() exercise: Exercise): Promise<Exercise> {
 
     if (exercise["_id"]) {
       throw new BadRequestException("You cannot change the id");
     }
 
-    return this.exercisesService.updateExercise(id, exercise);
+    return this.exercisesService.updateExercise(token.id, id, exercise);
   }
 
   @Delete(":id")

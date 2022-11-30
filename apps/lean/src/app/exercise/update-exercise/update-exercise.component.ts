@@ -11,7 +11,7 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./update-exercise.component.css"]
 })
 export class UpdateExerciseComponent implements OnInit {
-  exercise: ExerciseInterface;
+  exercise: ExerciseInterface | undefined;
 
   constructor(private service: ExerciseService, private location: Location, private route: ActivatedRoute) {
   }
@@ -22,14 +22,16 @@ export class UpdateExerciseComponent implements OnInit {
 
   getExercise(): void {
     const id = this.route.snapshot.paramMap.get("id");
-    this.service.getExercise(id).subscribe(exercise => {
+    this.service.getCustomExercise(id).subscribe(exercise => {
+      if (exercise.predefined) {
+        this.location.back();
+      }
       this.exercise = exercise;
     });
   }
 
   updateExercise(exerciseForm: FormGroup): void {
-    exerciseForm.value._id = this.exercise._id;
-    this.service.updateExercise(exerciseForm.value).subscribe(() => {
+    this.service.updateExercise(this.exercise?._id, exerciseForm.value).subscribe(() => {
       this.location.back();
     });
   }

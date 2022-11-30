@@ -46,8 +46,8 @@ export class ExerciseService {
       );
   }
 
-  updateExercise(value: ExerciseInterface): Observable<ExerciseInterface> {
-    return this.http.put<ExerciseInterface>(`/api/exercise/${value._id}`, value);
+  updateExercise(id: string | undefined, value: ExerciseInterface): Observable<ExerciseInterface> {
+    return this.http.put<ExerciseInterface>(`/api/exercise/${id}`, value);
   }
 
   deleteExercise(exerciseId: string): Observable<ExerciseInterface> {
