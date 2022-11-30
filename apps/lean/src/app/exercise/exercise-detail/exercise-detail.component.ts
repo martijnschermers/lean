@@ -25,7 +25,13 @@ export class ExerciseDetailComponent implements OnInit {
     const custom = this.route.snapshot.url[1].path == "custom";
 
     if (custom) {
-      this.exerciseService.getCustomExercise(id).subscribe(exercise => this.exercise$ = exercise);
+      this.exerciseService.getCustomExercise(id).subscribe(exercise => {
+        if (!exercise) {
+          this.location.back();
+        }
+
+        this.exercise$ = exercise;
+      });
     } else {
       this.exerciseService.getExercise(id).subscribe(exercise => this.exercise$ = exercise);
     }
