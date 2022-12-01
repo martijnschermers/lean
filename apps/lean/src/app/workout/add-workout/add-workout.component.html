@@ -16,22 +16,45 @@
 
     <div formArrayName="sets">
       <h2>Sets</h2>
-      <button class="btn btn-primary btn-sm" type="button" (click)="addSet()">Add another set</button>
 
       <div *ngFor="let set of sets.controls; let i=index">
         <div [formGroupName]="i">
-          <label class="label" for="exercise-{{ i }}">Exercise:</label>
-          <div class="flex">
-            <input class="input input-bordered" id="exercise-{{ i }}" type="text" formControlName="exercise">
-            <input class="input input-bordered w-fit" id="reps-{{ i }}" type="number" formControlName="reps"
-                   placeholder="12">
-            <input class="input input-bordered" id="weight-{{ i }}" type="number" formControlName="weight"
-                   placeholder="100 kg">
-            <input class="checkbox" type="checkbox" id="finished-{{i}}" formControlName="finished">
-            <button class="btn btn-error btn-sm" type="button" (click)="removeSet(i)">Remove</button>
+          <div class="flex items-center justify-between">
+            <div class="flex gap-4">
+              <div class="form-control">
+                <label class="label" for="exercise-{{ i }}">
+                  <span class="label-text">Exercise</span>
+                </label>
+                <select class="select select-bordered w-full" id="exercise-{{ i }}" type="text"
+                        formControlName="exercise">
+                  <option *ngFor="let exercise of exercises$ | async" [value]="exercise._id">{{exercise.name}}</option>
+                </select>
+              </div>
+
+              <div class="form-control">
+                <label for="reps-{{ i }}" class="label">
+                  <span class="label-text">Reps</span>
+                </label>
+                <input class="input input-bordered w-full" id="reps-{{ i }}" type="number" formControlName="reps">
+              </div>
+
+              <div class="form-control">
+                <label for="weight-{{ i }}" class="label">
+                  <span class="label-text">Weight (kg/lbs)</span>
+                </label>
+                <input class="input input-bordered w-full" id="weight-{{ i }}" type="number" formControlName="weight">
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <input class="checkbox checkbox-success" type="checkbox" id="finished-{{i}}" formControlName="finished">
+              <button class="btn btn-error btn-sm" type="button" (click)="removeSet(i)">Remove</button>
+            </div>
           </div>
         </div>
       </div>
+
+      <button class="btn btn-primary btn-sm mt-2" type="button" (click)="addSet()">Add set</button>
     </div>
 
     <button type="submit" class="btn btn-primary" [disabled]="workoutForm.invalid">Finish</button>

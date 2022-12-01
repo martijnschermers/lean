@@ -37,6 +37,11 @@ export class ExerciseService {
       );
   }
 
+  getAllExercises(): Observable<ExerciseInterface[]> {
+    //TODO: Implement api endpoint
+    return this.http.get<ExerciseInterface[]>("/api/exercise/all");
+  }
+
   addExercise(value: ExerciseInterface): Observable<ExerciseInterface> {
     return this.http.post<ExerciseInterface>("/api/exercise", value)
       .pipe(

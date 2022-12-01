@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, OnInit } from "@angular/core";
-import { WorkoutInterface } from "@lean/api-interfaces";
+import { ExerciseInterface, WorkoutInterface } from "@lean/api-interfaces";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { timer } from "rxjs";
+import { Observable, timer } from "rxjs";
+import { ExerciseService } from "../../exercise/exercise.service";
 import * as moment from "moment";
 
 @Component({
@@ -14,16 +15,19 @@ export class AddWorkoutComponent implements OnInit {
   workout?: WorkoutInterface;
   workoutForm: FormGroup;
   duration: string;
+  exercises$: Observable<ExerciseInterface[]> = new Observable<ExerciseInterface[]>(observer => {
+    this.exerciseService.getAllExercises().subscribe(exercises => {
+      observer.next(exercises);
+    });
+  })
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private exerciseService: ExerciseService) {
   }
 
   ngOnInit(): void {
     this.workoutForm = this.formBuilder.group({
       name: ["", Validators.required],
-      sets: this.formBuilder.array([
-        this.createSet()
-      ])
+      sets: this.formBuilder.array([])
     });
 
     timer(0, 1000).subscribe(timer => {
