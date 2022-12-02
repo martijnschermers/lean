@@ -25,10 +25,7 @@
                 <label class="label" for="exercise-{{ i }}">
                   <span class="label-text">Exercise</span>
                 </label>
-                <select class="select select-bordered w-full" id="exercise-{{ i }}" type="text"
-                        formControlName="exercise">
-                  <option *ngFor="let exercise of exercises$ | async" [value]="exercise._id">{{exercise.name}}</option>
-                </select>
+                <input class="input input-bordered" type="text" formControlName="exercise" />
               </div>
 
               <div class="form-control">
@@ -54,7 +51,27 @@
         </div>
       </div>
 
-      <button class="btn btn-primary btn-sm mt-2" type="button" (click)="addSet()">Add set</button>
+      <button *ngIf="exercises.length" class="btn btn-primary btn-sm mt-2" type="button" (click)="addSet()">Add set
+      </button>
+
+      <label for="add-exercise" class="btn btn-primary btn-sm mt-2">Add exercise</label>
+      <input type="checkbox" id="add-exercise" class="modal-toggle" />
+      <div class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+          <label for="add-exercise" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+          <h3 class="font-bold text-lg">Exercises</h3>
+          <div class="modal-action">
+            <ul>
+              <li *ngFor="let exercise of exercises$ | async">
+                <label for="add-exercise">
+                  <button class="btn btn-primary btn-sm" type="button"
+                          (click)="addExercise(exercise)">{{exercise.name}}</button>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <button type="submit" class="btn btn-primary" [disabled]="workoutForm.invalid">Finish</button>

@@ -39,6 +39,11 @@ export class ExerciseController {
     return this.exercisesService.findAllPredefined();
   }
 
+  @Get("all")
+  async findAll(@InjectToken() token: Token): Promise<Exercise[]> {
+    return this.exercisesService.findAll(token.id);
+  }
+
   @Get(":id")
   async findOne(@Param("id") id: string): Promise<Exercise> {
     const exercise = await this.exercisesService.findOne(id);

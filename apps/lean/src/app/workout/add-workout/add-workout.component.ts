@@ -15,6 +15,7 @@ export class AddWorkoutComponent implements OnInit {
   workout?: WorkoutInterface;
   workoutForm: FormGroup;
   duration: string;
+  exercises: ExerciseInterface[] = [];
   exercises$: Observable<ExerciseInterface[]> = new Observable<ExerciseInterface[]>(observer => {
     this.exerciseService.getAllExercises().subscribe(exercises => {
       observer.next(exercises);
@@ -41,9 +42,9 @@ export class AddWorkoutComponent implements OnInit {
     });
   }
 
-  createSet(): FormGroup {
+  createSet(exercise?: ExerciseInterface): FormGroup {
     return this.formBuilder.group({
-      exercise: ["", Validators.required],
+      exercise: [exercise ? exercise.name : "", Validators.required],
       reps: [0, Validators.required],
       weight: [0, Validators.required],
       finished: [false, Validators.required]
@@ -52,6 +53,11 @@ export class AddWorkoutComponent implements OnInit {
 
   get sets() {
     return this.workoutForm.get("sets")! as FormArray;
+  }
+
+  addExercise(exercise: ExerciseInterface) {
+    this.sets.push(this.createSet(exercise));
+    this.exercises.push(exercise);
   }
 
   addSet(): void {

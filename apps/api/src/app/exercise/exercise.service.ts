@@ -26,6 +26,12 @@ export class ExerciseService {
     return this.exerciseModel.findById(id, { __v: 0 });
   }
 
+  async findAll(id: string): Promise<Exercise[]> {
+    const custom = await this.findAllCustom(id);
+    const predefined = await this.findAllPredefined();
+    return [...custom, ...predefined];
+  }
+
   async updateExercise(userId: string, exerciseId: string, exercise: Partial<Exercise>): Promise<Exercise> {
     return this.userService.updateExercise(userId, exerciseId, exercise);
   }
