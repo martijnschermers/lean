@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from "../../auth/auth.service";
+import { Observable } from "rxjs";
+import { UserInterface } from "@lean/api-interfaces";
 
 @Component({
   selector: 'lean-navbar',
@@ -6,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor() {}
+  loggedInUser$: Observable<UserInterface>
 
-  ngOnInit(): void {}
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    // this.loggedInUser$ = this.authService.currentUser$;
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
 }
