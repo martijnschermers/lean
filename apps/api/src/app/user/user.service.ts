@@ -15,7 +15,7 @@ export class UserService {
   }
 
   async addWorkout(id: string, workoutId: string): Promise<void> {
-    this.userModel.updateOne({ _id: id }, { $push: { workoutsIds: workoutId } });
+    this.userModel.updateOne({ _id: id }, { $push: { workouts: workoutId } });
   }
 
   async findAllWorkouts(id: string): Promise<Workout[]> {
