@@ -1,5 +1,5 @@
 <form class="card flex-shrink-0 w-full shadow-2xl bg-base-100 m-auto"
-      (ngSubmit)="saveWorkout(workoutForm)"
+      (ngSubmit)="addWorkout(workoutForm)"
       [formGroup]="workoutForm">
   <div class="card-body">
     <h1>Workout</h1>
@@ -14,45 +14,57 @@
              class="input input-bordered" placeholder="Workout" />
     </div>
 
-    <div formArrayName="sets">
-      <h2>Sets</h2>
+    <div formArrayName="exercises">
+      <h2>Exercises</h2>
 
-      <div *ngFor="let set of sets.controls; let i=index">
-        <div [formGroupName]="i">
-          <div class="flex items-center justify-between">
-            <div class="flex gap-4">
-              <div class="form-control">
-                <label class="label" for="exercise-{{ i }}">
-                  <span class="label-text">Exercise</span>
-                </label>
-                <input class="input input-bordered" type="text" formControlName="exercise" />
+      <div *ngFor="let exercise of exercises.controls; let exerciseIndex=index">
+        <div [formGroupName]="exerciseIndex">
+
+          <input class="hidden" #exercise type="hidden" formControlName="name">
+          <h1>{{exercise.value}}</h1>
+
+          <div formArrayName="sets">
+            <div *ngFor="let set of getSets(exerciseIndex).controls; let setIndex=index">
+              <div class="flex items-center justify-between" [formGroupName]="setIndex">
+                <div class="flex gap-4">
+                  <div class="form-control">
+                    <label for="reps-{{ exerciseIndex }}" class="label">
+                      <span class="label-text">Reps</span>
+                    </label>
+                    <input class="input input-bordered w-full" id="reps-{{ exerciseIndex }}" type="number"
+                           formControlName="reps">
+                  </div>
+
+                  <div class="form-control">
+                    <label for="weight-{{ exerciseIndex }}" class="label">
+                      <span class="label-text">Weight (kg/lbs)</span>
+                    </label>
+                    <input class="input input-bordered w-full" id="weight-{{ exerciseIndex }}" type="number"
+                           formControlName="weight">
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                  <input class="checkbox checkbox-success" type="checkbox"
+                         id="finished-{{ exerciseIndex }}"
+                         formControlName="finished">
+
+                  <button class="btn btn-error btn-sm" type="button"
+                          (click)="deleteSet(exerciseIndex, setIndex)">
+                    Remove
+                  </button>
+                </div>
               </div>
-
-              <div class="form-control">
-                <label for="reps-{{ i }}" class="label">
-                  <span class="label-text">Reps</span>
-                </label>
-                <input class="input input-bordered w-full" id="reps-{{ i }}" type="number" formControlName="reps">
-              </div>
-
-              <div class="form-control">
-                <label for="weight-{{ i }}" class="label">
-                  <span class="label-text">Weight (kg/lbs)</span>
-                </label>
-                <input class="input input-bordered w-full" id="weight-{{ i }}" type="number" formControlName="weight">
-              </div>
-            </div>
-
-            <div class="flex items-center gap-4">
-              <input class="checkbox checkbox-success" type="checkbox" id="finished-{{i}}" formControlName="finished">
-              <button class="btn btn-error btn-sm" type="button" (click)="removeSet(i)">Remove</button>
             </div>
           </div>
-        </div>
-      </div>
 
-      <button *ngIf="exercises.length" class="btn btn-primary btn-sm mt-2" type="button" (click)="addSet()">Add set
-      </button>
+          <button class="btn btn-primary btn-sm mt-2" type="button" (click)="addSet(exerciseIndex)">
+            Add set
+          </button>
+        </div>
+
+        <div class="divider"></div>
+      </div>
 
       <label for="add-exercise" class="btn btn-primary btn-sm mt-2">Add exercise</label>
       <input type="checkbox" id="add-exercise" class="modal-toggle" />
@@ -61,19 +73,33 @@
           <label for="add-exercise" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
           <h3 class="font-bold text-lg">Exercises</h3>
           <div class="modal-action">
-            <ul>
-              <li *ngFor="let exercise of exercises$ | async">
-                <label for="add-exercise">
-                  <button class="btn btn-primary btn-sm" type="button"
-                          (click)="addExercise(exercise)">{{exercise.name}}</button>
-                </label>
+            <ul class="w-full divide-y divide-neutral-content">
+              <li class="py-3 sm:py-4" *ngFor="let exercise of exercises$ | async">
+                <div class="flex items-center space-x-4">
+                  <div *ngIf="exercise.image" class="flex-shrink-0">
+                    <img class="w-8 h-8 rounded-full" src="{{ exercise.image }}" alt="{{ exercise.name }}">
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                      {{exercise.name}}
+                    </p>
+                    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                      {{exercise.primaryMuscle}}
+                    </p>
+                  </div>
+                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                    <label class="btn btn-success btn-sm" for="add-exercise"
+                           (click)="addExercise(exercise)">Add
+                    </label>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>
         </div>
       </div>
-    </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="workoutForm.invalid">Finish</button>
+      <button type="submit" class="btn btn-primary" [disabled]="workoutForm.invalid">Finish</button>
+    </div>
   </div>
 </form>

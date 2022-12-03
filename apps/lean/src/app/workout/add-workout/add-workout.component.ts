@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, OnInit } from "@angular/core";
-import { ExerciseInterface, WorkoutInterface } from "@lean/api-interfaces";
+import { ExerciseInterface, SetInterface, WorkoutInterface } from "@lean/api-interfaces";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Observable, timer } from "rxjs";
 import { ExerciseService } from "../../exercise/exercise.service";
+import { WorkoutService } from "../workout.service";
 import * as moment from "moment";
 
 @Component({
@@ -15,61 +16,78 @@ export class AddWorkoutComponent implements OnInit {
   workout?: WorkoutInterface;
   workoutForm: FormGroup;
   duration: string;
-  exercises: ExerciseInterface[] = [];
   exercises$: Observable<ExerciseInterface[]> = new Observable<ExerciseInterface[]>(observer => {
     this.exerciseService.getAllExercises().subscribe(exercises => {
       observer.next(exercises);
     });
-  })
+  });
 
-  constructor(private formBuilder: FormBuilder, private exerciseService: ExerciseService) {
+  constructor(private formBuilder: FormBuilder, private workoutService: WorkoutService, private exerciseService: ExerciseService) {
   }
 
   ngOnInit(): void {
     this.workoutForm = this.formBuilder.group({
       name: ["", Validators.required],
-      sets: this.formBuilder.array([])
+      exercises: this.formBuilder.array([], Validators.required)
     });
 
     timer(0, 1000).subscribe(timer => {
-      if (timer < 60) {
-        this.duration = moment(timer * 1000).format("s") + " s";
-      } else if (timer < 3600) {
-        this.duration = moment(timer * 1000).format("m:ss") + " m";
-      } else {
-        this.duration = moment(timer * 1000).format("H:mm:ss") + " h";
-      }
+      this.duration = moment(timer * 1000).format("H:mm:ss");
     });
   }
 
-  createSet(exercise?: ExerciseInterface): FormGroup {
+  createExercise(exercise: ExerciseInterface): FormGroup {
     return this.formBuilder.group({
-      exercise: [exercise ? exercise.name : "", Validators.required],
+      id: [{ value: exercise._id, disabled: true }],
+      name: [{ value: exercise.name, disabled: true }],
+      sets: this.formBuilder.array([
+        this.createSet()
+      ], Validators.required)
+    });
+  }
+
+  createSet(): FormGroup {
+    return this.formBuilder.group({
       reps: [0, Validators.required],
       weight: [0, Validators.required],
       finished: [false, Validators.required]
     });
   }
 
-  get sets() {
-    return this.workoutForm.get("sets")! as FormArray;
+  get exercises(): FormArray {
+    return this.workoutForm.get("exercises")! as FormArray;
   }
 
-  addExercise(exercise: ExerciseInterface) {
-    this.sets.push(this.createSet(exercise));
-    this.exercises.push(exercise);
+  getSets(index: number): FormArray {
+    return this.exercises.at(index).get("sets")! as FormArray;
   }
 
-  addSet(): void {
-    this.sets.push(this.createSet());
+  addExercise(exercise: ExerciseInterface): void {
+    this.exercises.push(this.createExercise(exercise));
   }
 
-  removeSet(index: number) {
-    this.sets.removeAt(index);
+  addSet(index: number): void {
+    this.getSets(index).push(this.createSet());
   }
 
-  saveWorkout(form: FormGroup) {
-    //Calculate volume, duration, prs and add to object
-    console.log("Workout: ", form.value);
+  deleteSet(exerciseIndex: number, setIndex: number): void {
+    if (this.getSets(exerciseIndex).length == 1) {
+      this.exercises.removeAt(exerciseIndex);
+      return;
+    }
+
+    this.getSets(exerciseIndex).removeAt(setIndex);
+  }
+
+  addWorkout(form: FormGroup): void {
+    form.value.duration = this.duration;
+    form.value.sets = form.value.exercises.map(((exercise: { id: string, name: ExerciseInterface, sets: SetInterface[]; }) => {
+      exercise.sets.forEach(set => {
+        // set.exercise = exercise.id;
+      });
+    })).flat();
+    console.log(form.value);
+
+    this.workoutService.addWorkout(form.value).subscribe();
   }
 }
