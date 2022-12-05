@@ -12,7 +12,8 @@
       ],
       "options": {
         "allowedCommonJsDependencies": [
-          "validator"
+          "validator",
+          "moment"
         ],
         "outputPath": "dist/apps/lean",
         "index": "apps/lean/src/index.html",
