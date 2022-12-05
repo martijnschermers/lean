@@ -9,8 +9,7 @@ import { ExerciseService } from "../exercise.service";
   styleUrls: ["./exercises.component.css"]
 })
 export class ExerciseComponent implements OnInit {
-  customExercises$: ExerciseInterface[] = [];
-  predefinedExercises$: ExerciseInterface[] = [];
+  exercises$: ExerciseInterface[] = [];
 
   constructor(private service: ExerciseService) {
   }
@@ -20,7 +19,6 @@ export class ExerciseComponent implements OnInit {
   }
 
   getExercises(): void {
-    this.service.getCustomExercises().subscribe((exercises: ExerciseInterface[]) => this.customExercises$ = exercises);
-    this.service.getPredefinedExercises().subscribe((exercises: ExerciseInterface[]) => this.predefinedExercises$ = exercises);
+    this.service.getExercises().subscribe((exercises: ExerciseInterface[]) => this.exercises$ = exercises);
   }
 }

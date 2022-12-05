@@ -4,11 +4,12 @@
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal p-0">
-      <!-- <li class="hover:rounded-lg"><a routerLink="/workout">Workouts</a></li> -->
-      <li class="focus:rounded-lg hover:rounded-lg"><a routerLink="/about">About</a></li>
+      <li class="hover:rounded-lg"><a routerLink="/workout">Workouts</a></li>
+      <li class="hover:rounded-lg"><a routerLink="/about">About</a></li>
       <li class="hover:rounded-lg"><a routerLink="/user">Users</a></li>
       <li class="hover:rounded-lg"><a routerLink="/exercise">Exercises</a></li>
-      <!-- <li class="hover:rounded-lg"><a routerLink="/login">Login</a></li>-->
+      <li *ngIf="(loggedInUser$ | async) === undefined" class="hover:rounded-lg"><a routerLink="/login">Login</a></li>
+      <li *ngIf="(loggedInUser$ | async) as user" class="hover:rounded-lg"><a (click)="logout()">Logout</a></li>
     </ul>
   </div>
 </div>

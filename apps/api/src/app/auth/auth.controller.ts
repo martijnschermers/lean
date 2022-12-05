@@ -8,6 +8,7 @@ import {
 import { AuthService } from "./auth.service";
 import { UserCredentials, UserRegistration } from "@lean/api-interfaces";
 import { User } from "../user/user.schema";
+import { Identity } from "./identity.schema";
 
 @Controller()
 export class AuthController {
@@ -26,11 +27,11 @@ export class AuthController {
   }
 
   @Post("login")
-  async login(@Body() credentials: UserCredentials): Promise<{ token: string }> {
+  async login(@Body() credentials: UserCredentials): Promise<Identity> {
     try {
-      return {
-        token: await this.authService.generateToken(credentials.email, credentials.password)
-      };
+      const identity = await this.authService.generateToken(credentials.email, credentials.password);
+      identity.hash = undefined;
+      return identity;
     } catch (e) {
       throw new UnauthorizedException("Invalid credentials");
     }

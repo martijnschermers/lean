@@ -10,8 +10,8 @@ export class Workout {
   @Prop({ required: true, validate: isString })
   name: string;
 
-  @Prop({ required: true, validate: isNumber })
-  duration: number;
+  @Prop({ required: true, validate: isString })
+  duration: string;
 
   @Prop({ required: true, validate: isNumber })
   volume: number;

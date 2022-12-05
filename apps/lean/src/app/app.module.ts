@@ -9,10 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AboutComponent } from './about/about.component';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { ComponentsModule } from "./components/components.module";
+import { ComponentsModule } from './components/components.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, AboutComponent],
+  declarations: [AppComponent, AboutComponent, HomeComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -21,7 +22,7 @@ import { ComponentsModule } from "./components/components.module";
     WorkoutsModule,
     UserModule,
     AuthModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

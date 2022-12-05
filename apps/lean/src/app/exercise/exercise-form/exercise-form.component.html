@@ -55,6 +55,16 @@
       </select>
     </div>
 
+    <div *ngIf="user$ | async as user">
+      <div *ngIf="user.admin" class="form-control">
+        <label class="label">
+          <span class="label-text">Predefined</span>
+          <input type="checkbox" class="checkbox" name="predefined" formControlName="predefined"
+                 (ngModelChange)="exercise ? exercise.predefined = $event : ''">
+        </label>
+      </div>
+    </div>
+
     <div class="form-control">
       <label class="label">
         <span class="label-text">Image</span>
