@@ -7,6 +7,7 @@ import { Component } from "@angular/core";
 import { UserInterface } from "@lean/api-interfaces";
 import { UserFormComponent } from "../user-form/user-form.component";
 import { FormsModule } from "@angular/forms";
+import { HttpClient, HttpHandler } from "@angular/common/http";
 
 describe("UserDetailComponent", () => {
   let component: MockUserDetailComponent;
@@ -15,7 +16,7 @@ describe("UserDetailComponent", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UserDetailComponent, MockUserDetailComponent, UserFormComponent],
-      providers: [UserService],
+      providers: [UserService, HttpClient, HttpHandler],
       imports: [RouterTestingModule.withRoutes([]), FormsModule]
     }).compileComponents();
 
@@ -37,6 +38,7 @@ describe("UserDetailComponent", () => {
     user: UserInterface = {
       _id: "1",
       username: "test",
+      admin: false,
       email: "test"
     };
   }
