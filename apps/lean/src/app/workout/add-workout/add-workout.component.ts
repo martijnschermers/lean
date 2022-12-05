@@ -17,7 +17,7 @@ export class AddWorkoutComponent implements OnInit {
   workoutForm: FormGroup;
   duration: string;
   exercises$: Observable<ExerciseInterface[]> = new Observable<ExerciseInterface[]>(observer => {
-    this.exerciseService.getAllExercises().subscribe(exercises => {
+    this.exerciseService.getExercises().subscribe(exercises => {
       observer.next(exercises);
     });
   });
@@ -41,13 +41,14 @@ export class AddWorkoutComponent implements OnInit {
       id: [{ value: exercise._id, disabled: true }],
       name: [{ value: exercise.name, disabled: true }],
       sets: this.formBuilder.array([
-        this.createSet()
+        this.createSet(exercise._id)
       ], Validators.required)
     });
   }
 
-  createSet(): FormGroup {
+  createSet(exerciseId: string): FormGroup {
     return this.formBuilder.group({
+      exercise: [exerciseId],
       reps: [0, Validators.required],
       weight: [0, Validators.required],
       finished: [false, Validators.required]
@@ -66,8 +67,8 @@ export class AddWorkoutComponent implements OnInit {
     this.exercises.push(this.createExercise(exercise));
   }
 
-  addSet(index: number): void {
-    this.getSets(index).push(this.createSet());
+  addSet(index: number, exerciseId: string): void {
+    this.getSets(index).push(this.createSet(exerciseId));
   }
 
   deleteSet(exerciseIndex: number, setIndex: number): void {
@@ -81,11 +82,7 @@ export class AddWorkoutComponent implements OnInit {
 
   addWorkout(form: FormGroup): void {
     form.value.duration = this.duration;
-    form.value.sets = form.value.exercises.map(((exercise: { id: string, name: ExerciseInterface, sets: SetInterface[]; }) => {
-      exercise.sets.forEach(set => {
-        // set.exercise = exercise.id;
-      });
-    })).flat();
+    form.value.sets = form.value.exercises.map((exercise: { sets: SetInterface[]; }) => exercise.sets).flat();
     console.log(form.value);
 
     this.workoutService.addWorkout(form.value).subscribe();

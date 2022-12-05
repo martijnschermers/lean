@@ -19,7 +19,7 @@ describe("WorkoutDetailComponent", () => {
       _id: "1",
       name: "Workout 1",
       date: new Date(),
-      duration: 0,
+      duration: "00:00:00",
       prs: 0,
       volume: 0,
       sets: []

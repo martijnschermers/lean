@@ -19,9 +19,9 @@
 
       <div *ngFor="let exercise of exercises.controls; let exerciseIndex=index">
         <div [formGroupName]="exerciseIndex">
-
-          <input class="hidden" #exercise type="hidden" formControlName="name">
-          <h1>{{exercise.value}}</h1>
+          <input class="hidden" #exerciseId type="hidden" formControlName="id">
+          <input class="hidden" #exerciseName type="hidden" formControlName="name">
+          <h1>{{exerciseName.value}}</h1>
 
           <div formArrayName="sets">
             <div *ngFor="let set of getSets(exerciseIndex).controls; let setIndex=index">
@@ -58,7 +58,7 @@
             </div>
           </div>
 
-          <button class="btn btn-primary btn-sm mt-2" type="button" (click)="addSet(exerciseIndex)">
+          <button class="btn btn-primary btn-sm mt-2" type="button" (click)="addSet(exerciseIndex, exerciseId.value)">
             Add set
           </button>
         </div>
