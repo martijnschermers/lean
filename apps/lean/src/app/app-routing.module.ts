@@ -14,6 +14,7 @@ import { UpdateExerciseComponent } from "./exercise/update-exercise/update-exerc
 import { AddWorkoutComponent } from "./workout/add-workout/add-workout.component";
 import { HomeComponent } from "./home/home.component";
 import { AuthGuard } from "./auth/auth.guard";
+import { UpdateWorkoutComponent } from "./workout/update-workout/update-workout.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: "exercise/:id", component: ExerciseDetailComponent, canActivate: [AuthGuard] },
   { path: "workout", component: WorkoutsComponent, canActivate: [AuthGuard] },
   { path: "workout/add", component: AddWorkoutComponent, canActivate: [AuthGuard] },
+  { path: "workout/update/:id", component: UpdateWorkoutComponent, canActivate: [AuthGuard] },
   { path: "workout/:id", component: WorkoutDetailComponent, canActivate: [AuthGuard] },
   { path: "user", component: UsersComponent },
   { path: "user/:id", component: UserDetailComponent }

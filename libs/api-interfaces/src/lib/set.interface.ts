@@ -5,5 +5,5 @@ export interface SetInterface {
   weight: number;
   reps: number;
   finished: boolean;
-  exercise: ExerciseInterface;
+  exercise: ExerciseInterface | string;
 }

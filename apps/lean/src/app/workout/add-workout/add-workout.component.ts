@@ -13,7 +13,7 @@ import * as moment from "moment";
   styleUrls: ["./add-workout.component.css"]
 })
 export class AddWorkoutComponent implements OnInit {
-  workout?: WorkoutInterface;
+  workout: WorkoutInterface = { _id: "", volume: 0, prs: 0, name: "", sets: [], duration: "", date: new Date() };
   workoutForm: FormGroup;
   duration: string;
   exercises$: Observable<ExerciseInterface[]> = new Observable<ExerciseInterface[]>(observer => {
@@ -48,7 +48,7 @@ export class AddWorkoutComponent implements OnInit {
 
   createSet(exerciseId: string): FormGroup {
     return this.formBuilder.group({
-      exercise: [exerciseId],
+      _id: [exerciseId],
       reps: [0, Validators.required],
       weight: [0, Validators.required],
       finished: [false, Validators.required]
@@ -82,7 +82,8 @@ export class AddWorkoutComponent implements OnInit {
 
   addWorkout(form: FormGroup): void {
     form.value.duration = this.duration;
-    form.value.sets = form.value.exercises.map((exercise: { sets: SetInterface[]; }) => exercise.sets).flat();
+    form.value.date = new Date();
+
     console.log(form.value);
 
     this.workoutService.addWorkout(form.value).subscribe();

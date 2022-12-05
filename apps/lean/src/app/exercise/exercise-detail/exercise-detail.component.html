@@ -1,10 +1,10 @@
-<div *ngIf="exercise$ | async as exercise" class="card w-fit bg-base-100 shadow-xl m-auto">
-  <figure *ngIf="exercise.image"><img src="{{exercise.image}}" alt="ExerciseInterface image"></figure>
+<div *ngIf="exercise$ | async as exercise" class="card bg-base-300 max-w-lg shadow-xl my-3 m-auto">
+  <figure *ngIf="exercise.image"><img src="{{exercise.image}}" alt="Exercise image"></figure>
   <div class="card-body">
     <h2 class="card-title">{{exercise.name}}</h2>
     <p>{{exercise.description}}</p>
     <div class="card-actions justify-between items-center">
-      <div class="gap-2">
+      <div class="flex gap-2">
         <div class="badge badge-primary">{{exercise.primaryMuscle}}</div>
         <div class="badge badge-primary">{{exercise.type}}</div>
         <div class="badge badge-primary">{{exercise.category}}</div>

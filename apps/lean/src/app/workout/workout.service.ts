@@ -24,21 +24,27 @@ export class WorkoutService {
   addWorkout(workout: WorkoutInterface): Observable<WorkoutInterface> {
     const sets: SetInterface[] = [];
 
-    workout.sets!.forEach(async set => {
-      await this.exerciseService.getExercise(set.exercise!._id).subscribe((exercise) => {
-        const newSet: SetInterface = {
-          _id: set._id,
-          exercise,
-          reps: set.reps,
-          weight: set.weight,
-          finished: set.finished
-        };
+    workout.exercises!.forEach(exercise => {
+      exercise.sets!.forEach(async set => {
+        await this.exerciseService.getExercise(set._id).subscribe((exercise) => {
+          const newSet: SetInterface = {
+            _id: set._id,
+            exercise,
+            reps: set.reps,
+            weight: set.weight,
+            finished: set.finished
+          };
+          console.log(newSet);
 
-        sets.push(newSet);
+          sets.push(newSet);
+        });
       });
     });
     workout.sets = sets;
     workout.volume = this.calculateVolume(workout.sets!);
+
+    //TODO: Request gets send to fast, so the sets are not added to the workout
+
 
     console.log(workout);
     return this.http.post<WorkoutInterface>("/api/workout", workout);
@@ -50,5 +56,13 @@ export class WorkoutService {
       volume += set.reps * set.weight;
     });
     return volume;
+  }
+
+  updateWorkout(workout: WorkoutInterface): Observable<WorkoutInterface> {
+    return this.http.put<WorkoutInterface>(`/api/workout/${workout._id}`, workout);
+  }
+
+  deleteWorkout(id: string): Observable<WorkoutInterface> {
+    return this.http.delete<WorkoutInterface>(`/api/workout/${id}`);
   }
 }

@@ -17,4 +17,8 @@ export class WorkoutDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.workoutService.findOne(id).subscribe(workout => this.workout = workout);
   }
+
+  deleteWorkout(id: string) {
+    this.workoutService.deleteWorkout(id).subscribe();
+  }
 }
