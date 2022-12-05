@@ -30,6 +30,10 @@ import { TokenMiddleware } from "./auth/token.middleware";
       {
         path: "workout",
         module: WorkoutModule
+      },
+      {
+        path: "user",
+        module: UserModule
       }
     ])
   ],
@@ -43,7 +47,6 @@ export class AppModule {
       .exclude(
         { path: "api/login", method: RequestMethod.POST },
         { path: "api/register", method: RequestMethod.POST },
-        { path: "api/exercise", method: RequestMethod.GET }
       )
       .forRoutes(
         "exercise",

@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { UserInterface } from "@lean/api-interfaces";
-import { USERS } from "../mock-users";
 import { UserService } from "../user.service";
 
 @Component({
@@ -9,17 +8,9 @@ import { UserService } from "../user.service";
   styleUrls: ["./users.component.css"]
 })
 export class UsersComponent {
-  users: UserInterface[] = USERS;
+  users: UserInterface[] = [];
   user: UserInterface;
 
   constructor(private userService: UserService) {
-  }
-
-  addUser(): void {
-    this.userService.addUser(this.user);
-  }
-
-  deleteUser(user: UserInterface): void {
-    this.userService.deleteUser(user);
   }
 }

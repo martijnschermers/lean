@@ -30,9 +30,4 @@ export class UserDetailComponent implements OnInit {
 
     return;
   }
-
-  updateUser(): void {
-    this.userService.updateUser(this.user);
-    this.location.back();
-  }
 }
