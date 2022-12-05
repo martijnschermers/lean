@@ -11,21 +11,8 @@ export class ExerciseService {
   constructor(private http: HttpClient) {
   }
 
-  getCustomExercises(): Observable<ExerciseInterface[]> {
-    return this.http.get<ExerciseInterface[]>("/api/exercise/custom");
-  }
-
-  getCustomExercise(id: string | null): Observable<ExerciseInterface> {
-    return this.http.get<ExerciseInterface>(`/api/exercise/custom/${id}`)
-      .pipe(
-        catchError((err) => {
-          throw err;
-        })
-      );
-  }
-
-  getPredefinedExercises(): Observable<ExerciseInterface[]> {
-    return this.http.get<ExerciseInterface[]>("/api/exercise/");
+  getExercises(): Observable<ExerciseInterface[]> {
+    return this.http.get<ExerciseInterface[]>("/api/exercise");
   }
 
   getExercise(id: string | null): Observable<ExerciseInterface> {
@@ -35,11 +22,6 @@ export class ExerciseService {
           throw err;
         })
       );
-  }
-
-  getAllExercises(): Observable<ExerciseInterface[]> {
-    //TODO: Implement api endpoint
-    return this.http.get<ExerciseInterface[]>("/api/exercise/all");
   }
 
   addExercise(value: ExerciseInterface): Observable<ExerciseInterface> {

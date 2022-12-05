@@ -2,6 +2,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ExerciseInterface, ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
+import { AuthService } from "../../auth/auth.service";
 
 @Component({
   selector: "lean-exercise-form",
@@ -23,7 +24,9 @@ export class ExerciseFormComponent implements OnInit {
   exerciseCategories = Object.values(ExerciseCategory);
   muscles = Object.values(Muscle);
 
-  constructor(private formBuilder: FormBuilder) {
+  user$ = this.authService.currentUser;
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -33,6 +36,7 @@ export class ExerciseFormComponent implements OnInit {
         description: [this.exercise.description, Validators.required],
         type: [this.exercise.type, Validators.required],
         category: [this.exercise.category, Validators.required],
+        predefined: [this.exercise.predefined, Validators.required],
         primaryMuscle: [this.exercise.primaryMuscle, Validators.required],
         image: [this.exercise.image ? this.exercise.image : "", Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g)]
       });
@@ -42,6 +46,7 @@ export class ExerciseFormComponent implements OnInit {
         description: ["", Validators.required],
         type: [this.exerciseTypes[0], Validators.required],
         category: [this.exerciseCategories[0], Validators.required],
+        predefined: [false, Validators.required],
         primaryMuscle: [this.muscles[0], Validators.required],
         image: ["", Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g)]
       });

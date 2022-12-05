@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { ExerciseService } from "../exercise.service";
 import { Location } from "@angular/common";
-import { ExerciseInterface } from "@lean/api-interfaces";
+import { ExerciseInterface, UserInterface } from "@lean/api-interfaces";
 import { ActivatedRoute } from "@angular/router";
+import { AuthService } from "../../auth/auth.service";
 
 @Component({
   selector: "lean-update-exercise",
@@ -13,7 +14,7 @@ import { ActivatedRoute } from "@angular/router";
 export class UpdateExerciseComponent implements OnInit {
   exercise: ExerciseInterface | undefined;
 
-  constructor(private service: ExerciseService, private location: Location, private route: ActivatedRoute) {
+  constructor(private service: ExerciseService, private location: Location, private route: ActivatedRoute, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -22,10 +23,17 @@ export class UpdateExerciseComponent implements OnInit {
 
   getExercise(): void {
     const id = this.route.snapshot.paramMap.get("id");
-    this.service.getCustomExercise(id).subscribe(exercise => {
-      if (exercise.predefined) {
+    this.service.getExercise(id).subscribe(exercise => {
+      let user: UserInterface | undefined;
+      this.authService.currentUser.subscribe((currentUser) => user = currentUser);
+      if (!user) {
+        this.location.go("/login");
+      }
+
+      if (exercise.predefined && !user?.admin) {
         this.location.back();
       }
+
       this.exercise = exercise;
     });
   }

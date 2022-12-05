@@ -5,6 +5,7 @@ import { ExerciseInterface } from "@lean/api-interfaces";
 import { ExerciseService } from "../exercise.service";
 import { Location } from "@angular/common";
 import { Observable } from "rxjs";
+import { AuthService } from "../../auth/auth.service";
 
 @Component({
   selector: "lean-exercise-detail",
@@ -14,22 +15,13 @@ import { Observable } from "rxjs";
 export class ExerciseDetailComponent {
   exercise$: Observable<ExerciseInterface> = new Observable<ExerciseInterface>(observer => {
     const id = this.route.snapshot.paramMap.get("id");
-    const custom = this.route.snapshot.url[1].path == "custom";
 
-    if (custom) {
-      this.exerciseService.getCustomExercise(id).subscribe(exercise => {
-        if (!exercise) {
-          this.location.back();
-        }
-
-        observer.next(exercise);
-      });
-    } else {
-      this.exerciseService.getExercise(id).subscribe(exercise => observer.next(exercise));
-    }
+    this.exerciseService.getExercise(id).subscribe(exercise => observer.next(exercise));
   });
 
-  constructor(private route: ActivatedRoute, private exerciseService: ExerciseService, private location: Location) {
+  user$ = this.authService.currentUser;
+
+  constructor(private route: ActivatedRoute, private exerciseService: ExerciseService, private location: Location, private authService: AuthService) {
   }
 
   deleteExercise(exerciseId: string | undefined): void {

@@ -1,6 +1,6 @@
 <div class="flex justify-between items-center mb-2">
-  <h2>Custom Exercises</h2>
-  <button class="btn btn-sm btn-primary" routerLink="/exercise/add">Add Custom Exercise</button>
+  <h2>All Exercises</h2>
+  <button class="btn btn-sm btn-primary" routerLink="/exercise/add">Add Exercise</button>
 </div>
 <div class="overflow-x-auto w-full">
   <table class="table w-full z-0">
@@ -12,38 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let exercise of customExercises$" [routerLink]="['/exercise/custom', exercise._id]"
-        class="hover cursor-pointer">
-      <td>
-        <div class="flex items-center space-x-3">
-          <div *ngIf="exercise.image" class="avatar">
-            <div class="mask mask-squircle w-12 h-12">
-              <img src="{{exercise.image}}" alt="ExerciseInterface image" />
-            </div>
-          </div>
-          <div class="font-bold">{{exercise.name}} ({{exercise.category}})</div>
-        </div>
-      </td>
-      <td>{{exercise.type}}</td>
-      <td>{{exercise.primaryMuscle}}</td>
-    </tr>
-  </table>
-</div>
-
-<div class="divider"></div>
-
-<h2>Predefined Exercises</h2>
-<div class="overflow-x-auto w-full">
-  <table class="table w-full z-0">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Primary Muscle</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let exercise of predefinedExercises$" [routerLink]="['/exercise', exercise._id]"
+    <tr *ngFor="let exercise of exercises$" [routerLink]="['/exercise/', exercise._id]"
         class="hover cursor-pointer">
       <td>
         <div class="flex items-center space-x-3">
