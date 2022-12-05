@@ -7,5 +7,6 @@ export interface WorkoutInterface {
   volume: number;
   prs: number;
   date: Date;
+  exercises?: { sets: SetInterface[] }[];
   sets?: SetInterface[];
 }
