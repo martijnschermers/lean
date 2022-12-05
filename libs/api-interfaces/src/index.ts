@@ -6,5 +6,5 @@ export { UserInterface } from "./lib/user.interface";
 export { GroupWorkoutInterface } from "./lib/group-workout.interface";
 export { WorkoutInterface } from "./lib/workout.interface";
 export { SetInterface } from "./lib/set.interface";
-export { UserCredentials, UserRegistration } from "./lib/auth.interface";
+export { UserCredentials, UserRegistration, IdentityInterface } from "./lib/auth.interface";
 export { ResponseInterface } from "./lib/response.interface";

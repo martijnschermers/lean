@@ -1,16 +1,18 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { UserInterface, UserCredentials, UserRegistration } from "@lean/api-interfaces";
-import { BehaviorSubject, catchError, map, Observable } from "rxjs";
+import { UserInterface, UserCredentials, UserRegistration, IdentityInterface } from "@lean/api-interfaces";
+import { BehaviorSubject, catchError, map, Observable, of } from "rxjs";
+import { UserService } from "../user/user.service";
+import { Location } from "@angular/common";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  public currentUser$ = new BehaviorSubject<{ token: string } | undefined>(undefined);
+  public currentUser$ = new BehaviorSubject<IdentityInterface | undefined>(undefined);
   private readonly CURRENT_USER = "currentUser";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService, private location: Location) {
     const currentUser = localStorage.getItem(this.CURRENT_USER);
     if (currentUser) {
       this.currentUser$.next(JSON.parse(currentUser));
@@ -29,13 +31,13 @@ export class AuthService {
       );
   }
 
-  login(credentials: UserCredentials): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>("/api/login", credentials)
+  login(credentials: UserCredentials): Observable<IdentityInterface> {
+    return this.http.post<IdentityInterface>("/api/login", credentials)
       .pipe(
-        map((token) => {
-          localStorage.setItem(this.CURRENT_USER, JSON.stringify(token));
-          this.currentUser$.next(token);
-          return token;
+        map((identity) => {
+          localStorage.setItem(this.CURRENT_USER, JSON.stringify(identity));
+          this.currentUser$.next(identity);
+          return identity;
         }),
         catchError((err) => {
           throw err;
@@ -43,8 +45,19 @@ export class AuthService {
       );
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem(this.CURRENT_USER);
     this.currentUser$.next(undefined);
+    this.location.go("/");
+  }
+
+  get currentUser(): Observable<UserInterface | undefined> {
+    const currentUser = this.currentUser$.value;
+
+    if (currentUser) {
+      return this.userService.getUser(currentUser.email);
+    }
+
+    return of(undefined);
   }
 }

@@ -33,16 +33,15 @@ export class AuthService {
     const generatedHash = await hash(password, parseInt(process.env.SALT_ROUNDS, 10));
 
     const user = await this.identityModel.findOne({ $or: [{ username }, { email }] });
-    if (user) throw new Error("User already exists");
+    if (user) throw new Error("User registration failed");
 
     const identity = new this.identityModel({ username, hash: generatedHash, email });
 
     await identity.save();
   }
 
-  async generateToken(email: string, password: string): Promise<string> {
-    const identity = await this.identityModel.findOne({ email });
-
+  async generateToken(email: string, password: string): Promise<Identity> {
+    const identity = await this.identityModel.findOne({ email }, { __v: 0 });
     if (!identity || !(await compare(password, identity.hash))) throw new Error("User is not authorized");
 
     const user = await this.userModel.findOne({ email });
@@ -50,7 +49,8 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       sign({ id: user.id }, process.env.JWT_SECRET, (err: Error, token: string) => {
         if (err) reject(err);
-        else resolve(token);
+        else identity.token = token;
+        resolve(identity);
       });
     });
   }
