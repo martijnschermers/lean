@@ -1,31 +1,18 @@
-<div class="flex justify-between items-center mb-2">
-  <h2>All Exercises</h2>
-  <button class="btn btn-sm btn-primary" routerLink="/exercise/add">Add Exercise</button>
-</div>
-<div class="overflow-x-auto w-full">
-  <table class="table w-full z-0">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Primary Muscle</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let exercise of exercises$" [routerLink]="['/exercise/', exercise._id]"
-        class="hover cursor-pointer">
-      <td>
-        <div class="flex items-center space-x-3">
-          <div *ngIf="exercise.image" class="avatar">
-            <div class="mask mask-squircle w-12 h-12">
-              <img src="{{exercise.image}}" alt="ExerciseInterface image" />
-            </div>
-          </div>
-          <div class="font-bold">{{exercise.name}} ({{exercise.category}})</div>
-        </div>
-      </td>
-      <td>{{exercise.type}}</td>
-      <td>{{exercise.primaryMuscle}}</td>
-    </tr>
-  </table>
+<div class="m-4">
+  <div class="flex justify-between items-center mb-4 prose m-auto">
+    <h2 class="mb-0">Exercises</h2>
+    <button class="btn btn-sm btn-primary" routerLink="/exercise/add">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+           class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      Add Exercise
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-4">
+    <div *ngFor="let exercise of exercises$ | async">
+      <lean-exercise-card [exercise]="exercise"></lean-exercise-card>
+    </div>
+  </div>
 </div>

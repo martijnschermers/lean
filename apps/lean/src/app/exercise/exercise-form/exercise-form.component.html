@@ -1,7 +1,7 @@
-<form class="prose card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 m-auto" [formGroup]="exerciseForm"
+<form class="prose card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-200 my-4 m-auto" [formGroup]="exerciseForm"
       (ngSubmit)="onSubmit()">
   <div class="card-body">
-    <h1 class="text-center">{{title}}</h1>
+    <h2 class="my-2 text-center">{{title}}</h2>
 
     <div class="form-control">
       <label class="label">
@@ -59,7 +59,7 @@
       <div *ngIf="user.admin" class="form-control">
         <label class="label">
           <span class="label-text">Predefined</span>
-          <input type="checkbox" class="checkbox" name="predefined" formControlName="predefined"
+          <input type="checkbox" class="checkbox checkbox-primary" name="predefined" formControlName="predefined"
                  (ngModelChange)="exercise ? exercise.predefined = $event : ''">
         </label>
       </div>

@@ -1,0 +1,14 @@
+<div class="card bg-base-300 shadow-xl cursor-pointer" [routerLink]="['/exercise/', exercise._id]">
+  <figure *ngIf="exercise.image"><img src="{{exercise.image}}" alt="{{exercise.name}}" /></figure>
+  <div class="card-body">
+    <h2 class="card-title">
+      {{exercise.name}}
+    </h2>
+    <p>{{exercise.description}}</p>
+    <div class="card-actions justify-end">
+      <div class="badge badge-primary">{{exercise.primaryMuscle}}</div>
+      <div class="badge badge-primary">{{exercise.type}}</div>
+      <div class="badge badge-primary">{{exercise.category}}</div>
+    </div>
+  </div>
+</div>

@@ -13,7 +13,7 @@ import * as moment from "moment";
   styleUrls: ["./add-workout.component.css"]
 })
 export class AddWorkoutComponent implements OnInit {
-  workout?: WorkoutInterface;
+  workout: WorkoutInterface = { _id: "", volume: 0, prs: 0, name: "", sets: [], duration: "", date: new Date() };
   workoutForm: FormGroup;
   duration: string;
   exercises$: Observable<ExerciseInterface[]> = new Observable<ExerciseInterface[]>(observer => {
