@@ -12,7 +12,7 @@
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-4">
     <div *ngFor="let workout of workouts$ | async">
-      {{workout.name}}
+      <lean-workout-card [workout]="workout"></lean-workout-card>
     </div>
   </div>
 </div>
