@@ -6,18 +6,18 @@ import { AuthService } from "./auth.service";
 @Injectable({
   providedIn: "root"
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {
   }
 
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.authService.currentUser$.pipe(
-      map((token) => {
-        if (token) {
+    return this.authService.currentUser.pipe(
+      map((user) => {
+        if (user && user.admin) {
           return true;
         }
 
-        return this.router.parseUrl("/login");
+        return this.router.parseUrl("/");
       })
     );
   }
