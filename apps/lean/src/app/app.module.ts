@@ -11,6 +11,7 @@ import { UserModule } from "./user/user.module";
 import { AuthModule } from "./auth/auth.module";
 import { ComponentsModule } from "./components/components.module";
 import { HomeComponent } from "./home/home.component";
+import { GroupWorkoutModule } from "./group-workout/group-workout.module";
 
 @NgModule({
   declarations: [AppComponent, AboutComponent, HomeComponent],
@@ -20,6 +21,7 @@ import { HomeComponent } from "./home/home.component";
     HttpClientModule,
     ExerciseModule,
     WorkoutsModule,
+    GroupWorkoutModule,
     UserModule,
     AuthModule,
     ComponentsModule

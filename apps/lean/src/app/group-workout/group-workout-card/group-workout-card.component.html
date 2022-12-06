@@ -1,0 +1,10 @@
+<div class="card bg-base-300 shadow-xl m-auto cursor-pointer" [routerLink]="['/group-workout/', groupWorkout._id]">
+  <div class="card-body">
+    <h2 class="card-title">{{groupWorkout.name}}</h2>
+    <p>{{groupWorkout.date}}</p>
+    <div class="card-actions justify-end">
+      <div class="badge badge-primary">{{groupWorkout.duration}}</div>
+      <div class="badge badge-primary">{{groupWorkout.location}}</div>
+    </div>
+  </div>
+</div>
