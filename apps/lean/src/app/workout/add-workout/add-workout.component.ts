@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, OnInit } from "@angular/core";
-import { ExerciseInterface, SetInterface, WorkoutInterface } from "@lean/api-interfaces";
+import { ExerciseInterface, WorkoutInterface } from "@lean/api-interfaces";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Location } from "@angular/common";
 import { Observable, timer } from "rxjs";
 import { ExerciseService } from "../../exercise/exercise.service";
 import { WorkoutService } from "../workout.service";
@@ -22,7 +23,7 @@ export class AddWorkoutComponent implements OnInit {
     });
   });
 
-  constructor(private formBuilder: FormBuilder, private workoutService: WorkoutService, private exerciseService: ExerciseService) {
+  constructor(private formBuilder: FormBuilder, private workoutService: WorkoutService, private exerciseService: ExerciseService, private location: Location) {
   }
 
   ngOnInit(): void {
@@ -84,8 +85,8 @@ export class AddWorkoutComponent implements OnInit {
     form.value.duration = this.duration;
     form.value.date = new Date();
 
-    console.log(form.value);
-
-    this.workoutService.addWorkout(form.value).subscribe();
+    this.workoutService.addWorkout(form.value).subscribe(() => {
+      this.location.back();
+    });
   }
 }

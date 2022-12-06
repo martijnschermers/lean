@@ -1,4 +1,4 @@
-<div class="card w-96 bg-base-100 shadow-xl m-auto">
+<div *ngIf="workout$ | async as workout" class="card w-96 bg-base-100 shadow-xl m-auto">
   <div class="card-body">
     <h2 class="card-title">{{workout.name}}</h2>
     <p>{{workout.date}}</p>
@@ -31,6 +31,7 @@
     <li *ngFor="let set of workout.sets">
       <div class="card-body">
         <div class="card-actions justify-end">
+          <div class="badge">{{set.exercise!.name}}</div>
           <div class="badge badge-primary">{{set.weight}} kg</div>
           <div class="badge badge-primary">{{set.reps}} reps</div>
         </div>
