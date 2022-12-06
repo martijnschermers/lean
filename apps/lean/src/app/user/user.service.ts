@@ -10,7 +10,11 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  getUser(email: string): Observable<UserInterface> {
+  findOne(id: string | null): Observable<UserInterface> {
+    return this.http.get<UserInterface>(`/api/user/${id}`);
+  }
+
+  findOneByEmail(email: string): Observable<UserInterface> {
     return this.http.get<UserInterface>(`/api/user/?email=${email}`);
   }
 }

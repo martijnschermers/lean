@@ -55,7 +55,7 @@ export class AuthService {
     const currentUser = this.currentUser$.value;
 
     if (currentUser) {
-      return this.userService.getUser(currentUser.email);
+      return this.userService.findOneByEmail(currentUser.email);
     }
 
     return of(undefined);

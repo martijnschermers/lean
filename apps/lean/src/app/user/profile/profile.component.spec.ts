@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { UserDetailComponent } from "./user-detail.component";
+import { ProfileComponent } from "./profile.component";
 import { RouterTestingModule } from "@angular/router/testing";
 import { UserService } from "../user.service";
 import { Component } from "@angular/core";
@@ -15,7 +15,7 @@ describe("UserDetailComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UserDetailComponent, MockUserDetailComponent, UserFormComponent],
+      declarations: [ProfileComponent, MockUserDetailComponent, UserFormComponent],
       providers: [UserService, HttpClient, HttpHandler],
       imports: [RouterTestingModule.withRoutes([]), FormsModule]
     }).compileComponents();
@@ -30,7 +30,7 @@ describe("UserDetailComponent", () => {
   });
 
   @Component({
-    selector: "lean-mock-user-detail",
+    selector: "lean-mock-profile",
     template: `
       <lean-user-detail [user]="user">Mock User Detail Component</lean-user-detail>`
   })

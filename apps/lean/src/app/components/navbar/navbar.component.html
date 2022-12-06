@@ -30,9 +30,9 @@
           </a>
         </li>
         <li *ngIf="(loggedInUser$ | async) as user">
-          <a (click)="logout()">
-            <lean-icon [icon]="'logout'"></lean-icon>
-            Logout
+          <a routerLink="/profile">
+            <lean-icon [icon]="'profile'"></lean-icon>
+            Profile
           </a>
         </li>
       </ul>
@@ -73,9 +73,9 @@
         </a>
       </li>
       <li *ngIf="(loggedInUser$ | async) as user" class="hover:rounded-lg">
-        <a (click)="logout()">
-          <lean-icon [icon]="'logout'"></lean-icon>
-          Logout
+        <a routerLink="/profile">
+          <lean-icon [icon]="'profile'"></lean-icon>
+          Profile
         </a>
       </li>
     </ul>

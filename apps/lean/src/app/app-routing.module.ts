@@ -4,7 +4,7 @@ import { WorkoutsComponent } from "./workout/workouts/workouts.component";
 import { AboutComponent } from "./about/about.component";
 import { WorkoutDetailComponent } from "./workout/workout-detail/workout-detail.component";
 import { UsersComponent } from "./user/users/users.component";
-import { UserDetailComponent } from "./user/user-detail/user-detail.component";
+import { ProfileComponent } from "./user/profile/profile.component";
 import { LoginComponent } from "./auth/login/login.component";
 import { RegisterComponent } from "./auth/register/register.component";
 import { ExerciseComponent } from "./exercise/exercises/exercises.component";
@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: "workout/update/:id", component: UpdateWorkoutComponent, canActivate: [AuthGuard] },
   { path: "workout/:id", component: WorkoutDetailComponent, canActivate: [AuthGuard] },
   { path: "user", component: UsersComponent },
-  { path: "user/:id", component: UserDetailComponent }
+  { path: "profile", component: ProfileComponent }
 ];
 
 @NgModule({
