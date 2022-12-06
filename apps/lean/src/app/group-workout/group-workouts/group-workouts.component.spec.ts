@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GroupWorkoutsComponent } from './group-workouts.component';
+import { GroupWorkoutService } from "../group-workout.service";
+import { HttpClient, HttpHandler } from "@angular/common/http";
 
 describe('GroupWorkoutsComponent', () => {
   let component: GroupWorkoutsComponent;
@@ -9,6 +11,7 @@ describe('GroupWorkoutsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [GroupWorkoutsComponent],
+      providers: [GroupWorkoutService, HttpClient, HttpHandler]
     }).compileComponents();
 
     fixture = TestBed.createComponent(GroupWorkoutsComponent);
