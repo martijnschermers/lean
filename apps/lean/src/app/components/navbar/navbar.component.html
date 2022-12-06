@@ -5,11 +5,25 @@
         <lean-icon [icon]="'hamburger'"></lean-icon>
       </label>
       <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <a routerLink="/workout">
+        <li tabindex="0">
+          <a>
             <lean-icon [icon]="'workout-list'"></lean-icon>
             Workouts
           </a>
+          <ul class="p-2 bg-base-100 shadow-2xl z-50">
+            <li tabindex="0">
+              <a routerLink="/workout">
+                <lean-icon [icon]="'individual'"></lean-icon>
+                Individual
+              </a>
+            </li>
+            <li tabindex="0">
+              <a routerLink="/group-workout">
+                <lean-icon [icon]="'group'"></lean-icon>
+                Group
+              </a>
+            </li>
+          </ul>
         </li>
         <li>
           <a routerLink="/exercise">
@@ -48,12 +62,27 @@
 
   <div class="navbar-end hidden lg:flex">
     <ul class="menu menu-horizontal p-0">
-      <li class="hover:rounded-lg">
-        <a routerLink="/workout">
+      <li tabindex="0" class="hover:rounded-lg">
+        <a class="justify-between">
           <lean-icon [icon]="'workout-list'"></lean-icon>
           Workouts
         </a>
+        <ul class="p-2 bg-base-100 shadow-2xl z-50">
+          <li>
+            <a routerLink="/workout">
+              <lean-icon [icon]="'individual'"></lean-icon>
+              Individual
+            </a>
+          </li>
+          <li>
+            <a routerLink="/group-workout">
+              <lean-icon [icon]="'group'"></lean-icon>
+              Group
+            </a>
+          </li>
+        </ul>
       </li>
+
       <li class="hover:rounded-lg">
         <a routerLink="/exercise">
           <lean-icon [icon]="'exercise-list'"></lean-icon>
