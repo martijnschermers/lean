@@ -7,6 +7,7 @@ import { AddWorkoutComponent } from './add-workout/add-workout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WorkoutCardComponent } from './workout-card/workout-card.component';
 import { UpdateWorkoutComponent } from './update-workout/update-workout.component';
+import { WorkoutFormComponent } from './workout-form/workout-form.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { UpdateWorkoutComponent } from './update-workout/update-workout.componen
     AddWorkoutComponent,
     WorkoutCardComponent,
     UpdateWorkoutComponent,
+    WorkoutFormComponent,
   ],
   imports: [
     CommonModule,

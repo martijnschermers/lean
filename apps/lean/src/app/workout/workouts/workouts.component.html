@@ -1,5 +1,5 @@
 <div class="m-4">
-  <div class="flex justify-between items-center mb-4 prose m-auto">
+  <div class="flex flex-col md:flex-row gap-2 justify-between items-center mb-4 prose m-auto">
     <h2 class="mb-0">Workouts</h2>
     <button class="btn btn-sm btn-primary" routerLink="/workout/add">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -10,7 +10,7 @@
     </button>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-4 max-w-5xl m-auto">
     <div *ngFor="let workout of workouts$ | async">
       <lean-workout-card [workout]="workout"></lean-workout-card>
     </div>

@@ -18,10 +18,6 @@ export class UpdateExerciseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getExercise();
-  }
-
-  getExercise(): void {
     const id = this.route.snapshot.paramMap.get("id");
     this.service.getExercise(id).subscribe(exercise => {
       let user: UserInterface | undefined;
