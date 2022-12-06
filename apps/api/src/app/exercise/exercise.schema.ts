@@ -1,8 +1,7 @@
 import { Document } from "mongoose";
 import { ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { isEnum, isString, isURL } from "class-validator";
-import { User, UserSchema } from "../user/user.schema";
+import { isEmail, isEnum, isString, isURL } from "class-validator";
 
 export type ExerciseDocument = Exercise & Document;
 
@@ -29,8 +28,8 @@ export class Exercise {
   @Prop({ required: false, validate: (v) => isURL(v) || v === "" })
   image?: string;
 
-  @Prop({ required: false, type: [UserSchema] || null })
-  user?: User[];
+  @Prop({ required: false, validate: (v) => isEmail(v) || v === "" })
+  user?: string;
 }
 
 export const ExerciseSchema = SchemaFactory.createForClass(Exercise);

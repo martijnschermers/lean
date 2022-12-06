@@ -34,6 +34,10 @@ import { TokenMiddleware } from "./auth/token.middleware";
       {
         path: "user",
         module: UserModule
+      },
+      {
+        path: "group-workout",
+        module: GroupWorkoutModule
       }
     ])
   ],
@@ -50,7 +54,9 @@ export class AppModule {
       )
       .forRoutes(
         "exercise",
-        "workout"
+        "workout",
+        "user",
+        "group-workout"
       );
   }
 }

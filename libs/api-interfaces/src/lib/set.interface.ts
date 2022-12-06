@@ -1,9 +1,10 @@
 import { ExerciseInterface } from "./exercise.interface";
 
 export interface SetInterface {
-  _id: string;
+  _id?: string;
   weight: number;
   reps: number;
   finished: boolean;
-  exercise: ExerciseInterface | string;
+  exercise?: ExerciseInterface;
+  exerciseId?: string;
 }

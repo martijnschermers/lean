@@ -1,1 +1,1 @@
-<p>update-workout works!</p>
+<lean-workout-form *ngIf="workout" (workoutEvent)="updateWorkout($event)" [workout]="workout"></lean-workout-form>

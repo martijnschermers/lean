@@ -48,14 +48,14 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.CURRENT_USER);
     this.currentUser$.next(undefined);
-    this.location.go("/");
+    this.location.back();
   }
 
   get currentUser(): Observable<UserInterface | undefined> {
     const currentUser = this.currentUser$.value;
 
     if (currentUser) {
-      return this.userService.getUser(currentUser.email);
+      return this.userService.findOneByEmail(currentUser.email);
     }
 
     return of(undefined);

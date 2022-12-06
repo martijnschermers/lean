@@ -13,6 +13,7 @@ import { UserModule } from "../user/user.module";
     UserModule
   ],
   controllers: [ExerciseController],
-  providers: [ExerciseService]
+  providers: [ExerciseService],
+  exports: [ExerciseService]
 })
 export class ExerciseModule {}

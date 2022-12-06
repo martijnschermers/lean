@@ -18,11 +18,15 @@ export class UserService {
   }
 
   async addWorkout(id: string, workoutId: string): Promise<void> {
-    this.userModel.updateOne({ _id: id }, { $push: { workouts: workoutId } });
+    return this.userModel.findByIdAndUpdate(id, { $push: { workouts: workoutId } });
   }
 
   async findAllWorkouts(id: string): Promise<Workout[]> {
     const user = await this.userModel.findById(id).populate("workouts");
     return user.workouts;
+  }
+
+  async deleteWorkout(userId: string, workoutId: string): Promise<void> {
+    return this.userModel.findByIdAndUpdate(userId, { $pull: { workouts: workoutId } });
   }
 }

@@ -11,8 +11,8 @@ export class ExerciseService {
   }
 
   async findAll(id: string): Promise<Exercise[]> {
-    const exercises = await this.exerciseModel.find({});
-    return exercises.filter((exercise: Exercise) => exercise.user.length == 0 || exercise.user.filter((user) => user["_id"] == id));
+    const user = await this.userService.findOne(id);
+    return this.exerciseModel.find({ $or: [{ predefined: true }, { user: user.email }] });
   }
 
   async findOne(id: string): Promise<Exercise> {
@@ -38,7 +38,8 @@ export class ExerciseService {
 
   async createExercise(id: string, exercise: Partial<Exercise>): Promise<Exercise> {
     const newExercise = new this.exerciseModel(exercise);
-    newExercise.user.push(await this.userService.findOne(id));
+    const user = await this.userService.findOne(id);
+    newExercise.user = user.email;
     await newExercise.save();
 
     return newExercise.toObject({ versionKey: false });
