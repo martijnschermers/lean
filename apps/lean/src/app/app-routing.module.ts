@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent, title: "Login | Lean" },
   { path: "register", component: RegisterComponent, title: "Register | Lean" },
   { path: "about", component: AboutComponent, title: "About | Lean" },
-  { path: "exercise", component: ExerciseComponent, canActivate: [AuthGuard], title: "Exercises | Lean" },
+  { path: "exercise", component: ExerciseComponent, title: "Exercises | Lean" },
   { path: "exercise/:id", component: ExerciseDetailComponent, canActivate: [AuthGuard], title: "Exercise | Lean" },
   { path: "exercise/add", component: AddExerciseComponent, canActivate: [AuthGuard], title: "Add Exercise | Lean" },
   {

@@ -8,7 +8,7 @@
       <label class="label">
         <span class="label-text">Email</span>
       </label>
-      <input type="email" name="email" formControlName="email" placeholder="Email"
+      <input id="email" type="email" name="email" formControlName="email" placeholder="Email"
              class="input input-bordered" />
       <span *ngIf="email.invalid && (email.dirty || email.touched)">
         <span class="text-error" *ngIf="email.errors?.['required']">Email is required</span>
@@ -19,7 +19,7 @@
       <label class="label">
         <span class="label-text">Password</span>
       </label>
-      <input type="password" name="password" formControlName="password" placeholder="Password"
+      <input id="password" type="password" name="password" formControlName="password" placeholder="Password"
              class="input input-bordered" />
       <span *ngIf="password.invalid && (password.dirty || password.touched)">
         <span class="text-error" *ngIf="password.errors?.['required']">Password is required</span>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="form-control mt-6">
-      <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary">Login</button>
+      <button id="login" [disabled]="loginForm.invalid" type="submit" class="btn btn-primary">Login</button>
       <a class="link link-primary text-center mt-2" routerLink="/register">No account yet? Register!</a>
     </div>
 
