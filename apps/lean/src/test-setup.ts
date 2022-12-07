@@ -1,8 +1,8 @@
-import 'jest-preset-angular/setup-jest';
+import "jest-preset-angular/setup-jest";
 import { ngMocks } from "ng-mocks";
 
-ngMocks.autoSpy('jest');
+ngMocks.autoSpy("jest");
 
-// ngMocks.defaultMock(AuthService, () => ({
-//   currentUser$: EMPTY,
+// ngMocks.defaultMock(ExerciseService, () => ({
+//   getExercises: jest.fn().mockReturnValue(of(exercises)),
 // }));
