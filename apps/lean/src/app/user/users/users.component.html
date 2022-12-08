@@ -1,1 +1,12 @@
+<div class="m-4">
+  <div class="flex flex-col gap-2 justify-between items-center mb-4 prose m-auto">
+    <h2 class="mb-0">Users</h2>
+    <!--    TODO: Add search function -->
+  </div>
 
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-4 max-w-5xl m-auto">
+    <div *ngFor="let user of users$ | async">
+      <lean-user-card [user]="user"></lean-user-card>
+    </div>
+  </div>
+</div>

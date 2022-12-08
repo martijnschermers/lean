@@ -8,7 +8,7 @@
            (ngModelChange)="workout.name = $event" />
     <p class="my-0">Duration: {{workout.duration === "" ? duration : workout.duration}}</p>
 
-    <div formArrayName="exercises">
+    <div *ngIf="!update" formArrayName="exercises">
       <h2 class="my-2">Exercises</h2>
 
       <div *ngFor="let exercise of exercises.controls; let exerciseIndex=index">
@@ -19,7 +19,7 @@
 
           <div id="sets" formArrayName="sets">
             <div *ngFor="let set of getSets(exerciseIndex).controls; let setIndex=index">
-              <div class="flex items-start justify-between not-prose" [formGroupName]="setIndex">
+              <div class="flex items-end justify-between not-prose" [formGroupName]="setIndex">
                 <div class="flex gap-4">
                   <div class="form-control">
                     <label for="reps-{{ exerciseIndex }}" class="label">
@@ -38,8 +38,8 @@
                   </div>
                 </div>
 
-                <div class="flex items-center gap-4">
-                  <input class="checkbox checkbox-success" type="checkbox"
+                <div class="flex items-center mb-2 gap-4">
+                  <input class="ml-3 checkbox checkbox-success" type="checkbox"
                          id="finished-{{ exerciseIndex }}"
                          formControlName="finished">
 
@@ -97,9 +97,9 @@
             </div>
           </div>
         </div>
-
-        <button id="finish" type="submit" class="btn btn-primary" [disabled]="workoutForm.invalid">Finish</button>
       </div>
     </div>
+
+    <button id="finish" type="submit" class="btn btn-primary" [disabled]="workoutForm.invalid">Finish</button>
   </div>
 </form>

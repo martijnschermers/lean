@@ -5,12 +5,20 @@ import { ProfileComponent } from './profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { UserFormComponent } from './user-form/user-form.component';
-import { UserService } from "./user.service";
-import { ComponentsModule } from "../components/components.module";
+import { UserService } from './user.service';
+import { ComponentsModule } from '../components/components.module';
+import { UserCardComponent } from './user-card/user-card.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 @NgModule({
-  declarations: [UsersComponent, ProfileComponent, UserFormComponent],
+  declarations: [
+    UsersComponent,
+    ProfileComponent,
+    UserFormComponent,
+    UserCardComponent,
+    UserDetailComponent,
+  ],
   imports: [CommonModule, RouterModule, FormsModule, ComponentsModule],
-  providers: [UserService]
+  providers: [UserService],
 })
 export class UserModule {}

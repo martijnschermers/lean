@@ -17,4 +17,12 @@ export class UserService {
   findOneByEmail(email: string): Observable<UserInterface> {
     return this.http.get<UserInterface>(`/api/user/?email=${email}`);
   }
+
+  findAll(): Observable<UserInterface[]> {
+    return this.http.get<UserInterface[]>("/api/user");
+  }
+
+  follow(id: string): Observable<UserInterface> {
+    return this.http.get<UserInterface>(`/api/user/${id}/follow`);
+  }
 }

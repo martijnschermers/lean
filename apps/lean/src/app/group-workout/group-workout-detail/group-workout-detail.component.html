@@ -1,1 +1,19 @@
-<p>group-workout-detail works!</p>
+<div *ngIf="groupWorkout$ | async as groupWorkout" class="card w-fit bg-base-300 shadow-xl m-auto">
+  <div class="card-body">
+    <h2 class="card-title">{{groupWorkout.name}}</h2>
+    <p>{{groupWorkout.date}}</p>
+
+    <div class="card-actions justify-end">
+      <div class="badge badge-primary">{{groupWorkout.duration}}</div>
+      <div class="badge badge-primary">{{groupWorkout.location}}</div>
+    </div>
+
+    <div *ngFor="let exercise of groupWorkout.exercises">
+      <p>{{exercise.name}}</p>
+    </div>
+
+    <div>
+      <button class="btn btn-primary" (click)="joinGroupWorkout(groupWorkout)">Join</button>
+    </div>
+  </div>
+</div>

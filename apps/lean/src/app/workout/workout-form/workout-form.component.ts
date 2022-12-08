@@ -33,13 +33,8 @@ export class WorkoutFormComponent implements OnInit {
     if (this.workout) {
       this.update = true;
       this.workoutForm = this.formBuilder.group({
-        name: [this.workout.name, Validators.required],
-        exercises: this.formBuilder.array([], Validators.required)
+        name: [this.workout.name, Validators.required]
       });
-
-      // for (const exercise of this.workout.exercises!) {
-      //   this.addExercise(exercise);
-      // }
     } else {
       this.workout = { _id: "", volume: 0, prs: 0, name: "", sets: [], duration: "", date: new Date() };
 
@@ -110,5 +105,4 @@ export class WorkoutFormComponent implements OnInit {
 
     this.workoutEvent.emit(this.workoutForm);
   }
-
 }

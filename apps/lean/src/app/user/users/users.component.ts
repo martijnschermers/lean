@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { UserInterface } from "@lean/api-interfaces";
+import { Observable } from "rxjs";
+import { UserService } from "../user.service";
 
 @Component({
   selector: "lean-user",
@@ -7,6 +9,11 @@ import { UserInterface } from "@lean/api-interfaces";
   styleUrls: ["./users.component.css"]
 })
 export class UsersComponent {
-  users: UserInterface[] = [];
-  user: UserInterface;
+  users$: Observable<UserInterface[]> = new Observable<UserInterface[]>(observer => {
+    this.userService.findAll().subscribe(users => {
+      observer.next(users);
+    });
+  });
+
+  constructor(private userService: UserService) {}
 }
