@@ -76,7 +76,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminGuard],
     title: "Update Group Workout | Lean"
   },
-  { path: "user", component: UsersComponent, title: "Users | Lean" },
+  { path: "user", component: UsersComponent, canActivate: [AuthGuard], title: "Users | Lean" },
   { path: "user/:id", component: UserDetailComponent, canActivate: [AuthGuard], title: "User | Lean" },
   { path: "profile", component: ProfileComponent, canActivate: [AuthGuard], title: "Profile | Lean" }
 ];

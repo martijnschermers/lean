@@ -12,10 +12,18 @@ import { UserModule } from "./user/user.module";
 import { SetModule } from "./set/set.module";
 import { AuthModule } from "./auth/auth.module";
 import { TokenMiddleware } from "./auth/token.middleware";
+import { Neo4jModule } from "nest-neo4j/dist";
 
 @Module({
   imports: [
     MongooseModule.forRoot(environment.mongoUrl),
+    Neo4jModule.forRoot({
+      scheme: "neo4j+s",
+      host: process.env.NEO4J_HOST,
+      port: 7687,
+      username: process.env.NEO4J_USERNAME,
+      password: process.env.NEO4J_PASSWORD
+    }),
     ExerciseModule,
     WorkoutModule,
     GroupWorkoutModule,
@@ -50,7 +58,7 @@ export class AppModule {
       .apply(TokenMiddleware)
       .exclude(
         { path: "api/login", method: RequestMethod.POST },
-        { path: "api/register", method: RequestMethod.POST },
+        { path: "api/register", method: RequestMethod.POST }
       )
       .forRoutes(
         "exercise",

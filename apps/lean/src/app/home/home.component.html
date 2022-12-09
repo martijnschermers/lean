@@ -13,7 +13,16 @@
   </div>
 </div>
 
-<!-- TODO: Recommendations-->
-<div>
 
+<div *ngIf="currentUser$ && recommendedWorkouts$ | async as workouts" class="prose md:prose-md lg:prose-lg m-auto my-6">
+  <div *ngIf="workouts.length >= 3">
+    <div class="divider"></div>
+
+    <h2 class="text-center">Recommendations</h2>
+
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-4 m-auto not-prose">
+      <lean-workout-card *ngFor="let workout of workouts" [workout]="workout"></lean-workout-card>
+    </div>
+  </div>
 </div>

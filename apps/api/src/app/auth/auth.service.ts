@@ -5,18 +5,23 @@ import { hash, compare } from "bcrypt";
 import { JwtPayload, sign, verify } from "jsonwebtoken";
 import { Identity, IdentityDocument } from "./identity.schema";
 import { User, UserDocument } from "../user/user.schema";
+import { Neo4jService } from "nest-neo4j/dist";
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel(Identity.name) private identityModel: Model<IdentityDocument>,
-    @InjectModel(User.name) private userModel: Model<UserDocument>
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private neoService: Neo4jService
   ) {
   }
 
   async createUser(username: string, email: string): Promise<User> {
     const user = new this.userModel({ username, email });
     await user.save();
+
+    await this.neoService.write(`CREATE (u:User {id: "${user.id}", username: "${user.username}", email: "${user.email}"})`);
+
     return user;
   }
 

@@ -15,7 +15,7 @@ export class UserService {
   }
 
   findOneByEmail(email: string): Observable<UserInterface> {
-    return this.http.get<UserInterface>(`/api/user/?email=${email}`);
+    return this.http.get<UserInterface>(`/api/user/${email}`);
   }
 
   findAll(): Observable<UserInterface[]> {
