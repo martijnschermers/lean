@@ -1,22 +1,22 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { GroupWorkoutDetailComponent } from "./group-workout-detail.component";
-import { GroupWorkoutService } from "../group-workout.service";
+import { UserDetailComponent } from "./user-detail.component";
+import { UserService } from "../user.service";
 import { HttpClient, HttpHandler } from "@angular/common/http";
 import { RouterTestingModule } from "@angular/router/testing";
 
-describe("GroupWorkoutDetailComponent", () => {
-  let component: GroupWorkoutDetailComponent;
-  let fixture: ComponentFixture<GroupWorkoutDetailComponent>;
+describe("UserDetailComponent", () => {
+  let component: UserDetailComponent;
+  let fixture: ComponentFixture<UserDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GroupWorkoutDetailComponent],
-      providers: [GroupWorkoutService, HttpClient, HttpHandler],
+      declarations: [UserDetailComponent],
+      providers: [UserService, HttpClient, HttpHandler],
       imports: [RouterTestingModule.withRoutes([])]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GroupWorkoutDetailComponent);
+    fixture = TestBed.createComponent(UserDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

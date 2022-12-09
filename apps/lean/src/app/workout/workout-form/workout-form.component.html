@@ -2,24 +2,24 @@
       (ngSubmit)="onSubmit()"
       [formGroup]="workoutForm">
   <div class="card-body">
-    <h2 class="my-2">{{workout.name.length > 0 ? workout.name : 'Workout'}}</h2>
-    <input type="text" name="name" formControlName="name"
+    <h2 id="workout-name" class="my-2">{{workout.name.length > 0 ? workout.name : 'Workout'}}</h2>
+    <input type="text" id="name" name="name" formControlName="name"
            class="input input-bordered" placeholder="Workout Name"
            (ngModelChange)="workout.name = $event" />
     <p class="my-0">Duration: {{workout.duration === "" ? duration : workout.duration}}</p>
 
-    <div formArrayName="exercises">
+    <div *ngIf="!update" formArrayName="exercises">
       <h2 class="my-2">Exercises</h2>
 
       <div *ngFor="let exercise of exercises.controls; let exerciseIndex=index">
         <div [formGroupName]="exerciseIndex">
           <input class="hidden" #exerciseId type="hidden" formControlName="id">
           <input class="hidden" #exerciseName type="hidden" formControlName="name">
-          <h3 class="my-2">{{exerciseName.value}}</h3>
+          <h3 id="exercise-name" class="my-2">{{exerciseName.value}}</h3>
 
-          <div formArrayName="sets">
+          <div id="sets" formArrayName="sets">
             <div *ngFor="let set of getSets(exerciseIndex).controls; let setIndex=index">
-              <div class="flex items-start justify-between not-prose" [formGroupName]="setIndex">
+              <div class="flex items-end justify-between not-prose" [formGroupName]="setIndex">
                 <div class="flex gap-4">
                   <div class="form-control">
                     <label for="reps-{{ exerciseIndex }}" class="label">
@@ -38,12 +38,12 @@
                   </div>
                 </div>
 
-                <div class="flex items-center gap-4">
-                  <input class="checkbox checkbox-success" type="checkbox"
+                <div class="flex items-center mb-2 gap-4">
+                  <input class="ml-3 checkbox checkbox-success" type="checkbox"
                          id="finished-{{ exerciseIndex }}"
                          formControlName="finished">
 
-                  <button class="btn btn-error btn-sm" type="button"
+                  <button id="remove-set-{{ setIndex }}" class="btn btn-error btn-sm" type="button"
                           (click)="deleteSet(exerciseIndex, setIndex)">
                     Remove
                   </button>
@@ -52,7 +52,7 @@
             </div>
           </div>
 
-          <button class="btn btn-primary btn-sm mt-2 w-full" type="button"
+          <button id="add-set" class="btn btn-primary btn-sm mt-2 w-full" type="button"
                   (click)="addSet(exerciseIndex, exerciseId.value)">
             Add set
           </button>
@@ -71,7 +71,7 @@
               <label for="add-exercise" class="btn btn-sm btn-circle">✕</label>
             </div>
             <div class="modal-action">
-              <ul class="w-full divide-y divide-neutral-content">
+              <ul id="exercises" class="w-full divide-y divide-neutral-content">
                 <li class="py-3" *ngFor="let exercise of exercises$ | async">
                   <div class="flex items-center space-x-4">
                     <div *ngIf="exercise.image">
@@ -86,7 +86,7 @@
                       </p>
                     </div>
                     <div class="inline-flex items-center">
-                      <label class="btn btn-success btn-sm" for="add-exercise"
+                      <label class="btn btn-success btn-sm" for="add-exercise" id="add-{{exercise.name}}"
                              (click)="addExercise(exercise)">
                         Add
                       </label>
@@ -97,9 +97,9 @@
             </div>
           </div>
         </div>
-
-        <button type="submit" class="btn btn-primary" [disabled]="workoutForm.invalid">Finish</button>
       </div>
     </div>
+
+    <button id="finish" type="submit" class="btn btn-primary" [disabled]="workoutForm.invalid">Finish</button>
   </div>
 </form>

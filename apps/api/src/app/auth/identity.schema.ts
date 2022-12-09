@@ -21,8 +21,8 @@ export class Identity {
   @Prop({ required: false })
   hash?: string;
 
-  @Prop({ required: true })
-  token: string;
+  @Prop({ required: false })
+  token?: string;
 }
 
 export const IdentitySchema = SchemaFactory.createForClass(Identity);

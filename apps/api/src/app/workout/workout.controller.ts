@@ -13,6 +13,11 @@ export class WorkoutController {
     return this.workoutService.findAll(token.id);
   }
 
+  @Get("recommendations")
+  async getRecommendations(@InjectToken() token: Token): Promise<Workout[]> {
+    return this.workoutService.findRecommendedWorkouts(token.id);
+  }
+
   @Get(":id")
   async findOne(@Param("id") id: string): Promise<Workout> {
     return this.workoutService.findOne(id);

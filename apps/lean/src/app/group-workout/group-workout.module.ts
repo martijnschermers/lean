@@ -7,6 +7,7 @@ import { GroupWorkoutDetailComponent } from './group-workout-detail/group-workou
 import { AddGroupWorkoutComponent } from './add-group-workout/add-group-workout.component';
 import { UpdateGroupWorkoutComponent } from './update-group-workout/update-group-workout.component';
 import { GroupWorkoutFormComponent } from './group-workout-form/group-workout-form.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,6 @@ import { GroupWorkoutFormComponent } from './group-workout-form/group-workout-fo
     UpdateGroupWorkoutComponent,
     GroupWorkoutFormComponent,
   ],
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule]
 })
 export class GroupWorkoutModule {}

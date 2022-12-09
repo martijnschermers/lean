@@ -20,6 +20,10 @@ export class WorkoutService {
     return this.http.get<WorkoutInterface>(`/api/workout/${id}`);
   }
 
+  findRecommendedWorkouts(): Observable<WorkoutInterface[]> {
+    return this.http.get<WorkoutInterface[]>("/api/workout/recommendations");
+  }
+
   addWorkout(workout: WorkoutInterface): Observable<WorkoutInterface> {
     const sets: SetInterface[] = [];
 

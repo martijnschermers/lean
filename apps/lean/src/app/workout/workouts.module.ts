@@ -16,14 +16,17 @@ import { WorkoutFormComponent } from './workout-form/workout-form.component';
     AddWorkoutComponent,
     WorkoutCardComponent,
     UpdateWorkoutComponent,
-    WorkoutFormComponent,
+    WorkoutFormComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     RouterLinkWithHref,
     ReactiveFormsModule,
-    RouterLink,
+    RouterLink
   ],
+  exports: [
+    WorkoutCardComponent
+  ]
 })
 export class WorkoutsModule {}

@@ -1,6 +1,8 @@
-import { Controller, Get, Param, Query } from "@nestjs/common";
+import { Controller, Get, Param } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { User } from "./user.schema";
+import { InjectToken, Token } from "../auth/token.decorator";
+import { isEmail } from "class-validator";
 
 @Controller()
 export class UserController {
@@ -8,12 +10,21 @@ export class UserController {
   }
 
   @Get()
-  async findOneByEmail(@Query("email") email: string): Promise<User> {
-    return this.userService.findOneByEmail(email);
+  async findAll(@InjectToken() token: Token): Promise<User[]> {
+    return this.userService.findAll(token.id);
   }
 
-  @Get(":id")
-  async findOne(@Param("id") id: string): Promise<User> {
-    return this.userService.findOne(id);
+  @Get(":identifier")
+  async findOne(@Param("identifier") identifier: string): Promise<User> {
+    if (isEmail(identifier)) {
+      return this.userService.findOneByEmail(identifier);
+    }
+
+    return this.userService.findOne(identifier);
+  }
+
+  @Get(":id/follow")
+  async follow(@InjectToken() token: Token, @Param("id") id: string): Promise<void> {
+    return this.userService.follow(token.id, id);
   }
 }

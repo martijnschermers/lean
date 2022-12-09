@@ -1,0 +1,15 @@
+<div class="card w-72 md:w-fit shadow-2xl bg-base-200 m-auto my-3 cursor-pointer" [routerLink]="['/user', user._id]">
+  <div class="card-body">
+    <h2 class="card-title">
+      {{user.username | titlecase}}
+    </h2>
+    <p>{{user.email}}</p>
+
+    <div class="card-actions justify-center mt-3">
+      <button class="btn btn-primary btn-sm" (click)="follow()">
+        <lean-icon [icon]="'follow'"></lean-icon>
+        Follow
+      </button>
+    </div>
+  </div>
+</div>

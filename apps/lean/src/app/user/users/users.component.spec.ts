@@ -1,14 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { UsersComponent } from './users.component';
+import { UsersComponent } from "./users.component";
+import { UserService } from "../user.service";
+import { HttpClient, HttpHandler } from "@angular/common/http";
 
-describe('UsersComponent', () => {
+describe("UsersComponent", () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UsersComponent],
+      providers: [UserService, HttpClient, HttpHandler]
     }).compileComponents();
 
     fixture = TestBed.createComponent(UsersComponent);
@@ -16,7 +19,7 @@ describe('UsersComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -2,15 +2,25 @@
   <div class="card-body">
     <h2 class="card-title">{{workout.name}}</h2>
     <p>{{workout.date}}</p>
-    <div class="card-actions items-center justify-between">
+    <div>
       <div class="flex gap-2">
         <div class="badge badge-primary">{{workout.volume}} kg</div>
         <div class="badge badge-primary">{{workout.prs}} prs</div>
         <div class="badge badge-primary">{{workout.duration}}</div>
       </div>
 
+      <ul class="my-3">
+        <p>Sets</p>
+        <li *ngFor="let set of workout.sets">
+          <div class="flex justify-between">
+            <div>{{set.exercise!.name}}</div>
+            <div>{{set.weight}} kg</div>
+            <div>{{set.reps}} reps</div>
+          </div>
+        </li>
+      </ul>
+
       <div class="card-actions justify-end">
-        <button class="btn btn-sm btn-primary" [routerLink]="['/workout/update', workout._id]">Update</button>
         <label for="my-modal-6" class="btn btn-sm btn-error">Delete</label>
         <input type="checkbox" id="my-modal-6" class="modal-toggle" />
         <div class="modal modal-bottom sm:modal-middle">
@@ -26,16 +36,4 @@
       </div>
     </div>
   </div>
-
-  <ul>
-    <li *ngFor="let set of workout.sets">
-      <div class="card-body">
-        <div class="card-actions justify-end">
-          <div class="badge">{{set.exercise!.name}}</div>
-          <div class="badge badge-primary">{{set.weight}} kg</div>
-          <div class="badge badge-primary">{{set.reps}} reps</div>
-        </div>
-      </div>
-    </li>
-  </ul>
 </div>

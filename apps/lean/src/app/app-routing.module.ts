@@ -19,13 +19,15 @@ import { GroupWorkoutsComponent } from "./group-workout/group-workouts/group-wor
 import { UpdateGroupWorkoutComponent } from "./group-workout/update-group-workout/update-group-workout.component";
 import { AdminGuard } from "./auth/admin.guard";
 import { AddGroupWorkoutComponent } from "./group-workout/add-group-workout/add-group-workout.component";
+import { UserDetailComponent } from "./user/user-detail/user-detail.component";
+import { GroupWorkoutDetailComponent } from "./group-workout/group-workout-detail/group-workout-detail.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent, title: "Lean" },
   { path: "login", component: LoginComponent, title: "Login | Lean" },
   { path: "register", component: RegisterComponent, title: "Register | Lean" },
   { path: "about", component: AboutComponent, title: "About | Lean" },
-  { path: "exercise", component: ExerciseComponent, canActivate: [AuthGuard], title: "Exercises | Lean" },
+  { path: "exercise", component: ExerciseComponent, title: "Exercises | Lean" },
   { path: "exercise/:id", component: ExerciseDetailComponent, canActivate: [AuthGuard], title: "Exercise | Lean" },
   { path: "exercise/add", component: AddExerciseComponent, canActivate: [AuthGuard], title: "Add Exercise | Lean" },
   {
@@ -64,7 +66,7 @@ const routes: Routes = [
   },
   {
     path: "group-workout/:id",
-    component: WorkoutDetailComponent,
+    component: GroupWorkoutDetailComponent,
     canActivate: [AuthGuard],
     title: "Group Workout | Lean"
   },
@@ -74,8 +76,9 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminGuard],
     title: "Update Group Workout | Lean"
   },
-  { path: "user", component: UsersComponent, title: "Users | Lean" },
-  { path: "profile", component: ProfileComponent, title: "Profile | Lean" }
+  { path: "user", component: UsersComponent, canActivate: [AuthGuard], title: "Users | Lean" },
+  { path: "user/:id", component: UserDetailComponent, canActivate: [AuthGuard], title: "User | Lean" },
+  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard], title: "Profile | Lean" }
 ];
 
 @NgModule({
