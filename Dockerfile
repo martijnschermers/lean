@@ -13,7 +13,6 @@ COPY --chown=node:node . .
 RUN npm run build:api
 ENV NODE_ENV production
 RUN npm install --production
-RUN npm test --if-present
 USER node
 
 FROM node:18-alpine As production
