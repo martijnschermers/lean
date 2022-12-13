@@ -5,11 +5,13 @@
   "scripts": {
     "ng": "nx",
     "dev": "nx serve",
+    "dev:api": "nx serve api",
     "start": "nx serve --prod",
-    "start:api": "nx serve api",
+    "start:api": "nx serve api --prod",
     "build": "nx build",
     "build:api": "nx build api",
     "test": "nx test",
+    "test:api": "nx test api",
     "e2e": "nx e2e lean-e2e"
   },
   "private": true,
