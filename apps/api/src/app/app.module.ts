@@ -3,8 +3,6 @@ import { RouterModule } from "@nestjs/core";
 import { MongooseModule } from "@nestjs/mongoose";
 
 import { environment } from "../environments/environment";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
 import { ExerciseModule } from "./exercise/exercise.module";
 import { WorkoutModule } from "./workout/workout.module";
 import { GroupWorkoutModule } from "./group-workout/group-workout.module";
@@ -49,8 +47,6 @@ import { Neo4jModule } from "nest-neo4j/dist";
       }
     ])
   ],
-  controllers: [AppController],
-  providers: [AppService]
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
@@ -68,3 +64,5 @@ export class AppModule {
       );
   }
 }
+
+//TODO: unit tet, integration test, e2e test, 10 total ~3 per test type
