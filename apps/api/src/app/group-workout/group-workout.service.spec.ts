@@ -92,7 +92,7 @@ describe("GroupWorkoutService", () => {
       expect(groupWorkouts[0]).toHaveProperty("name", groupWorkout.name);
     });
 
-    it("should add a workout", async () => {
+    it("should add a group workout", async () => {
       await service.addGroupWorkout(testWorkout);
 
       const groupWorkouts = await mongoc.db("test").collection("groupworkouts").find().toArray();
@@ -100,7 +100,15 @@ describe("GroupWorkoutService", () => {
       expect(groupWorkouts[0]).toHaveProperty("name", testWorkout.name);
     });
 
-    it("should join a workout", async () => {
+    it("should find a group workout by id", async () => {
+      const groupWorkout = await service.addGroupWorkout(testWorkout);
+
+      const retrievedWorkout = await service.findOne(groupWorkout["_id"]);
+
+      expect(retrievedWorkout).toHaveProperty("name", groupWorkout.name);
+    });
+
+    it("should join a group workout", async () => {
       const user = await userModel.create(testUser);
       const groupWorkout = await service.addGroupWorkout(testWorkout);
 
