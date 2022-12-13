@@ -11,9 +11,9 @@ COPY --chown=node:node package*.json ./
 COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node . .
 RUN npm run build:api
+RUN npm run test api --if-present
 ENV NODE_ENV production
 RUN npm install --production
-RUN npm test --if-present
 USER node
 
 FROM node:18-alpine As production
