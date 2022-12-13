@@ -28,8 +28,8 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent, title: "Register | Lean" },
   { path: "about", component: AboutComponent, title: "About | Lean" },
   { path: "exercise", component: ExerciseComponent, title: "Exercises | Lean" },
-  { path: "exercise/:id", component: ExerciseDetailComponent, canActivate: [AuthGuard], title: "Exercise | Lean" },
   { path: "exercise/add", component: AddExerciseComponent, canActivate: [AuthGuard], title: "Add Exercise | Lean" },
+  { path: "exercise/:id", component: ExerciseDetailComponent, canActivate: [AuthGuard], title: "Exercise | Lean" },
   {
     path: "exercise/update/:id",
     component: UpdateExerciseComponent,

@@ -6,7 +6,6 @@ import { Workout, WorkoutDocument } from "./workout.schema";
 import { ExerciseService } from "../exercise/exercise.service";
 import { Set } from "../set/set.schema";
 import { Neo4jService } from "nest-neo4j/dist";
-import { WorkoutInterface } from "@lean/api-interfaces";
 
 @Injectable()
 export class WorkoutService {
