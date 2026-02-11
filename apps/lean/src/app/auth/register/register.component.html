@@ -1,6 +1,8 @@
-<form [formGroup]="registerForm" (ngSubmit)="register()"
-      class="prose card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200 m-auto my-3">
-
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="register()"
+  class="prose card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200 m-auto my-3"
+>
   <div class="card-body">
     <h1 class="text-center">Register</h1>
 
@@ -8,61 +10,120 @@
       <label class="label">
         <span class="label-text">Username</span>
       </label>
-      <input type="text" name="username" formControlName="username" placeholder="Username"
-             class="input input-bordered" />
-      <span *ngIf="username.invalid && (username.dirty || username.touched)">
-        <span class="text-error" *ngIf="username.errors?.['required']">Username is required</span>
-      </span>
+      <input
+        type="text"
+        name="username"
+        formControlName="username"
+        placeholder="Username"
+        class="input input-bordered"
+      />
+      @if (username.invalid && (username.dirty || username.touched)) {
+        @if (username.errors?.['required']) {
+          <span class="text-error">Username is required</span>
+        }
+      }
     </div>
 
     <div class="form-control">
       <label class="label">
         <span class="label-text">Email</span>
       </label>
-      <input type="email" name="email" formControlName="email" placeholder="Email"
-             class="input input-bordered" />
-      <span *ngIf="email.invalid && (email.dirty || email.touched)">
-        <span class="text-error" *ngIf="email.errors?.['required']">Email is required</span>
-        <span class="text-error" *ngIf="email.errors?.['email']">Provide a valid email</span>
-      </span>
+      <input
+        type="email"
+        name="email"
+        formControlName="email"
+        placeholder="Email"
+        class="input input-bordered"
+      />
+      @if (email.invalid && (email.dirty || email.touched)) {
+        @if (email.errors?.['required']) {
+          <span class="text-error">Email is required</span>
+        }
+        @if (email.errors?.['email']) {
+          <span class="text-error">Provide a valid email</span>
+        }
+      }
     </div>
 
     <div class="form-control">
       <label class="label">
         <span class="label-text">Password</span>
       </label>
-      <input type="password" name="password" formControlName="password" placeholder="Password"
-             class="input input-bordered" />
-      <span *ngIf="password.invalid && (password.dirty || password.touched)">
-        <span class="text-error" *ngIf="password.errors?.['required']">Password is required</span>
-        <span class="text-error" *ngIf="password.errors?.['minlength']">Password must be 8 characters long</span>
-      </span>
+      <input
+        type="password"
+        name="password"
+        formControlName="password"
+        placeholder="Password"
+        class="input input-bordered"
+      />
+      @if (password.invalid && (password.dirty || password.touched)) {
+        @if (password.errors?.['required']) {
+          <span class="text-error">Password is required</span>
+        }
+        @if (password.errors?.['minlength']) {
+          <span class="text-error">Password must be 8 characters long</span>
+        }
+      }
     </div>
 
     <div class="form-control">
       <label class="label">
         <span class="label-text">Repeat Password</span>
       </label>
-      <input type="password" name="repeat-password" formControlName="repeatPassword"
-             placeholder="Repeat Password"
-             class="input input-bordered" />
-      <span *ngIf="repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)">
-        <span class="text-error" *ngIf="repeatPassword.errors?.['required']">Repeat Password is required</span>
-       <span class="text-error"
-             *ngIf="repeatPassword.errors?.['minlength']">Repeat Password must be 8 characters long</span>
-      </span>
+      <input
+        type="password"
+        name="repeat-password"
+        formControlName="repeatPassword"
+        placeholder="Repeat Password"
+        class="input input-bordered"
+      />
+      @if (
+        repeatPassword.invalid &&
+        (repeatPassword.dirty || repeatPassword.touched)
+      ) {
+        @if (repeatPassword.errors?.['required']) {
+          <span class="text-error">Repeat Password is required</span>
+        }
+        @if (repeatPassword.errors?.['minlength']) {
+          <span class="text-error"
+            >Repeat Password must be 8 characters long</span
+          >
+        }
+      }
     </div>
 
     <div class="form-control mt-6">
-      <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary">Register</button>
-      <a class="link link-primary text-center mt-2" routerLink="/login">Already an account? Login!</a>
+      <button
+        [disabled]="registerForm.invalid"
+        type="submit"
+        class="btn btn-primary"
+      >
+        Register
+      </button>
+      <a class="link link-primary text-center mt-2" routerLink="/login"
+        >Already an account? Login!</a
+      >
     </div>
 
-    <div *ngIf="registerForm.errors?.['invalidCredentials']" class="alert alert-error shadow-lg">
-      <div>
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        <span>{{registerForm.errors?.['message']}}</span>
+    @if (registerForm.errors?.['invalidCredentials']) {
+      <div class="alert alert-error shadow-lg">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="stroke-current flex-shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>{{ registerForm.errors?.['message'] }}</span>
+        </div>
       </div>
-    </div>
+    }
   </div>
 </form>
