@@ -1,5 +1,4 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { Routes } from "@angular/router";
 import { WorkoutsComponent } from "./workout/workouts/workouts.component";
 import { AboutComponent } from "./about/about.component";
 import { WorkoutDetailComponent } from "./workout/workout-detail/workout-detail.component";
@@ -22,7 +21,7 @@ import { AddGroupWorkoutComponent } from "./group-workout/add-group-workout/add-
 import { UserDetailComponent } from "./user/user-detail/user-detail.component";
 import { GroupWorkoutDetailComponent } from "./group-workout/group-workout-detail/group-workout-detail.component";
 
-const routes: Routes = [
+export const APP_ROUTES: Routes = [
   { path: "", component: HomeComponent, title: "Lean" },
   { path: "login", component: LoginComponent, title: "Login | Lean" },
   { path: "register", component: RegisterComponent, title: "Register | Lean" },
@@ -80,13 +79,3 @@ const routes: Routes = [
   { path: "user/:id", component: UserDetailComponent, canActivate: [AuthGuard], title: "User | Lean" },
   { path: "profile", component: ProfileComponent, canActivate: [AuthGuard], title: "Profile | Lean" }
 ];
-
-@NgModule({
-  declarations: [],
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {
-}
