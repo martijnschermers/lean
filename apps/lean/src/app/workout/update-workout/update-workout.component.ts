@@ -1,14 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { WorkoutInterface } from "@lean/api-interfaces";
 import { WorkoutService } from "../workout.service";
+import { WorkoutFormComponent } from "../workout-form/workout-form.component";
 import { FormGroup } from "@angular/forms";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "lean-update-workout",
   templateUrl: "./update-workout.component.html",
-  styleUrls: ["./update-workout.component.css"]
+  styleUrls: ["./update-workout.component.css"],
+  imports: [WorkoutFormComponent, CommonModule],
 })
 export class UpdateWorkoutComponent implements OnInit{
   workout: WorkoutInterface | undefined;

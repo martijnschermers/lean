@@ -1,39 +1,54 @@
-<div *ngIf="workout$ | async as workout" class="card w-96 bg-base-100 shadow-xl m-auto">
-  <div class="card-body">
-    <h2 class="card-title">{{workout.name}}</h2>
-    <p>{{workout.date}}</p>
-    <div>
-      <div class="flex gap-2">
-        <div class="badge badge-primary">{{workout.volume}} kg</div>
-        <div class="badge badge-primary">{{workout.prs}} prs</div>
-        <div class="badge badge-primary">{{workout.duration}}</div>
-      </div>
+@if (workout$ | async; as workout) {
+  <div class="card w-96 bg-base-100 shadow-xl m-auto">
+    <div class="card-body">
+      <h2 class="card-title">{{ workout.name }}</h2>
+      <p>{{ workout.date }}</p>
+      <div>
+        <div class="flex gap-2">
+          <div class="badge badge-primary">{{ workout.volume }} kg</div>
+          <div class="badge badge-primary">{{ workout.prs }} prs</div>
+          <div class="badge badge-primary">{{ workout.duration }}</div>
+        </div>
 
-      <ul class="my-3">
-        <p>Sets</p>
-        <li *ngFor="let set of workout.sets">
-          <div class="flex justify-between">
-            <div>{{set.exercise!.name}}</div>
-            <div>{{set.weight}} kg</div>
-            <div>{{set.reps}} reps</div>
-          </div>
-        </li>
-      </ul>
+        <ul class="my-3">
+          <p>Sets</p>
+          @for (set of workout.sets; track $index) {
+            <li>
+              <div class="flex justify-between">
+                <div>{{ set.exercise!.name }}</div>
+                <div>{{ set.weight }} kg</div>
+                <div>{{ set.reps }} reps</div>
+              </div>
+            </li>
+          }
+        </ul>
 
-      <div class="card-actions justify-end">
-        <label for="my-modal-6" class="btn btn-sm btn-error">Delete</label>
-        <input type="checkbox" id="my-modal-6" class="modal-toggle" />
-        <div class="modal modal-bottom sm:modal-middle">
-          <div class="modal-box">
-            <label for="my-modal-6" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-            <h3 class="font-bold text-lg">Are you sure you want to delete this workout?</h3>
-            <div class="modal-action">
-              <label for="my-modal-6" (click)="deleteWorkout(workout._id)" class="btn btn-success">Yes</label>
-              <label for="my-modal-6" class="btn btn-error">No</label>
+        <div class="card-actions justify-end">
+          <label for="my-modal-6" class="btn btn-sm btn-error">Delete</label>
+          <input type="checkbox" id="my-modal-6" class="modal-toggle" />
+          <div class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+              <label
+                for="my-modal-6"
+                class="btn btn-sm btn-circle absolute right-2 top-2"
+                >✕</label
+              >
+              <h3 class="font-bold text-lg">
+                Are you sure you want to delete this workout?
+              </h3>
+              <div class="modal-action">
+                <label
+                  for="my-modal-6"
+                  (click)="deleteWorkout(workout._id)"
+                  class="btn btn-success"
+                  >Yes</label
+                >
+                <label for="my-modal-6" class="btn btn-error">No</label>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+}

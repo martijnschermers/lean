@@ -1,16 +1,26 @@
-<div *ngIf="groupWorkout$ | async as groupWorkout" class="card w-fit bg-base-300 shadow-xl m-auto my-4">
-  <div class="card-body">
-    <h2 class="card-title">{{groupWorkout.name}}</h2>
-    <p>{{groupWorkout.date}}</p>
+@if (groupWorkout$ | async; as groupWorkout) {
+  <div
+    *ngIf="groupWorkout$ | async as groupWorkout"
+    class="card w-fit bg-base-300 shadow-xl m-auto my-4"
+  >
+    <div class="card-body">
+      <h2 class="card-title">{{ groupWorkout.name }}</h2>
+      <p>{{ groupWorkout.date }}</p>
 
-    <div class="card-actions justify-end items-center">
-      <div class="badge badge-primary">{{groupWorkout.duration}}</div>
-      <div class="badge badge-primary">{{groupWorkout.location}}</div>
-      <button class="btn btn-success btn-sm" (click)="joinGroupWorkout(groupWorkout)">Join</button>
-    </div>
+      <div class="card-actions justify-end items-center">
+        <div class="badge badge-primary">{{ groupWorkout.duration }}</div>
+        <div class="badge badge-primary">{{ groupWorkout.location }}</div>
+        <button
+          class="btn btn-success btn-sm"
+          (click)="joinGroupWorkout(groupWorkout)"
+        >
+          Join
+        </button>
+      </div>
 
-    <div *ngFor="let exercise of groupWorkout.exercises">
-      <p>{{exercise.name}}</p>
+      <div *ngFor="let exercise of groupWorkout.exercises">
+        <p>{{ exercise.name }}</p>
+      </div>
     </div>
   </div>
-</div>
+}

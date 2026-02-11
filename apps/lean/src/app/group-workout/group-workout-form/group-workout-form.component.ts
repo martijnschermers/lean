@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { Observable } from "rxjs";
 import { ExerciseInterface, GroupWorkoutInterface } from "@lean/api-interfaces";
 import { ExerciseService } from "../../exercise/exercise.service";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "lean-group-workout-form",
   templateUrl: "./group-workout-form.component.html",
-  styleUrls: ["./group-workout-form.component.css"]
+  styleUrls: ["./group-workout-form.component.css"],
+  imports: [CommonModule, ReactiveFormsModule]
 })
 export class GroupWorkoutFormComponent implements OnInit {
   @Input()

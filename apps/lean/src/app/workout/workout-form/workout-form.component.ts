@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ExerciseInterface, WorkoutInterface } from "@lean/api-interfaces";
 import { ExerciseService } from "../../exercise/exercise.service";
 import { Observable, timer } from "rxjs";
 import * as moment from "moment";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "lean-workout-form",
   templateUrl: "./workout-form.component.html",
-  styleUrls: ["./workout-form.component.css"]
+  styleUrls: ["./workout-form.component.css"],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule]
 })
 export class WorkoutFormComponent implements OnInit {
   @Input()
