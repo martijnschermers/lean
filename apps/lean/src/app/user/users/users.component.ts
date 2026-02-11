@@ -2,11 +2,14 @@ import { Component } from "@angular/core";
 import { UserInterface } from "@lean/api-interfaces";
 import { Observable } from "rxjs";
 import { UserService } from "../user.service";
+import { CommonModule } from "@angular/common";
+import { UserCardComponent } from "../user-card/user-card.component";
 
 @Component({
   selector: "lean-user",
   templateUrl: "./users.component.html",
-  styleUrls: ["./users.component.css"]
+  styleUrls: ["./users.component.css"],
+  imports: [CommonModule, UserCardComponent]
 })
 export class UsersComponent {
   users$: Observable<UserInterface[]> = new Observable<UserInterface[]>(observer => {
@@ -15,5 +18,5 @@ export class UsersComponent {
     });
   });
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 }

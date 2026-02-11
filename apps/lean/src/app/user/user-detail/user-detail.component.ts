@@ -3,12 +3,14 @@ import { Observable } from "rxjs";
 import { UserInterface } from "@lean/api-interfaces";
 import { UserService } from "../user.service";
 import { ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
+import { Location, CommonModule } from "@angular/common";
+import { IconComponent } from "../../components/icon/icon.component";
 
 @Component({
   selector: "lean-user-detail",
   templateUrl: "./user-detail.component.html",
-  styleUrls: ["./user-detail.component.css"]
+  styleUrls: ["./user-detail.component.css"],
+  imports: [CommonModule, IconComponent]
 })
 export class UserDetailComponent {
   user$: Observable<UserInterface> = new Observable<UserInterface>(observer => {
