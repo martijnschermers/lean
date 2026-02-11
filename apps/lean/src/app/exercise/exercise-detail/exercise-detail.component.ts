@@ -1,28 +1,31 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Component } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Component, inject } from "@angular/core";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 import { ExerciseInterface } from "@lean/api-interfaces";
 import { ExerciseService } from "../exercise.service";
-import { Location } from "@angular/common";
+import { CommonModule, Location } from "@angular/common";
 import { Observable } from "rxjs";
+import { switchMap } from "rxjs/operators";
 import { AuthService } from "../../auth/auth.service";
 
 @Component({
   selector: "lean-exercise-detail",
   templateUrl: "./exercise-detail.component.html",
-  styleUrls: ["./exercise-detail.component.css"]
+  styleUrls: ["./exercise-detail.component.css"],
+  imports: [CommonModule, RouterLink],
+  standalone: true
 })
 export class ExerciseDetailComponent {
-  exercise$: Observable<ExerciseInterface> = new Observable<ExerciseInterface>(observer => {
-    const id = this.route.snapshot.paramMap.get("id");
+  private route = inject(ActivatedRoute);
+  private exerciseService = inject(ExerciseService);
+  private location = inject(Location);
+  private authService = inject(AuthService);
 
-    this.exerciseService.getExercise(id).subscribe(exercise => observer.next(exercise));
-  });
+  exercise$: Observable<ExerciseInterface> = this.route.paramMap.pipe(
+    switchMap(paramMap => this.exerciseService.getExercise(paramMap.get("id")))
+  );
 
   user$ = this.authService.currentUser;
-
-  constructor(private route: ActivatedRoute, private exerciseService: ExerciseService, private location: Location, private authService: AuthService) {
-  }
 
   deleteExercise(exerciseId: string | undefined): void {
     this.exerciseService.deleteExercise(exerciseId!).subscribe(() => {

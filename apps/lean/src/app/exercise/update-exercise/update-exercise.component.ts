@@ -1,15 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { ExerciseService } from "../exercise.service";
-import { Location } from "@angular/common";
+import { Location, CommonModule } from "@angular/common";
 import { ExerciseInterface, UserInterface } from "@lean/api-interfaces";
 import { ActivatedRoute } from "@angular/router";
 import { AuthService } from "../../auth/auth.service";
+import { ExerciseFormComponent } from "../exercise-form/exercise-form.component";
 
 @Component({
   selector: "lean-update-exercise",
   templateUrl: "./update-exercise.component.html",
-  styleUrls: ["./update-exercise.component.css"]
+  styleUrls: ["./update-exercise.component.css"],
+  imports: [CommonModule, ExerciseFormComponent]
 })
 export class UpdateExerciseComponent implements OnInit {
   exercise: ExerciseInterface | undefined;
