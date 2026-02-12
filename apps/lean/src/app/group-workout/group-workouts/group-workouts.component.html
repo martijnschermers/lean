@@ -1,18 +1,34 @@
 <div class="m-4">
-  <div class="flex flex-col md:flex-row gap-2 justify-between items-center mb-4 prose m-auto">
+  <div
+    class="flex flex-col md:flex-row gap-2 justify-between items-center mb-4 prose m-auto"
+  >
     <h2 class="mb-0">Group Workouts</h2>
     <button class="btn btn-sm btn-primary" routerLink="/group-workout/add">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-           class="w-5 h-5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-5 h-5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 4.5v15m7.5-7.5h-15"
+        />
       </svg>
       Add Group Workout
     </button>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-4 max-w-5xl m-auto">
-    <div *ngFor="let groupWorkout of groupWorkouts$ | async">
-      <lean-group-workout-card [groupWorkout]="groupWorkout"></lean-group-workout-card>
-    </div>
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-4 max-w-5xl m-auto"
+  >
+    @for (groupWorkout of groupWorkouts$ | async; track $index) {
+      <lean-group-workout-card
+        [groupWorkout]="groupWorkout"
+      ></lean-group-workout-card>
+    }
   </div>
 </div>

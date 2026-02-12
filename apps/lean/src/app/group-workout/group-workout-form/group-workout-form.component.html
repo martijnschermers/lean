@@ -1,35 +1,70 @@
-<form class="card flex-shrink-0 shadow-2xl bg-base-300 my-3 m-auto prose"
-      (ngSubmit)="onSubmit()"
-      [formGroup]="groupWorkoutForm">
+<form
+  class="card flex-shrink-0 shadow-2xl bg-base-300 my-3 m-auto prose"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="groupWorkoutForm"
+>
   <div class="card-body">
-    <h2 id="workout-name" class="my-2">{{groupWorkout.name.length > 0 ? groupWorkout.name : 'Group Workout'}}</h2>
-    <input type="text" id="name" name="name" formControlName="name"
-           class="input input-bordered" placeholder="Workout Name"
-           (ngModelChange)="groupWorkout.name = $event" />
+    <h2 id="workout-name" class="my-2">
+      {{ groupWorkout.name.length > 0 ? groupWorkout.name : 'Group Workout' }}
+    </h2>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      formControlName="name"
+      class="input input-bordered"
+      placeholder="Workout Name"
+      (ngModelChange)="groupWorkout.name = $event"
+    />
 
-    <input type="text" name="location" formControlName="location"
-           class="input input-bordered" placeholder="Location" />
+    <input
+      type="text"
+      name="location"
+      formControlName="location"
+      class="input input-bordered"
+      placeholder="Location"
+    />
 
-    <input type="date" name="date" formControlName="date"
-           class="input input-bordered" />
+    <input
+      type="date"
+      name="date"
+      formControlName="date"
+      class="input input-bordered"
+    />
 
-    <input type="text" name="duration" formControlName="duration"
-           class="input input-bordered" placeholder="Duration" />
+    <input
+      type="text"
+      name="duration"
+      formControlName="duration"
+      class="input input-bordered"
+      placeholder="Duration"
+    />
 
     <div formArrayName="exercises">
       <h2 class="my-2">Exercises</h2>
 
-      <div *ngFor="let exercise of exercises.controls; let exerciseIndex=index">
+      @for (
+        exercise of exercises.controls;
+        let exerciseIndex = $index;
+        track $index
+      ) {
         <div [formGroupName]="exerciseIndex">
-          <input class="hidden" #exerciseName type="hidden" formControlName="name">
-          <h3 id="exercise-name" class="my-2">{{exerciseName.value}}</h3>
+          <input
+            class="hidden"
+            #exerciseName
+            type="hidden"
+            formControlName="name"
+          />
+          <h3 id="exercise-name" class="my-2">{{ exerciseName.value }}</h3>
         </div>
 
         <div class="divider"></div>
-      </div>
+      }
 
       <div class="flex flex-col gap-2 w-full md:w-1/2 m-auto">
-        <label for="add-exercise" class="btn btn-primary btn-sm mt-2">Add Exercise</label>
+        <label for="add-exercise" class="btn btn-primary btn-sm mt-2"
+          >Add Exercise</label
+        >
         <input type="checkbox" id="add-exercise" class="modal-toggle" />
         <div class="modal modal-bottom sm:modal-middle not-prose">
           <div class="modal-box">
@@ -39,33 +74,50 @@
             </div>
             <div class="modal-action">
               <ul id="exercises" class="w-full divide-y divide-neutral-content">
-                <li class="py-3" *ngFor="let exercise of exercises$ | async">
-                  <div class="flex items-center space-x-4">
-                    <div *ngIf="exercise.image">
-                      <img class="avatar rounded-full w-10 h-10" src="{{ exercise.image }}" alt="{{ exercise.name }}">
+                @for (exercise of exercises$ | async; track $index) {
+                  <li class="py-3">
+                    <div class="flex items-center space-x-4">
+                      @if (exercise.image) {
+                        <img
+                          class="avatar rounded-full w-10 h-10"
+                          src="{{ exercise.image }}"
+                          alt="{{ exercise.name }}"
+                        />
+                      }
+                      <div class="flex-1">
+                        <p class="font-bold">
+                          {{ exercise.name }}
+                        </p>
+                        <p>
+                          {{ exercise.primaryMuscle }}
+                        </p>
+                      </div>
+                      <div class="inline-flex items-center">
+                        <label
+                          class="btn btn-success btn-sm"
+                          for="add-exercise"
+                          id="add-{{ exercise.name }}"
+                          (click)="addExercise(exercise)"
+                        >
+                          Add
+                        </label>
+                      </div>
                     </div>
-                    <div class="flex-1">
-                      <p class="font-bold">
-                        {{exercise.name}}
-                      </p>
-                      <p>
-                        {{exercise.primaryMuscle}}
-                      </p>
-                    </div>
-                    <div class="inline-flex items-center">
-                      <label class="btn btn-success btn-sm" for="add-exercise" id="add-{{exercise.name}}"
-                             (click)="addExercise(exercise)">
-                        Add
-                      </label>
-                    </div>
-                  </div>
-                </li>
+                  </li>
+                }
               </ul>
             </div>
           </div>
         </div>
 
-        <button id="finish" type="submit" class="btn btn-primary" [disabled]="groupWorkoutForm.invalid">Add</button>
+        <button
+          id="finish"
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="groupWorkoutForm.invalid"
+        >
+          Add
+        </button>
       </div>
     </div>
   </div>

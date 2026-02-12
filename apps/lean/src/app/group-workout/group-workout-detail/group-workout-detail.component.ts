@@ -3,12 +3,13 @@ import { GroupWorkoutService } from "../group-workout.service";
 import { Observable } from "rxjs";
 import { GroupWorkoutInterface } from "@lean/api-interfaces";
 import { ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
+import { Location, CommonModule } from "@angular/common";
 
 @Component({
   selector: "lean-group-workout-detail",
   templateUrl: "./group-workout-detail.component.html",
-  styleUrls: ["./group-workout-detail.component.css"]
+  styleUrls: ["./group-workout-detail.component.css"],
+  imports: [CommonModule]
 })
 export class GroupWorkoutDetailComponent {
   groupWorkout$: Observable<GroupWorkoutInterface> = new Observable<GroupWorkoutInterface>(observer => {

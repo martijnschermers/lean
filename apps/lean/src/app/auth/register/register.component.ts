@@ -4,11 +4,15 @@ import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { catchError, map } from "rxjs";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterLinkWithHref } from "@angular/router";
 
 @Component({
   selector: "lean-register",
   templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.css"]
+  styleUrls: ["./register.component.css"],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLinkWithHref]
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;

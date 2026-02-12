@@ -1,23 +1,24 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, inject, input, output } from "@angular/core";
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ExerciseInterface, ExerciseCategory, ExerciseType, Muscle } from "@lean/api-interfaces";
 import { AuthService } from "../../auth/auth.service";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "lean-exercise-form",
   templateUrl: "./exercise-form.component.html",
-  styleUrls: ["./exercise-form.component.css"]
+  styleUrls: ["./exercise-form.component.css"],
+  imports: [ReactiveFormsModule, CommonModule],
+  standalone: true
 })
-export class ExerciseFormComponent implements OnInit {
-  @Input()
-  title: string;
+export class ExerciseFormComponent {
+  private formBuilder = inject(FormBuilder);
+  private authService = inject(AuthService);
 
-  @Input()
-  exercise?: ExerciseInterface;
-
-  @Output()
-  exerciseEvent: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  title = input.required<string>();
+  exercise = input<ExerciseInterface>();
+  exerciseEvent = output<FormGroup>();
 
   exerciseForm!: FormGroup;
   exerciseTypes = Object.values(ExerciseType);
@@ -26,19 +27,21 @@ export class ExerciseFormComponent implements OnInit {
 
   user$ = this.authService.currentUser;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor() {
+    this.initializeForm();
   }
 
-  ngOnInit(): void {
-    if (this.exercise) {
+  private initializeForm(): void {
+    const exerciseValue = this.exercise();
+    if (exerciseValue) {
       this.exerciseForm = this.formBuilder.group({
-        name: [this.exercise.name, Validators.required],
-        description: [this.exercise.description, Validators.required],
-        type: [this.exercise.type, Validators.required],
-        category: [this.exercise.category, Validators.required],
-        predefined: [this.exercise.predefined, Validators.required],
-        primaryMuscle: [this.exercise.primaryMuscle, Validators.required],
-        image: [this.exercise.image ? this.exercise.image : "", Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g)]
+        name: [exerciseValue.name, Validators.required],
+        description: [exerciseValue.description, Validators.required],
+        type: [exerciseValue.type, Validators.required],
+        category: [exerciseValue.category, Validators.required],
+        predefined: [exerciseValue.predefined, Validators.required],
+        primaryMuscle: [exerciseValue.primaryMuscle, Validators.required],
+        image: [exerciseValue.image ? exerciseValue.image : "", Validators.pattern(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g)]
       });
     } else {
       this.exerciseForm = this.formBuilder.group({

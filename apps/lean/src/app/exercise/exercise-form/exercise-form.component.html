@@ -1,37 +1,62 @@
-<form class="prose card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-200 my-4 m-auto" [formGroup]="exerciseForm"
-      (ngSubmit)="onSubmit()">
+<form
+  class="prose card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-200 my-4 m-auto"
+  [formGroup]="exerciseForm"
+  (ngSubmit)="onSubmit()"
+>
   <div class="card-body">
-    <h2 class="my-2 text-center">{{title}}</h2>
+    <h2 class="my-2 text-center">{{ title() }}</h2>
 
     <div class="form-control">
       <label class="label">
         <span class="label-text">Name</span>
       </label>
-      <input type="text" class="input input-bordered" name="name" formControlName="name"
-             (ngModelChange)="exercise ? exercise.name = $event : ''" placeholder="Name">
-      <span *ngIf="name.invalid && (name.dirty || name.touched)">
-        <span class="text-error" *ngIf="name.errors?.['required']">Name is required</span>
-      </span>
+      <input
+        type="text"
+        class="input input-bordered"
+        name="name"
+        formControlName="name"
+        (ngModelChange)="exercise() ? (exercise()!.name = $event) : ''"
+        placeholder="Name"
+      />
+      @if (name.invalid && (name.dirty || name.touched)) {
+        @if (name.errors?.['required']) {
+          <span class="text-error">Name is required</span>
+        }
+      }
     </div>
 
     <div class="form-control">
       <label class="label">
         <span class="label-text">Description</span>
       </label>
-      <input type="text" class="input input-bordered" name="description" formControlName="description"
-             (ngModelChange)="exercise ? exercise.description = $event : ''" placeholder="Description">
-      <span *ngIf="description.invalid && (description.dirty || description.touched)">
-        <span class="text-error" *ngIf="description.errors?.['required']">Description is required</span>
-      </span>
+      <input
+        type="text"
+        class="input input-bordered"
+        name="description"
+        formControlName="description"
+        (ngModelChange)="exercise() ? (exercise()!.description = $event) : ''"
+        placeholder="Description"
+      />
+      @if (description.invalid && (description.dirty || description.touched)) {
+        @if (description.errors?.['required']) {
+          <span class="text-error">Description is required</span>
+        }
+      }
     </div>
 
     <div class="form-control">
       <label class="label">
         <span class="label-text">Type</span>
       </label>
-      <select class="select select-bordered" formControlName="type"
-              (ngModelChange)="exercise ? exercise.type = $event : ''" name="type">
-        <option *ngFor="let type of exerciseTypes" [value]="type">{{type}}</option>
+      <select
+        class="select select-bordered"
+        formControlName="type"
+        (ngModelChange)="exercise() ? (exercise()!.type = $event) : ''"
+        name="type"
+      >
+        @for (type of exerciseTypes; track $index) {
+          <option [value]="type">{{ type }}</option>
+        }
       </select>
     </div>
 
@@ -39,9 +64,15 @@
       <label class="label">
         <span class="label-text">Equipment</span>
       </label>
-      <select class="select select-bordered" formControlName="category"
-              (ngModelChange)="exercise ? exercise.category = $event : ''" name="category">
-        <option *ngFor="let category of exerciseCategories" [value]="category">{{category}}</option>
+      <select
+        class="select select-bordered"
+        formControlName="category"
+        (ngModelChange)="exercise() ? (exercise()!.category = $event) : ''"
+        name="category"
+      >
+        @for (category of exerciseCategories; track $index) {
+          <option [value]="category">{{ category }}</option>
+        }
       </select>
     </div>
 
@@ -49,34 +80,62 @@
       <label class="label">
         <span class="label-text">Primary Muscle</span>
       </label>
-      <select class="select select-bordered" formControlName="primaryMuscle"
-              (ngModelChange)="exercise ? exercise.primaryMuscle = $event : ''" name="primaryMuscle">
-        <option *ngFor="let muscle of muscles" [value]="muscle">{{muscle}}</option>
+      <select
+        class="select select-bordered"
+        formControlName="primaryMuscle"
+        (ngModelChange)="exercise() ? (exercise()!.primaryMuscle = $event) : ''"
+        name="primaryMuscle"
+      >
+        @for (muscle of muscles; track $index) {
+          <option [value]="muscle">{{ muscle }}</option>
+        }
       </select>
     </div>
 
-    <div *ngIf="user$ | async as user">
-      <div *ngIf="user.admin" class="form-control">
-        <label class="label">
-          <span class="label-text">Predefined</span>
-          <input type="checkbox" class="checkbox checkbox-primary" name="predefined" formControlName="predefined"
-                 (ngModelChange)="exercise ? exercise.predefined = $event : ''">
-        </label>
-      </div>
-    </div>
+    @if (user$ | async; as user) {
+      @if (user.admin) {
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Predefined</span>
+            <input
+              type="checkbox"
+              class="checkbox checkbox-primary"
+              name="predefined"
+              formControlName="predefined"
+              (ngModelChange)="
+                exercise() ? (exercise()!.predefined = $event) : ''
+              "
+            />
+          </label>
+        </div>
+      }
+    }
 
     <div class="form-control">
       <label class="label">
         <span class="label-text">Image</span>
       </label>
-      <input type="url" class="input input-bordered" (ngModelChange)="exercise ? exercise.image = $event : ''"
-             name="image" formControlName="image"
-             placeholder="Image Url">
-      <span *ngIf="image.invalid && (image.dirty || image.touched)">
-          <span class="text-error" *ngIf="image.errors?.['pattern']">Must be a valid image url</span>
-      </span>
+      <input
+        type="url"
+        class="input input-bordered"
+        (ngModelChange)="exercise() ? (exercise()!.image = $event) : ''"
+        name="image"
+        formControlName="image"
+        placeholder="Image Url"
+      />
+      @if (image.invalid && (image.dirty || image.touched)) {
+        @if (image.errors?.['pattern']) {
+          <span class="text-error">Must be a valid image url</span>
+        }
+      }
     </div>
 
-    <button [disabled]="exerciseForm.invalid" class="btn btn-primary mt-2" type="submit">{{title}}</button>
+    <button
+      [disabled]="exerciseForm.invalid"
+      class="btn btn-primary mt-2"
+      type="submit"
+    >
+      {{ title() }}
+    </button>
   </div>
 </form>

@@ -1,6 +1,8 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()"
-      class="prose card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200 m-auto my-3">
-
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="login()"
+  class="prose card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-200 m-auto my-3"
+>
   <div class="card-body">
     <h1 class="text-center">Login</h1>
 
@@ -8,34 +10,73 @@
       <label class="label">
         <span class="label-text">Email</span>
       </label>
-      <input id="email" type="email" name="email" formControlName="email" placeholder="Email"
-             class="input input-bordered" />
-      <span *ngIf="email.invalid && (email.dirty || email.touched)">
-        <span class="text-error" *ngIf="email.errors?.['required']">Email is required</span>
-      </span>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        formControlName="email"
+        placeholder="Email"
+        class="input input-bordered"
+      />
+      @if (email.invalid && (email.dirty || email.touched)) {
+        @if (email.errors?.['required']) {
+          <span class="text-error">Email is required</span>
+        }
+      }
     </div>
 
     <div class="form-control">
       <label class="label">
         <span class="label-text">Password</span>
       </label>
-      <input id="password" type="password" name="password" formControlName="password" placeholder="Password"
-             class="input input-bordered" />
-      <span *ngIf="password.invalid && (password.dirty || password.touched)">
-        <span class="text-error" *ngIf="password.errors?.['required']">Password is required</span>
-      </span>
+      <input
+        id="password"
+        type="password"
+        name="password"
+        formControlName="password"
+        placeholder="Password"
+        class="input input-bordered"
+      />
+      @if (password.invalid && (password.dirty || password.touched)) {
+        @if (password.errors?.['required']) {
+          <span class="text-error">Password is required</span>
+        }
+      }
     </div>
 
     <div class="form-control mt-6">
-      <button id="login" [disabled]="loginForm.invalid" type="submit" class="btn btn-primary">Login</button>
-      <a class="link link-primary text-center mt-2" routerLink="/register">No account yet? Register!</a>
+      <button
+        id="login"
+        [disabled]="loginForm.invalid"
+        type="submit"
+        class="btn btn-primary"
+      >
+        Login
+      </button>
+      <a class="link link-primary text-center mt-2" routerLink="/register"
+        >No account yet? Register!</a
+      >
     </div>
 
-    <div *ngIf="loginForm.errors?.['invalidCredentials']" class="alert alert-error shadow-lg">
-      <div>
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        <span>{{loginForm.errors?.['message']}}</span>
+    @if (loginForm.errors?.['invalidCredentials']) {
+      <div class="alert alert-error shadow-lg">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="stroke-current flex-shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <span>{{ loginForm.errors?.['message'] }}</span>
+        </div>
       </div>
-    </div>
+    }
   </div>
 </form>
